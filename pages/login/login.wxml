@@ -8,3 +8,20 @@
   </van-row>
 </view>
 
+<van-cell-group>
+  <van-field
+  label="账号"
+    value="{{ username }}"
+    placeholder="请输入手机号码"
+    border="{{ true }}"
+    bind:change="onChange"
+  />
+  <van-field
+    value="{{ password }}"
+    type="password"
+    label="密码"
+    placeholder="请输入密码"
+    border="{{ true }}"
+  />
+</van-cell-group>
+

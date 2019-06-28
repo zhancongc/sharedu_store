@@ -10,7 +10,9 @@ Page({
       navHeight: app.globalData.navHeight,
       backWord: '注册',
       pageTitle: '密码登陆'
-    }
+    },
+    username: '请输入用户名',
+    password: '请输入密码'
   },
   backWordHandler: function () {
     wx.redirectTo({
@@ -71,5 +73,9 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  onChange(event) {
+    // event.detail 为当前输入的值
+    console.log(event.detail);
   }
 })

@@ -21,7 +21,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.7.2",
+	"libVersion": "2.0.4",
 	"appid": "wx107f16d433135388",
 	"projectname": "sharedu",
 	"debugOptions": {
