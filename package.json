@@ -1,0 +1,19 @@
+{
+  "name": "sharedu",
+  "version": "1.0.0",
+  "description": "education app(store)",
+  "main": "app.js",
+  "dependencies": {
+    "vant-weapp": "^0.5.15"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "sharedu",
+    "store"
+  ],
+  "author": "zhancongc",
+  "license": "ISC"
+}

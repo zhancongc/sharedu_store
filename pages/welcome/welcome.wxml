@@ -1,0 +1,6 @@
+<!--pages/welcome/welcome.wxml-->
+<view style="margin-top: 150rpx"></view>
+<van-button size="large" bindtap="toLogin">登陆</van-button>
+<van-button size="large" bindtap="toLesson">课程</van-button>
+<van-button size="large" bindtap="toMe">我的</van-button>
+
