@@ -7,3 +7,31 @@
     <van-col span="8" offset="4" class="page-title">{{navbarData.pageTitle}}</van-col>
   </van-row>
 </view>
+
+<van-row>
+  <van-col span="22" offset="1" style="text-align: center">
+    <image src="/images/logo.png" mode="aspectFit" style="height:320rpx;" />
+  </van-col>
+</van-row>
+
+<van-cell-group>
+  <van-field label="账号" value="{{ phone }}" placeholder="请输入手机号码" border="{{ false }}" bind:change="onChangePhone"/>
+  <van-field value="{{ verificationCode }}" type="number" label="验证码" placeholder="请输入验证码" border="{{ false }}" bind:change="onChangeVerificationCode">
+  <van-button slot="button" size="mini" type="primary">验证码</van-button></van-field>
+  <van-field value="{{ password }}" type="password" label="密码" placeholder="请设置密码" border="{{ false }}" bind:change="onChangePassword"/>
+</van-cell-group>
+
+<view style="margin-top:20rpx;">
+<van-row><van-col span="22" offset="1">
+<van-button type="primary" size="large" disabled="{{!agreement}}" bind:tap="userRegister">注册</van-button>
+</van-col>
+</van-row>
+</view>
+
+<view style="margin-top:14rpx;">
+<van-row>
+<van-col span="20" offset="2" style="text-align: center; font-size: 24rpx; color: #666;margin-top: 10rpx;">
+<van-checkbox value="{{ agreement }}" checked-color="#07c160" bind:change="onChangeAgreement">我同意《服务条款》和《sharedu隐私政策》</van-checkbox>
+</van-col>
+</van-row>
+</view>

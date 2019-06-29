@@ -11,8 +11,10 @@ Page({
       backWord: '注册',
       pageTitle: '密码登陆'
     },
-    username: '请输入用户名',
-    password: '请输入密码'
+    loginViaPassword: true,
+    phone: '',
+    password: '',
+    verificationCode: ''
   },
   backWordHandler: function () {
     wx.redirectTo({
@@ -74,8 +76,53 @@ Page({
   onShareAppMessage: function () {
 
   },
-  onChange(event) {
+  switchToVerificationCodeLogin : function () {
+    // 切换到验证码登录
+    this.setData({
+      loginViaPassword: false
+    })
+  },
+  switchToPasswordLogin: function () {
+    // 切换到密码登录
+    this.setData({
+      loginViaPassword: true
+    })
+  },
+  onChangePhone(event) {
     // event.detail 为当前输入的值
-    console.log(event.detail);
+    var that = this;
+    that.data.phone = event.detail;
+  },
+  onChangePassword(event) {
+    var that = this;
+    that.data.password = event.detail;
+  },
+  onChangeVerificationCode(event) {
+    var that = this;
+    that.data.verificationCode = event.detail;
+  },
+  userLogin:function () {
+    // 用户登录
+    var that = this;
+    var passkey;
+    console.log(that.data.loginViaPassword)
+    if(that.data.loginViaPassword) {
+      passkey = that.data.password
+    } else {
+      passkey = that.data.verificationCode
+    }
+    console.log(that.data.phone, passkey);
+    if(that.data.phone === '123' && passkey === '123') {
+      wx.showToast({
+        title: '正在登录',
+      })
+      wx.navigateTo({url: '/pages/index/index',})
+      // wx.redirectTo({url: '/pages/index/index',})
+    } else if (that.data.phone === '' && passkey === '') {
+      wx.showToast({ title: '账号或密码为空',})
+    } 
+    else {
+      wx.showToast({title: '账号或密码错误',})
+    }
   }
 })

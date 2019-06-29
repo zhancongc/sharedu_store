@@ -11,7 +11,11 @@ Page({
       navHeight: app.globalData.navHeight,
       backWord: '登陆',
       pageTitle: '账号注册'
-    }
+    },
+    phone: '',
+    password: '',
+    verificationCode: '',
+    agreement: false
   },
   backHandler: function () {
     wx.redirectTo({
@@ -72,5 +76,34 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  onChangePhone(event) {
+    // event.detail 为当前输入的值
+    var that = this;
+    that.data.phone = event.detail;
+  },
+  onChangePassword(event) {
+    var that = this;
+    that.data.password = event.detail;
+  },
+  onChangeVerificationCode(event) {
+    var that = this;
+    that.data.verificationCode = event.detail;
+  },
+  onChangeAgreement(event) {
+    var that = this;
+    that.setData({
+      agreement: event.detail
+    });
+  },
+  userRegister: function() {
+    // 用户注册
+    var that = this;
+    console.log(that.data.phone, that.data.password, that.data.varificationCode);
+    if (that.data.phone === '123' && that.data.varificationCode === '123') {
+      wx.showToast({title: '注册成功',})
+      wx.navigateTo({ url: '/pages/index/index', });
+      // wx.redirectTo({url: '/pages/index/index',})
+    }
   }
 })

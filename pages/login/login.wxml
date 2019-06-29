@@ -8,20 +8,34 @@
   </van-row>
 </view>
 
-<van-cell-group>
-  <van-field
-  label="账号"
-    value="{{ username }}"
-    placeholder="请输入手机号码"
-    border="{{ true }}"
-    bind:change="onChange"
-  />
-  <van-field
-    value="{{ password }}"
-    type="password"
-    label="密码"
-    placeholder="请输入密码"
-    border="{{ true }}"
-  />
-</van-cell-group>
+<van-row>
+  <van-col span="22" offset="1" style="text-align: center">
+    <image src="/images/logo.png" mode="aspectFit" style="height:320rpx;" />
+  </van-col>
+</van-row>
 
+<view wx:if="{{loginViaPassword}}">
+<van-cell-group>
+  <van-field label="账号" value="{{ phone }}" placeholder="请输入手机号码" border="{{ false }}" bind:change="onChangePhone"/>
+  <van-field value="{{ password }}" type="password" label="密码" placeholder="请输入密码" border="{{ false }}" bind:change="onChangePassword"/>
+  <van-row>
+    <van-col span="8" offset="15" bind:tap="switchToVerificationCodeLogin" style="text-align:right; color: #666; font-size: 24rpx;height: 60rpx; line-height:60rpx;">验证码登录</van-col>
+</van-row>
+</van-cell-group>
+</view>
+
+<view wx:if="{{!loginViaPassword}}">
+<van-cell-group>
+  <van-field label="账号" value="{{ phone }}" placeholder="请输入手机号码" border="{{ false }}" bind:change="onChangePhone"/>
+  <van-field value="{{ verificationCode }}" type="number" label="验证码" placeholder="请输入验证码" border="{{ false }}" bind:change="onChangeVerificationCode">
+  <van-button slot="button" size="mini" type="primary" style="height:48rpx;line-height: 48rpx;">验证码</van-button></van-field>
+  <van-row>
+    <van-col span="8" offset="15" bind:tap="switchToPasswordLogin" style="text-align:right; color: #666; font-size: 24rpx;height: 60rpx; line-height:60rpx;">密码登录</van-col>
+  </van-row>
+</van-cell-group>
+</view>
+<view style="margin-top:20rpx;">
+<van-row><van-col span="22" offset="1">
+<van-button type="primary" size="large" bind:tap="userLogin">登录</van-button>
+</van-col></van-row>
+</view>
