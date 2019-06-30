@@ -16,8 +16,12 @@
 <view style="margin-top: 20rpx;">
 <van-row>
   <van-col span="22" offset="1" style="text-align: center;">
-  <text bindtap="toRegister" style="font-size: 24rpx; color: #666;">手机号码快捷注册 ></text>
+  <view bindtap="toRegister" style="font-size: 24rpx; color: #666; vertical-align: middle;">手机号码快捷注册 <text style="line-height:20rpx;" class="fa fa-angle-right fa-1x"></text></view>
   <!--van-button size="large" type="default" bindtap="toRegister">手机号注册</van-button-->
   </van-col>
 </van-row>
+</view>
+
+<view style="margin-top: 40rpx;">
+<van-button size="large" type="default" bindtap="toIdentification">去认证</van-button>
 </view>

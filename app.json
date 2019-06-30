@@ -4,6 +4,7 @@
     "pages/register/register",
     "pages/login/login",
     "pages/index/index",
+    "pages/identification/identification",
     "pages/logs/logs",
     "pages/lesson/lesson",
     "pages/me/me"

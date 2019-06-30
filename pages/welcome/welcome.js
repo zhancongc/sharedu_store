@@ -72,5 +72,10 @@ Page({
     wx.navigateTo({
       url: '/pages/register/register',
     })
+  },
+  toIdentification:function() {
+    wx.navigateTo({
+      url: '/pages/identification/identification',
+    })
   }
 })

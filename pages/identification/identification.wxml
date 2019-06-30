@@ -1,0 +1,16 @@
+<!--pages/identification/identification.wxml-->
+<view class='custom-navbar'>
+  <view class='palce-holder-nav' style="height: {{navbarData.navHeight}}px;"></view>
+  <van-row class='main-navbar' style="height: {{2.2*navbarData.navHeight}}px;line-height: {{2.2*navbarData.navHeight}}px">
+    <van-col span="4" class="back-word">
+    <text bind:tap="backHandler" style="width: 80rpx; height:56rpx; vertical-align:0%;" class="fa fa-angle-left fa-lg"></text>
+    </van-col>
+    <van-col span="8" offset="4" class="page-title">{{navbarData.pageTitle}}</van-col>
+  </van-row>
+</view>
+
+<van-cell-group>
+  <van-field label="门店名称" value="{{ storeName }}" placeholder="请输入门店名称" border="{{ false }}" bind:change="onChangeStoreName"/>
+  <van-field value="{{ detailAddress }}" label="详细地址" placeholder="请输入详细地址" border="{{ false }}" bind:change="onChangeDetailAddress"/>
+</van-cell-group>
+
