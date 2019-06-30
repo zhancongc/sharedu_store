@@ -9,7 +9,7 @@ Page({
     navbarData: {
       navHeight: app.globalData.navHeight,
       backWord: '注册',
-      pageTitle: '密码登陆'
+      pageTitle: '登陆'
     },
     loginViaPassword: true,
     phone: '',

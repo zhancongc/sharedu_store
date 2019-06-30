@@ -2,7 +2,7 @@
 <view class='custom-navbar'>
   <view class='palce-holder-nav' style="height: {{navbarData.navHeight}}px;"></view>
   <van-row class='main-navbar' style="height: {{2.2*navbarData.navHeight}}px;line-height: {{2.2*navbarData.navHeight}}px">
-    <van-col span="4" class="back-word" bind:tap="backWordHandler">
+    <van-col span="4" class="back-word" bindtap="backWordHandler">
     {{navbarData.backWord}}</van-col>
     <van-col span="8" offset="4" class="page-title">{{navbarData.pageTitle}}</van-col>
   </van-row>
@@ -30,7 +30,7 @@
   <van-field value="{{ verificationCode }}" type="number" label="验证码" placeholder="请输入验证码" border="{{ false }}" bind:change="onChangeVerificationCode">
   <van-button slot="button" size="mini" type="primary" style="height:48rpx;line-height: 48rpx;">验证码</van-button></van-field>
   <van-row>
-    <van-col span="8" offset="15" bind:tap="switchToPasswordLogin" style="text-align:right; color: #666; font-size: 24rpx;height: 60rpx; line-height:60rpx;">密码登录</van-col>
+    <van-col span="8" offset="15" bindtap="switchToPasswordLogin" style="text-align:right; color: #666; font-size: 24rpx;height: 60rpx; line-height:60rpx;">密码登录</van-col>
   </van-row>
 </van-cell-group>
 </view>

@@ -63,19 +63,14 @@ Page({
   onShareAppMessage: function () {
 
   },
-  toLesson: function () {
-    wx.navigateTo({
-      url: '/pages/lesson/lesson',
-    })
-  },
-  toMe: function () {
-    wx.navigateTo({
-      url: '/pages/me/me',
-    })
-  },
   toLogin: function() {
     wx.navigateTo({
       url: '/pages/login/login',
+    })
+  },
+  toRegister: function () {
+    wx.navigateTo({
+      url: '/pages/register/register',
     })
   }
 })
