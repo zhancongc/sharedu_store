@@ -11,9 +11,23 @@ Page({
       navHeight: app.globalData.navHeight,
       pageTitle: '门店入驻'
     },
-    cityPicker: false,
+    clientHeight: "",
+    currentTab: '',
+    addPhotoCSS: ['photo-preview', 'photo-upload'],
+    addPhotoCSSIndex: 1,
+    imgUrls: [
+      'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640',
+      'https://images.unsplash.com/photo-1551214012-84f95e060dee?w=640',
+      'https://images.unsplash.com/photo-1551446591-142875a901a1?w=640'
+    ],
+    indicatorDots: true,
+    autoplay: false,
+    interval: 5000,
+    duration: 1000,
+
     storeName: "",
     cityName: "",
+    cityPicker: false,
     detailAddress: "",
     location: 'dddd',
     areaList: {
@@ -43,6 +57,13 @@ Page({
   backHandler: function () {
     console.log("返回主页");
     wx.navigateBack();
+  },
+  swiperchange: function (e) {
+    var that = this
+    console.log(e.detail.current)
+    that.setData({
+      'currentTab': e.detail.current
+    })
   },
   onTapCityName: function() {
     var that = this;
@@ -85,7 +106,14 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-
+    var that = this
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          clientHeight: res.windowHeight
+        });
+      }
+    })
   },
 
   /**
@@ -136,6 +164,17 @@ Page({
   onShareAppMessage: function () {
 
   },
-  onChangeStoreName: function() {},
-  onChangeDetailAddress: function() {}
+  addStorePhoto: function() {
+    wx.chooseImage({
+      count: 4,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success: function(res) {
+        const tempFilePaths = res.tempFilePaths
+        console.log(tempFilePaths)
+      },
+      fail: function(res){},
+      complete: function(res){}
+    })
+  }
 })

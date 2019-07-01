@@ -9,13 +9,30 @@
   </van-row>
 </view>
 
-<text bind:tap="backHandler" style="text-align:center;width: 100%; height:184rpx; vertical-align:0%;" class="fa fa-plus-circle fa-5x"></text>
+<view style="width: 100%; height: 200rpx;margin-top:20rpx; margin-bottom: 20rpx; background-image: url({{}})">
+<view bindtap="addStorePhoto" class="{{addPhotoCSS[addPhotoCSSIndex]}}"><van-icon name="photo" size="50rpx" custom-style="position: relative; left:30rpx; top: 30rpx; color: white;" /></view>
+<view wx:if="addPhotoCSSIndex" class="addStorePhoto-subtitle">添加门店照片</view>
+</view>
+
+<swiper indicator-dots="{{indicatorDots}}"
+  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+  <block wx:for="{{imgUrls}}">
+    <swiper-item>
+      <image src="{{item}}" style="aspectFit" class="slide-image" width="355" height="150"/>
+    </swiper-item>
+  </block>
+</swiper>
+
+<!--swiper style="height: {{clientHeight?clientHeight+'px':'auto'}}" class='videoSwiper' current="{{currentTab}}" duration="200" bindchange="swiperchange">
+<swiper-item><scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" bindscrolltolower="scrollbot"></scroll-view></swiper-item>
+</swiper-->
 
 <van-cell-group>
-  <van-field label="门店名称" value="{{ storeName }}" placeholder="请输入门店名称" border="{{ false }}" bind:change="onChangeStoreName"/>
-    <van-field readonly label="所在城市" value="{{ cityName }}" placeholder="请选择所在城市" border="{{ false }}" bind:tap="onTapCityName" style="color: black;"/>
-  <van-field value="{{ detailAddress }}" label="详细地址" placeholder="请输入详细地址" border="{{ false }}" bind:change="onChangeDetailAddress" icon="location" bind:click-icon="getLocation"/>
+  <van-field label="门店名称" value="{{ storeName }}" placeholder="请输入门店名称" border="{{ false }}" maxlength="30" focus="true" bind:change="onChangeStoreName"/>
+    <van-field readonly label="所在城市" value="{{ cityName }}" placeholder="请选择所在城市" border="{{ false }}" maxlength="30" is-link="true" bind:tap="onTapCityName" style="color: black;"/>
+  <van-field value="{{ detailAddress }}" label="详细地址" placeholder="请输入详细地址" border="{{ false }}" maxlength="60" bind:change="onChangeDetailAddress" icon="location" bind:click-icon="getLocation"/>
 </van-cell-group>
+
 
 <view class='mask' wx:if="{{ cityPicker }}"></view>
 <view wx:if="{{ cityPicker }}" style="position: fixed; bottom: 0rpx; left: 0rpx; width:100%;">

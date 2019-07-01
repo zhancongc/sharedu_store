@@ -7,6 +7,7 @@
     "van-checkbox": "/miniprogram_npm/vant-weapp/checkbox/index",
     "van-icon": "/miniprogram_npm/vant-weapp/icon/index",
     "van-picker": "/miniprogram_npm/vant-weapp/picker/index",
-    "van-area": "/miniprogram_npm/vant-weapp/area/index"
+    "van-area": "/miniprogram_npm/vant-weapp/area/index",
+    "van-steps": "/miniprogram_npm/vant-weapp/steps/index"
   }
 }
