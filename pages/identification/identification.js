@@ -3823,7 +3823,6 @@ Page({
     }
   },
   backHandler: function () {
-    console.log("返回主页");
     wx.navigateBack();
   },
   swiperchange: function (e) {
@@ -3831,6 +3830,11 @@ Page({
     console.log(e.detail.current)
     that.setData({
       'currentTab': e.detail.current
+    })
+  },
+  onChangeStoreName: function (event) {
+    this.setData({
+      storeName: event.detail
     })
   },
   onTapCityName: function() {
@@ -3971,9 +3975,16 @@ Page({
   },
   identificationCommit: function() {
     var that = this;
-    if (that.data.storeName && that.data.cityName && that.data.detailAddress && that.data.uploadPhotoes && that.data.liencePhoto)
-    wx.navigateTo({
-      url: '/pages/index/index',
-    })
+    if (that.data.storeName && that.data.cityName && that.data.detailAddress && that.data.uploadPhotoes && that.data.liencePhoto) {
+      wx.navigateTo({
+        url: '/pages/index/index',
+      })
+    } else {
+      wx.showToast({
+        title: '有些数据未填',
+        duration: 1500,
+        icon: "none"
+      })
+    }
   }
 })

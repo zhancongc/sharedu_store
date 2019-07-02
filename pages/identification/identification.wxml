@@ -28,10 +28,10 @@
 
 <view style="margin-top: -70rpx;">
 <van-cell-group>
-  <van-field label="门店名称" value="{{ storeName }}" placeholder="请输入门店名称" border="{{ true }}" maxlength="30" focus="true" bind:change="onChangeStoreName"/>
-    <van-field readonly label="所在城市" value="{{ cityName }}" placeholder="请选择所在城市" border="{{ true }}" maxlength="30" is-link="true" bind:tap="onTapCityName" style="color: black;"/>
-  <van-field value="{{ detailAddress }}" label="详细地址" placeholder="请输入详细地址" border="{{ true }}" maxlength="60" bind:change="onChangeDetailAddress" icon="location" bind:click-icon="getLocation"/>
-  <van-field readonly label="营业执照" placeholder="点击上传营业执照加盖章照片" border="{{ true }}" bind:tap="addStoreLiencePhoto" is-link="true" />
+  <van-field label="门店名称" value="{{ storeName }}" required="true" placeholder="请输入门店名称" border="{{ true }}" maxlength="30" focus="true" bind:change="onChangeStoreName"/>
+    <van-field readonly label="所在城市" value="{{ cityName }}" required="true" placeholder="请选择所在城市" border="{{ true }}" maxlength="30" is-link="true" bind:tap="onTapCityName" style="color: black;"/>
+  <van-field value="{{ detailAddress }}" label="详细地址" required="true" placeholder="请输入详细地址" border="{{ true }}" maxlength="60" bind:change="onChangeDetailAddress" icon="location" bind:click-icon="getLocation"/>
+  <van-field readonly label="营业执照" required="true" placeholder="点击上传营业执照加盖章照片" border="{{ true }}" bind:tap="addStoreLiencePhoto" is-link="true" />
 </van-cell-group>
 </view>
 
