@@ -25,3 +25,6 @@
 <view style="margin-top: 40rpx;">
 <van-button size="large" type="default" bindtap="toIdentification">去认证</van-button>
 </view>
+<view style="margin-top: 40rpx;">
+<van-button size="large" type="default" bindtap="toIndex">去首页</van-button>
+</view>

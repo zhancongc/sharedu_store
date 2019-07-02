@@ -1,13 +1,25 @@
-// pages/welcome/welcome.js
+// pages/bills/bills.js
+const app = getApp()
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-
+    navbarData: {
+      navHeight: app.globalData.navHeight,
+      pageTitle: '订单管理'
+    },
+    tabBarActive: 2,
+    tabBarUrls: ["/pages/index/index", "/pages/lesson/lesson", "/pages/bills/bills", "/pages/me/me"]
   },
-
+  onTabBarChange(event) {
+    var that = this;
+    if (event.detail !== that.data.tabBarActive) {
+      wx.navigateTo({
+        url: that.data.tabBarUrls[event.detail],
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -62,25 +74,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  toLogin: function() {
-    wx.navigateTo({
-      url: '/pages/login/login',
-    })
-  },
-  toRegister: function () {
-    wx.navigateTo({
-      url: '/pages/register/register',
-    })
-  },
-  toIdentification:function() {
-    wx.navigateTo({
-      url: '/pages/identification/identification',
-    })
-  },
-  toIndex: function() {
-    wx.navigateTo({
-      url: '/pages/index/index',
-    })
   }
 })

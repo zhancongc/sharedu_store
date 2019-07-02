@@ -116,8 +116,8 @@ Page({
       wx.showToast({
         title: '正在登录',
       })
-      wx.navigateTo({url: '/pages/index/index',})
-      // wx.redirectTo({url: '/pages/index/index',})
+      wx.navigateTo({ url: '/pages/index/index',})
+      // wx.redirectTo({url: '/pages/identification/identification',})
     } else if (that.data.phone === '' && passkey === '') {
       wx.showToast({ title: '账号或密码为空',})
     } 

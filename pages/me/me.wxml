@@ -1,2 +1,19 @@
 <!--pages/me/me.wxml-->
-<text>pages/me/me.wxml</text>
+<!--index.wxml-->
+<view class='custom-navbar'>
+  <view class='palce-holder-nav' style="height: {{navbarData.navHeight}}px;"></view>
+  <van-row class='main-navbar' style="height: {{2.2*navbarData.navHeight}}px;line-height: {{2.2*navbarData.navHeight}}px">
+    <van-col span="8" offset="8" class="page-title">{{navbarData.pageTitle}}</van-col>
+  </van-row>
+</view>
+
+<van-row>
+<van-col></van-col>
+</van-row>
+
+<van-tabbar active="{{ active }}" bind:change="onTabBarChange">
+  <van-tabbar-item icon="home-o">首页</van-tabbar-item>
+  <van-tabbar-item icon="apps-o">课程</van-tabbar-item>
+  <van-tabbar-item icon="orders-o">订单</van-tabbar-item>
+  <van-tabbar-item icon="user-circle-o">我的</van-tabbar-item>
+</van-tabbar>

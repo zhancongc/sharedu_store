@@ -1,4 +1,4 @@
-<!--pages/lesson/lesson.wxml-->
+<!--pages/bills/bills.wxml-->
 <!--index.wxml-->
 <view class='custom-navbar'>
   <view class='palce-holder-nav' style="height: {{navbarData.navHeight}}px;"></view>
