@@ -1,26 +1,12 @@
-// pages/me/me.js
-const app = getApp()
+// pages/account/account.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    navbarData: {
-      navHeight: app.globalData.navHeight,
-      pageTitle: '我的店铺'
-    },
-    tabBarActive: 3,
-    tabBarUrls: ["/pages/index/index", "/pages/lesson/lesson", "/pages/bills/bills", "/pages/me/me"]
-    },
-    onTabBarChange(event) {
-      var that = this;
-      if (event.detail !== that.data.tabBarActive) {
-        wx.redirectTo({
-          url: that.data.tabBarUrls[event.detail],
-        })
-      }
-    },
+
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -76,10 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  toAccount : function () {
-    wx.navigateTo({
-      url: '/pages/account/account',
-    })
   }
 })

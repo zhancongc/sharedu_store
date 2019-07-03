@@ -10,12 +10,20 @@ Page({
       pageTitle: '订单管理'
     },
     tabBarActive: 2,
-    tabBarUrls: ["/pages/index/index", "/pages/lesson/lesson", "/pages/bills/bills", "/pages/me/me"]
+    tabBarUrls: ["/pages/index/index", "/pages/lesson/lesson", "/pages/bills/bills", "/pages/me/me"],
+    bills: [{
+      storeName: '尚德教育',
+      billStatus: '待接单',
+      billLessonPicture: '/images/logo.png',
+      billLessonName: '考研英语一阅读专项训练',
+      billAmount: 1188,
+      canReceiveOrder: true
+    }]
   },
   onTabBarChange(event) {
     var that = this;
     if (event.detail !== that.data.tabBarActive) {
-      wx.navigateTo({
+      wx.redirectTo({
         url: that.data.tabBarUrls[event.detail],
       })
     }

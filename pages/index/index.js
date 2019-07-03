@@ -14,7 +14,7 @@ Page({
   onTabBarChange(event) {
     var that = this;
     if(event.detail !== that.data.tabBarActive) {
-      wx.navigateTo({
+      wx.redirectTo({
         url: that.data.tabBarUrls[event.detail],
       })
     }

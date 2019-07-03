@@ -9,6 +9,8 @@
     "van-picker": "/miniprogram_npm/vant-weapp/picker/index",
     "van-area": "/miniprogram_npm/vant-weapp/area/index",
     "van-tabbar": "/miniprogram_npm/vant-weapp/tabbar/index",
-    "van-tabbar-item": "/miniprogram_npm/vant-weapp/tabbar-item/index"
+    "van-tabbar-item": "/miniprogram_npm/vant-weapp/tabbar-item/index",
+    "van-cell": "/miniprogram_npm/vant-weapp/cell/index",
+    "van-cell-group": "/miniprogram_npm/vant-weapp/cell-group/index"
   }
 }
