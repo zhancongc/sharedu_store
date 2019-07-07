@@ -11,14 +11,17 @@ Page({
     },
     tabBarActive: 2,
     tabBarUrls: ["/pages/index/index", "/pages/lesson/lesson", "/pages/bills/bills", "/pages/me/me"],
-    bills: [{
+    billType: 1,
+    allBills: [{
       storeName: '尚德教育',
       billStatus: '待接单',
-      billLessonPicture: '/images/logo.png',
+      billLessonPicture: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJY3iauTMvLDsyB0cxoTfcGU1u1c7uwUz0JC3TjqmV9zhxjzRDPf1FtypEjjCeUolOLUdUGB2JtvXA/132',
       billLessonName: '考研英语一阅读专项训练',
       billAmount: 1188,
       canReceiveOrder: true
-    }]
+    }],
+    uncompleteBills: [],
+    completeBills: []
   },
   onTabBarChange(event) {
     var that = this;
