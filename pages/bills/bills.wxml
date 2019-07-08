@@ -10,14 +10,14 @@
 </view>
 <view style="width:100%;height: {{3.2*navbarData.navHeight}}px;"></view>
 
-<view style="width: 94%; height: 88rpx; margin: 0 auto;">
-  <view class="tabs-item">全部订单</view>
-  <view class="tabs-item">待接单</view>
-  <view class="tabs-item">已完成</view>
+<view style="width: 94%; height: 88rpx; margin: 0 auto; color: #888;">
+  <view class="tabs-item" style="color:{{ tabColor1 }}" data-index="1" bindtap="switchTabs">全部订单</view>
+  <view class="tabs-item" style="color:{{ tabColor2 }}" data-index="2" bindtap="switchTabs">待接单</view>
+  <view class="tabs-item" style="color:{{ tabColor3 }}" data-index="3" bindtap="switchTabs">已完成</view>
 </view>
 
 <block wx:if="{{billType==1}}">
-  <view wx:for="{{ allBills }}" class="bills-item">
+  <view wx:for="{{ allBills }}" wx:key="item.storeName" class="bills-item">
     <van-icon color="#666" name="shop-o" class="store-icon"></van-icon>
     <view class="store-name">{{item.storeName}}</view>
     <view class="bill-status">{{item.billStatus}}</view>
@@ -31,7 +31,7 @@
 
 
 <block wx:if="{{billType==2}}">  
-  <view wx:for="{{ uncompleteBills }}" class="bills-item">
+  <view wx:for="{{ uncompleteBills }}" wx:key="item.storeName" class="bills-item">
     <van-icon color="#666" name="shop-o" class="store-icon"></van-icon>
     <view class="store-name">{{item.storeName}}</view>
     <view class="bill-status">{{item.billStatus}}</view>
@@ -44,7 +44,7 @@
 </block>
 
 <block wx:if="{{billType==3}}">  
-  <view wx:for="{{ uncompleteBills }}" class="bills-item">
+  <view wx:for="{{ uncompleteBills }}" wx:key="item.storeName" class="bills-item">
     <van-icon color="#666" name="shop-o" class="store-icon"></van-icon>
     <view class="store-name">{{item.storeName}}</view>
     <view class="bill-status">{{item.billStatus}}</view>
