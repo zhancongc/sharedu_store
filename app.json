@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/bills/bills",
+
     "pages/welcome/welcome",
     "pages/register/register",
     "pages/login/login",
@@ -8,9 +8,11 @@
 
     "pages/index/index",
     "pages/lesson/lesson",
-    
+    "pages/comment/comment",
+    "pages/bills/bills",
     "pages/me/me",
-    "pages/account/account"
+    "pages/account/account",
+    "pages/feedback/feedback"
   ],
   "window": {
     "backgroundTextStyle": "light",
