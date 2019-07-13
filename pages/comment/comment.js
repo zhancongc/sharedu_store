@@ -11,7 +11,9 @@ Page({
       pageTitle: 'sharedu'
     },
   },
-
+  backArrow:function() {
+    wx.navigateBack()
+  },
   /**
    * Lifecycle function--Called when page load
    */

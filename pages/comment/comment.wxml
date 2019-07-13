@@ -2,7 +2,8 @@
 <view class='custom-navbar'>
   <view class='palce-holder-nav' style="height: {{navbarData.navHeight}}px;"></view>
   <van-row class='main-navbar' style="height: {{2.2*navbarData.navHeight}}px;line-height: {{2.2*navbarData.navHeight}}px">
-    <van-col span="8" offset="8" class="page-title">{{navbarData.pageTitle}}</van-col>
+  <van-col span="3" offset="1"><van-icon name="arrow-left" bind:click="backArrow"></van-icon></van-col>
+    <van-col span="8" offset="4" class="page-title">{{navbarData.pageTitle}}</van-col>
   </van-row>
 </view>
 </view>
