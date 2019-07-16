@@ -19,6 +19,11 @@ Page({
       })
     }
   },
+  toComment: function () {
+    wx.navigateTo({
+      url: '/pages/comment/comment',
+    })
+  },
   onLoad: function () {
   },
   getUserInfo: function(e) {

@@ -10,8 +10,15 @@ Page({
       navHeight: app.globalData.navHeight,
       pageTitle: 'sharedu'
     },
+    storeComment: {
+      averageGrade: 4.8,
+      commentNumber: 789,
+      goodCommentNumber: 345,
+      otherCommentNumber: 444,
+      goodCommentPercent: 43.7
+    }
   },
-  backArrow:function() {
+  backArrow:function(event) {
     wx.navigateBack()
   },
   /**

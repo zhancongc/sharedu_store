@@ -1,15 +1,18 @@
 {
   "pages": [
-    "pages/comment/comment",
+    "pages/index/index",
     "pages/welcome/welcome",
     "pages/register/register",
     "pages/login/login",
     "pages/identification/identification",
 
-    "pages/index/index",
+    
+    "pages/comment/comment",
+    
     "pages/lesson/lesson",
     
     "pages/bills/bills",
+    
     "pages/me/me",
     "pages/account/account",
     "pages/feedback/feedback"
