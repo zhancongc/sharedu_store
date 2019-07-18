@@ -11,7 +11,7 @@ Page({
       pageTitle: 'sharedu'
     },
     storeComment: {
-      averageGrade: 4.8,
+      averageGrade: 3.8,
       commentNumber: 789,
       goodCommentNumber: 345,
       otherCommentNumber: 444,

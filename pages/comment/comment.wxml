@@ -12,10 +12,10 @@
 <view style="width: 94%; height: 306rpx; border-radius: 20rpx; box-shadow: 1px 1px 5px #888; margin: 20rpx 20rpx;">
   <view style="width: 200rpx; height: 200rpx; margin: 20rpx 20rpx 20rpx 20rpx;float: left; text-align: center; vertial-align: middle"><text style="line-height: 200rpx; font-size: 80rpx; color: #ff6600;">{{storeComment.averageGrade}}</text></view>
   <view style="width: 280rpx; height: 40rpx; line-height: 40rpx; font-size: 40rpx; margin: 20rpx 20rpx 20rpx 20rpx;">sharedu评分</view>
-  <view style="width: 400rpx; height: 50rpx; float: right;">评价数：{{storeComment.commentNumber}}</view>
-  <view style="width: 400rpx; height: 50rpx; float: right;">好评：{{storeComment.goodCommentNumber}}</view>
-  <view style="width: 400rpx; height: 50rpx; float: right;">中差评：{{storeComment.otherCommentNumber}}</view>
-  <view style="width: 400rpx; height: 50rpx; float: right;">好评率：{{storeComment.goodCommentPercent}}%</view>
+  <view style="width: 400rpx; height: 50rpx; float: right; font-size: 25rpx;">评价数：{{storeComment.commentNumber}}</view>
+  <view style="width: 400rpx; height: 50rpx; float: right; font-size: 25rpx;">好评：{{storeComment.goodCommentNumber}}</view>
+  <view style="width: 400rpx; height: 50rpx; float: right; font-size: 25rpx;">中差评：{{storeComment.otherCommentNumber}}</view>
+  <view style="width: 400rpx; height: 50rpx; float: right; font-size: 25rpx;">好评率：{{storeComment.goodCommentPercent}}%</view>
 </view>
 
 

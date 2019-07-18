@@ -11,17 +11,41 @@ Page({
       pageTitle: '课程管理'
     },
     tabBarActive: 1,
-    tabBarUrls: ["/pages/index/index", "/pages/lesson/lesson", "/pages/bills/bills", "/pages/me/me"]
-    },
-    onTabBarChange(event) {
-      var that = this;
-      if (event.detail !== that.data.tabBarActive) {
-        wx.redirectTo({
-          url: that.data.tabBarUrls[event.detail],
-        })
-      }
-    },
-
+    tabBarUrls: ["/pages/index/index", "/pages/lesson/lesson", "/pages/bills/bills", "/pages/me/me"],
+    lessonType: 1
+  },
+  onTabBarChange(event) {
+    var that = this;
+    if (event.detail !== that.data.tabBarActive) {
+      wx.redirectTo({
+        url: that.data.tabBarUrls[event.detail],
+      })
+    }
+  },
+  switchTabs: function (e) {
+    var that = this;
+    that.setData({
+      billType: e.currentTarget.dataset.index,
+    })
+    that.setTabsColor(e.currentTarget.dataset.index);
+  },
+  setTabsColor: function (index) {
+    var that = this;
+    if (index == 1) {
+      that.setData({
+        tabColor1: '#ff6600',
+        tabColor2: '#888',
+      })
+      return;
+    }
+    if (index == 2) {
+      that.setData({
+        tabColor1: '#888',
+        tabColor2: '#ff6600'
+      })
+      return;
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
