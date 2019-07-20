@@ -11,10 +11,9 @@ Page({
     },
     tabBarActive: 2,
     tabBarUrls: ["/pages/index/index", "/pages/lesson/lesson", "/pages/bills/bills", "/pages/me/me"],
-    tabColor1: '#ff6600',
-    tabColor2: '#888',
-    tabColor3: '#888',
-    billType: 1,
+    currentTab: 0,
+    tabName: [{ index: 0, name: '全部订单' }, { index: 1, name: '待接单' }, {index: 2, name: '已完成'}],
+    tabColor: ['#ff6600', '#888', '#888'],
     allBills: [{
       storeName: '尚德教育',
       billStatus: '待接单',
@@ -29,33 +28,27 @@ Page({
   switchTabs: function(e) {
     var that = this;
     that.setData({
-      billType: e.currentTarget.dataset.index,
+      currentTab: e.currentTarget.dataset.index,
     })
     that.setTabsColor(e.currentTarget.dataset.index);
   },
   setTabsColor: function (index) {
     var that = this;
+    if (index == 0) {
+      that.setData({
+        tabColor: ['#ff6600', '#888', '#888'],
+      })
+      return;
+    }
     if (index == 1) {
       that.setData({
-        tabColor1: '#ff6600',
-        tabColor2: '#888',
-        tabColor3: '#888',
+        tabColor: ['#888', '#ff6600', '#888'],
       })
       return;
     }
     if (index == 2) {
       that.setData({
-        tabColor1: '#888',
-        tabColor2: '#ff6600',
-        tabColor3: '#888',
-      })
-      return;
-    }
-    if (index == 3) {
-      that.setData({
-        tabColor1: '#888',
-        tabColor2: '#888',
-        tabColor3: '#ff6600',
+        tabColor: ['#888', '#888', '#ff6600'],
       })
       return;
     }

@@ -12,7 +12,9 @@ Page({
     },
     tabBarActive: 1,
     tabBarUrls: ["/pages/index/index", "/pages/lesson/lesson", "/pages/bills/bills", "/pages/me/me"],
-    lessonType: 1
+    currentTab: 0,
+    tabName: [{index: 0, name: '上架课程'}, {index: 1, name: '下架课程'}],
+    tabColor: ['#ff6600', '#888'],
   },
   onTabBarChange(event) {
     var that = this;
@@ -25,23 +27,21 @@ Page({
   switchTabs: function (e) {
     var that = this;
     that.setData({
-      billType: e.currentTarget.dataset.index,
+      currentTab: e.currentTarget.dataset.index,
     })
     that.setTabsColor(e.currentTarget.dataset.index);
   },
   setTabsColor: function (index) {
     var that = this;
-    if (index == 1) {
+    if (index == 0) {
       that.setData({
-        tabColor1: '#ff6600',
-        tabColor2: '#888',
+        tabColor: ['#ff6600', '#888']
       })
       return;
     }
-    if (index == 2) {
+    if (index == 1) {
       that.setData({
-        tabColor1: '#888',
-        tabColor2: '#ff6600'
+        tabColor: ['#888', '#ff6600']
       })
       return;
     }

@@ -16,8 +16,9 @@
   <van-tabbar-item icon="user-circle-o">我的</van-tabbar-item>
 </van-tabbar>
 
+<view></view>
+
 <view>
-  <view>签到</view>
   <view bindtap="toComment">评价</view>
 </view>
 <view>

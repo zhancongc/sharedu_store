@@ -19,17 +19,16 @@
 </van-tabbar>
 
 <view style="width: 94%; height: 88rpx; margin: 0 auto; color: #888;">
-  <view class="tabs-item" style="color:{{ tabColor1 }}" data-index="1" bindtap="switchTabs">上架课程</view>
-  <view class="tabs-item" style="color:{{ tabColor2 }}" data-index="2" bindtap="switchTabs">下架课程</view>
+  <view wx:for="{{tabName}}" wx:key="{{tabColor}}" class="tabs-item" style="color:{{ tabColor[item.index] }}" data-index="{{item.index}}" bindtap="switchTabs">{{item.name}}</view>
 </view>
 
-<block wx:if="{{lessonType==1}}">
+<block wx:if="{{currentTab==1}}">
   <view wx:for="{{ allBills }}" wx:key="item.storeName" class="bills-item">
 
   </view>
 </block>
 
-<block wx:if="{{lessonType==2}}">
+<block wx:if="{{currentTab==2}}">
   <view wx:for="{{ allBills }}" wx:key="item.storeName" class="bills-item">
 
   </view>
