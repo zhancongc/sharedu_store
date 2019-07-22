@@ -13,6 +13,7 @@ Page({
     tabBarActive: 3,
     tabBarUrls: ["/pages/index/index", "/pages/lesson/lesson", "/pages/bills/bills", "/pages/me/me"]
     },
+    
     onTabBarChange(event) {
       var that = this;
       if (event.detail !== that.data.tabBarActive) {
