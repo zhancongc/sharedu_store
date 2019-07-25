@@ -39,6 +39,7 @@ App({
     })
   },
   globalData: {
+    domainUrl: "http://52.83.45.66:9999/",
     userInfo: null,
     navHeight: 20
   }
