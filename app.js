@@ -39,7 +39,7 @@ App({
     })
   },
   globalData: {
-    domainUrl: "http://52.83.45.66:9999/",
+    domainUrl: "https://store.sharedu.co/",
     userInfo: null,
     navHeight: 20
   }

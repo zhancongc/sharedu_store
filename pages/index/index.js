@@ -9,7 +9,8 @@ Page({
       pageTitle: 'sharedu'
     },
     tabBarActive: 0,
-    tabBarUrls: ["/pages/index/index", "/pages/lesson/lesson", "/pages/bills/bills", "/pages/me/me"]
+    tabBarUrls: ["/pages/index/index", "/pages/lesson/lesson", "/pages/bills/bills", "/pages/me/me"],
+    isIdentificated: true
   },
   onTabBarChange(event) {
     var that = this;
@@ -22,6 +23,11 @@ Page({
   toComment: function () {
     wx.navigateTo({
       url: '/pages/comment/comment',
+    })
+  },
+  toIdentification: function () {
+    wx.navigateTo({
+      url: '/pages/identification/identification',
     })
   },
   onLoad: function () {
