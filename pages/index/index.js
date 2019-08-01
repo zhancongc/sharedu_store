@@ -10,7 +10,7 @@ Page({
     },
     tabBarActive: 0,
     tabBarUrls: ["/pages/index/index", "/pages/lesson/lesson", "/pages/bills/bills", "/pages/me/me"],
-    isIdentificated: true
+    isIdentificated: false
   },
   onTabBarChange(event) {
     var that = this;
