@@ -1,5 +1,5 @@
-<!--pages/feedback/feedback.wxml-->
-<view style="background: linear-gradient(to right, #ffcc00, #ff6600);width:100%;height: {{3.2*navbarData.navHeight}}px; position: fixed;">
+<!--pages/wallet/wallet.wxml-->
+<view class="" style="background: linear-gradient(to right, #ffcc00, #ff6600);width:100%;height: {{3.2*navbarData.navHeight}}px; position: fixed;">
   <view class='custom-navbar'>
     <view class='palce-holder-nav' style="height: {{navbarData.navHeight}}px;"></view>
     <van-row class='main-navbar' style="height: {{2.2*navbarData.navHeight}}px;line-height: {{2.2*navbarData.navHeight}}px">
@@ -13,4 +13,7 @@
 </view>
 <view style="width:100%;height: {{3.2*navbarData.navHeight}}px;"></view>
 
+<van-cell-group>
+  <van-cell title="账户流水" is-link="true" bind:tap="" />
+</van-cell-group>
 

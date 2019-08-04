@@ -15,6 +15,13 @@ Page({
     currentTab: 0,
     tabName: [{index: 0, name: '上架课程'}, {index: 1, name: '下架课程'}],
     tabColor: ['#ff6600', '#888'],
+    forSaleLesson: [{
+      lessonName: '高二数学精讲',
+      lessonPrice: '899',
+      lessonTimes: 10,
+      lessonPicture: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJY3iauTMvLDsyB0cxoTfcGU1u1c7uwUz0JC3TjqmV9zhxjzRDPf1FtypEjjCeUolOLUdUGB2JtvXA/132',
+    }],
+    outOfSaleLeson: []
   },
   onTabBarChange(event) {
     var that = this;

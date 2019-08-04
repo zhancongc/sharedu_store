@@ -20,24 +20,22 @@
 <view style="width: 94%; height: 400rpx; margin: auto;">
   <view style="width: 100%; height: 60rpx; font-size: 40rpx; line-height: 60rpx; margin-top: 20rpx;">
   今日数据</view>
-  <view style="">
-    <view style="width: 40%; font-size: 30rpx; line-height: 80rpx; float: left;">今日入账 {{}}</view>
-    <view style="width: 60%; font-size: 30rpx; line-height: 80rpx; float: right;">1801</view>
-    <view style="width: 40%; font-size: 30rpx; line-height: 80rpx; float: left;">今日订单 {{}}</view>
-    <view style="width: 60%; font-size: 30rpx; line-height: 80rpx; float: right;">1802</view>
-  </view>
-      <view style="width: 40%; font-size: 30rpx; line-height: 80rpx; float: left;">今日课程 {{}}</view>
-    <view style="width: 60%; font-size: 30rpx; line-height: 80rpx; float: right;">1803</view>
-</view>
-
-<view>
-  <view bindtap="toComment">评价</view>
+  <view style="width: 40%; font-size: 30rpx; line-height: 80rpx; float: left;">今日入账 {{}}</view>
+  <view style="width: 60%; font-size: 30rpx; line-height: 80rpx; float: right;">1801</view>
+  <view style="width: 40%; font-size: 30rpx; line-height: 80rpx; float: left;">今日订单 {{}}</view>
+  <view style="width: 60%; font-size: 30rpx; line-height: 80rpx; float: right;">1802</view>
+    <view style="width: 40%; font-size: 30rpx; line-height: 80rpx; float: left;">今日课程 {{}}</view>
+  <view style="width: 60%; font-size: 30rpx; line-height: 80rpx; float: right;">1803</view>
+    <view style="width: 40%; font-size: 30rpx; line-height: 80rpx; float: left;">今日好评 {{}}</view>
+  <view style="width: 60%; font-size: 30rpx; line-height: 80rpx; float: right;">1804</view>
+  <view style="width: 40%; font-size: 30rpx; line-height: 80rpx; float: left;">今日中差评 {{}}</view>
+  <view style="width: 60%; font-size: 30rpx; line-height: 80rpx; float: right;">1805</view>
 </view>
 </block>
 
 <block wx:if="{{!isIdentificated}}">
-  <view style="text-align: center;">
-    <van-button round type="primary"  bind:click="toIdentification">
+  <view style="text-align: center; width: 94%; margin: auto;margin-top: 400rpx;">
+    <van-button type="primary" size="large" bind:click="toIdentification">
     立即认证</van-button>
   </view>
 </block>

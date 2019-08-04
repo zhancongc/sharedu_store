@@ -38,5 +38,13 @@ Page({
     this.setData({
       userInfo: e.detail.userInfo,
     })
+  },
+  onShow: function() {
+    var that = this;
+    that.setData({
+      isIdentificated: app.globalData.isIdentificated
+    })
   }
 })
+
+

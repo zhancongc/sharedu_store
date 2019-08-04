@@ -3976,6 +3976,7 @@ Page({
   identificationCommit: function() {
     var that = this;
     if (that.data.storeName && that.data.cityName && that.data.detailAddress && that.data.uploadPhotoes && that.data.liencePhoto) {
+      app.globalData.isIdentificated = true;
       wx.navigateTo({
         url: '/pages/index/index',
       })

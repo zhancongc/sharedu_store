@@ -23,38 +23,49 @@
 </view>
 
 <block wx:if="{{currentTab==0}}">
-  <view wx:for="{{ allBills }}" wx:key="item.storeName" class="bills-item">
-    <van-icon color="#666" name="shop-o" class="store-icon"></van-icon>
-    <view class="store-name">{{item.storeName}}</view>
-    <view class="bill-status">{{item.billStatus}}</view>
+  <view wx:for="{{ allBills }}" wx:key="item.billLessonName" class="bills-item">
     <view class="bill-lesson-picture" style="background-image: url({{ item.billLessonPicture }});"></view>
-    <view class="bill-lesson-name">{{item.billLessonName}}</view>
-    <view class="bill-amount">￥{{item.billAmount}}</view>
+    <view class="bill-detail">
+      <view class="bill-lesson-name">{{item.billLessonName}}</view>
+      <view class="bill-amount">￥{{item.billAmount}}</view>
+      <view class="bill-status">{{item.billStatus}}</view>
+    </view>
     <block wx:if="{{item.canReceiveOrder}}">
-  <van-button size="mini" class="receive-order" style="">接单</van-button></block>
+      <view class="bill-operate-bar">
+        <van-button size="mini" class="bill-operate">接单</van-button>
+      </view>
+    </block>
   </view>
 </block>
 
 <block wx:if="{{currentTab==1}}">
-  <view wx:for="{{ uncompleteBills }}" wx:key="item.storeName" class="bills-item">
-    <van-icon color="#666" name="shop-o" class="store-icon"></van-icon>
-    <view class="store-name">{{item.storeName}}</view>
-    <view class="bill-status">{{item.billStatus}}</view>
+  <view wx:for="{{ allBills }}" wx:key="item.billLessonName" class="bills-item">
     <view class="bill-lesson-picture" style="background-image: url({{ item.billLessonPicture }});"></view>
-    <view class="bill-lesson-name">{{item.billLessonName}}</view>
-    <view class="bill-amount">￥{{item.billAmount}}</view>
+    <view style="width: 65%; height: 240rpx; float: right;">
+      <view class="bill-lesson-name">{{item.billLessonName}}</view>
+      <view class="bill-amount">￥{{item.billAmount}}</view>
+      <view class="bill-status">{{item.billStatus}}</view>
+    </view>
     <block wx:if="{{item.canReceiveOrder}}">
-  <van-button size="mini" class="receive-order" style="">接单</van-button></block>
+      <view style="width: 100%; float: right;">
+        <van-button size="mini" class="bill-operate">接单</van-button>
+      </view>
+    </block>
   </view>
 </block>
 
 <block wx:if="{{currentTab==2}}">
-  <view wx:for="{{ completeBills }}" wx:key="item.storeName" class="bills-item">
-    <van-icon color="#666" name="shop-o" class="store-icon"></van-icon>
-    <view class="store-name">{{item.storeName}}</view>
-    <view class="bill-status">{{item.billStatus}}</view>
+  <view wx:for="{{ allBills }}" wx:key="item.billLessonName" class="bills-item">
     <view class="bill-lesson-picture" style="background-image: url({{ item.billLessonPicture }});"></view>
-    <view class="bill-lesson-name">{{item.billLessonName}}</view>
-    <view class="bill-amount">￥{{item.billAmount}}</view>
+    <view style="width: 65%; height: 240rpx; float: right;">
+      <view class="bill-lesson-name">{{item.billLessonName}}</view>
+      <view class="bill-amount">￥{{item.billAmount}}</view>
+      <view class="bill-status">{{item.billStatus}}</view>
+    </view>
+    <block wx:if="{{item.canReceiveOrder}}">
+      <view style="width: 100%; float: right;">
+        <van-button size="mini" class="bill-operate">接单</van-button>
+      </view>
+    </block>
   </view>
 </block>

@@ -1,21 +1,20 @@
 {
   "pages": [
-    "pages/index/index",
+    "pages/me/me",
     "pages/welcome/welcome",
     "pages/register/register",
     "pages/login/login",
     "pages/identification/identification",
-
-    
     "pages/comment/comment",
-    
-    "pages/lesson/lesson",
-    
+    "pages/index/index",
     "pages/bills/bills",
-    
-    "pages/me/me",
+    "pages/lesson/lesson",
     "pages/account/account",
-    "pages/feedback/feedback"
+    "pages/feedback/feedback",
+    "pages/help/help",
+    "pages/aboutUs/aboutUs",
+    "pages/wallet/wallet",
+    "pages/storeDetail/storeDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

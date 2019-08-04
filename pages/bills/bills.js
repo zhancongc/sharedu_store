@@ -15,7 +15,6 @@ Page({
     tabName: [{ index: 0, name: '全部订单' }, { index: 1, name: '待接单' }, {index: 2, name: '已完成'}],
     tabColor: ['#ff6600', '#888', '#888'],
     allBills: [{
-      storeName: '尚德教育',
       billStatus: '待接单',
       billLessonPicture: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJY3iauTMvLDsyB0cxoTfcGU1u1c7uwUz0JC3TjqmV9zhxjzRDPf1FtypEjjCeUolOLUdUGB2JtvXA/132',
       billLessonName: '考研英语一阅读专项训练',

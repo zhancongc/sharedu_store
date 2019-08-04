@@ -1,4 +1,4 @@
-// pages/feedback/feedback.js
+// pages/storeDetail/storeDetail.js
 const app = getApp()
 Page({
 
@@ -8,7 +8,7 @@ Page({
   data: {
     navbarData: {
       navHeight: app.globalData.navHeight,
-      pageTitle: '意见反馈'
+      pageTitle: '我的钱包'
     },
   },
 

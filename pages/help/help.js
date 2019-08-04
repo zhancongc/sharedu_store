@@ -1,19 +1,11 @@
-// pages/feedback/feedback.js
-const app = getApp()
+// pages/help/help.js
 Page({
 
   /**
    * Page initial data
    */
   data: {
-    navbarData: {
-      navHeight: app.globalData.navHeight,
-      pageTitle: '意见反馈'
-    },
-  },
 
-  backHandler: function () {
-    wx.navigateBack()
   },
 
   /**

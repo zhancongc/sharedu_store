@@ -1,11 +1,19 @@
 // pages/account/account.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    navbarData: {
+      navHeight: app.globalData.navHeight,
+      pageTitle: '账号设置'
+    },
+  },
 
+  backHandler: function () {
+    wx.navigateBack()
   },
 
   /**

@@ -12,16 +12,15 @@ Page({
     },
     tabBarActive: 3,
     tabBarUrls: ["/pages/index/index", "/pages/lesson/lesson", "/pages/bills/bills", "/pages/me/me"]
-    },
-    
-    onTabBarChange(event) {
-      var that = this;
-      if (event.detail !== that.data.tabBarActive) {
-        wx.redirectTo({
-          url: that.data.tabBarUrls[event.detail],
-        })
-      }
-    },
+  },
+  onTabBarChange(event) {
+    var that = this;
+    if (event.detail !== that.data.tabBarActive) {
+      wx.redirectTo({
+        url: that.data.tabBarUrls[event.detail],
+      })
+    }
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -82,5 +81,31 @@ Page({
     wx.navigateTo({
       url: '/pages/account/account',
     })
+  },
+  toWallet: function() {
+    wx.navigateTo({
+      url: '/pages/wallet/wallet',
+    })
+  },
+  toStoreDetail: function() {
+    wx.navigateTo({
+      url: '/pages/storeDetail/storeDetail',
+    })
+  },
+  toAboutUs: function () {
+    wx.navigateTo({
+      url: '/pages/aboutUs/aboutUs',
+    })
+  },
+  toHelp: function(){
+    wx.navigateTo({
+      url: '/pages/help/help',
+    })
+  },
+  toFeedback: function() {
+    wx.navigateTo({
+      url: '/pages/feedback/feedback',
+    })
   }
 })
+

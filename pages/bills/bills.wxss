@@ -1,13 +1,13 @@
 /* pages/bills/bills.wxss */
 .tabs-item {width: 33%; height: 100%; float: left; text-align: center; line-height: 88rpx; font-size: 28rpx;}
 .tab-active{ color: black; }
-.bills-item {width: 94%; height: 306rpx; border-radius: 20rpx; box-shadow: 1px 1px 5px #888; margin: 20rpx 20rpx;}
-.store-icon {width: 40rpx; height: 50rpx; float: left; margin: 12rpx 10rpx 8rpx 20rpx;}
-.store-name {width: 65%; height: 50rpx;float:left; margin: 10rpx 10rpx 10rpx 10rpx; font-size: 30rpx; line-height:50rpx; color: #666;}
-.bill-status {width: 100rpx; height: 50rpx; float:right; font-size: 30rpx; color: #ff6600; margin: 10rpx 10rpx 10rpx 10rpx;}
-.bill-lesson-picture {width: 200rpx;height: 200rpx; float: left; margin: 10rpx 10rpx 10rpx 20rpx; border-radius: 10rpx; background-repeat:no-repeat; background-size:100% 100%;}
-.bill-lesson-name {width: 60%; height: 72rpx;float:left;font-size: 25rpx; margin: 10rpx 10rpx 10rpx 10rpx;}
-.bill-amount {width: 60%; height: 60rpx;float:left;font-size: 50rpx; line-height: 60rpx; margin: 10rpx 10rpx 10rpx 10rpx; vertical-align: middle;}
-.receive-order {float:right; margin: 10rpx 10rpx 10rpx 10rpx;}
 
+.bills-item {width: 94%; height: 306rpx; box-shadow: 1px 1px 5px #888; margin: 20rpx 20rpx;}
+.bill-lesson-picture {width: 200rpx; height: 200rpx; float: left; margin: 20rpx 20rpx 20rpx 20rpx; border-radius: 10rpx; background-repeat:no-repeat; background-size:100% 100%;}
+.bill-detail {width: 65%; height: 240rpx; float: right;}
+.bill-lesson-name {width: 90%; height: 30rpx;float:left; font-size: 25rpx; margin: 20rpx 10rpx;}
+.bill-amount {width: 90%; height: 60rpx; float:left;font-size: 50rpx; line-height: 60rpx; margin: 10rpx 10rpx; vertical-align: middle;}
+.bill-status {width: 100rpx; height: 40rpx; float: left; font-size: 30rpx; color: #ff6600; margin: 10rpx 10rpx;}
+.bill-operate-bar {width: 100%; float: right;}
+.bill-operate {float: right; margin: 5rpx 10rpx 5rpx 5rpx;}
 

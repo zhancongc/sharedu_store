@@ -1,3 +1,16 @@
 /* pages/lesson/lesson.wxss */
 .tabs-item {width: 50%; height: 100%; float: left; text-align: center; line-height: 88rpx; font-size: 28rpx;}
 .tab-active{ color: black; }
+
+.lesson-picture {width: 200rpx;height: 200rpx; float: left; margin: 20rpx 20rpx 20rpx 20rpx; border-radius: 10rpx; background-repeat:no-repeat; background-size:100% 100%; }
+
+.lesson-detail {width: 65%; height: 240rpx; float: right;}
+.lesson-name {width: 90%; font-size: 25rpx; margin: 20rpx 10rpx;}
+.lesson-price {width: 90%; font-size: 50rpx; margin: 20rpx 10rpx;}
+.lesson-times {width: 90%; font-size: 30rpx; margin: 20rpx 10rpx;}
+
+.lesson-operate-bar {width: 100%; float: right;}
+.lesson-operate-right {float: right; margin: 5rpx 25rpx 5rpx 5rpx;}
+.lesson-operate-left {float: right; margin: 5rpx 5rpx 5rpx 25rpx;}
+.lesson-operate {float: right; margin: 5rpx 5rpx 5rpx 5rpx;}
+

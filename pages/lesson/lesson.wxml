@@ -21,14 +21,38 @@
   <view wx:for="{{tabName}}" wx:key="{{tabColor}}" class="tabs-item" style="color:{{ tabColor[item.index] }}" data-index="{{item.index}}" bindtap="switchTabs">{{item.name}}</view>
 </view>
 
-<block wx:if="{{currentTab==1}}">
-  <view wx:for="{{ allBills }}" wx:key="item.storeName" class="bills-item">
-
+<block wx:if="{{currentTab==0}}">
+  <view wx:for="{{ forSaleLesson }}" wx:key="item.lessonName" class="bills-item">
+    <view style="width: 94%; height: 306rpx; box-shadow: 1px 1px 5px #888; margin: 20rpx 20rpx;">
+      <view style="background-image: url({{ item.lessonPicture }});" class="lesson-picture"></view>
+      <view class="lesson-detail">
+        <view class="lesson-name">{{item.lessonName}}</view>
+        <view class="lesson-price">￥{{item.lessonPrice}}</view>
+        <view class="lesson-times">{{item.lessonTimes}}课时</view>
+      </view>
+      <view class="lesson-operate-bar">
+        <van-button size="mini" class="lesson-operate">分享</van-button>
+        <van-button size="mini" class="lesson-operate">下架</van-button>
+        <van-button size="mini" class="lesson-operate">编辑</van-button>
+      </view>
+    </view>
   </view>
 </block>
 
-<block wx:if="{{currentTab==2}}">
-  <view wx:for="{{ allBills }}" wx:key="item.storeName" class="bills-item">
-
+<block wx:if="{{currentTab==1}}">
+  <view wx:for="{{ outOfSaleLesson }}" wx:key="item.lessonName" class="bills-item">
+    <view style="width: 94%; height: 306rpx; box-shadow: 1px 1px 5px #888; margin: 20rpx 20rpx;">
+      <view style="background-image: url({{ item.lessonPicture }});" class="lesson-picture"></view>
+      <view style="width: 65%; float: right;">
+        <view class="lesson-name">{{item.lessonName}}</view>
+        <view class="lesson-price">￥{{item.lessonPrice}}</view>
+        <view class="lesson-times">{{item.lessonTimes}}课时</view>
+      </view>
+      <view style="width: 100%; float: right;">
+        <van-button size="mini" class="lesson-operate">分享</van-button>
+        <van-button size="mini" class="lesson-operate">下架</van-button>
+        <van-button size="mini" class="lesson-operate">编辑</van-button>
+      </view>
+    </view>
   </view>
 </block>
