@@ -31,9 +31,10 @@
         <view class="lesson-times">{{item.lessonTimes}}课时</view>
       </view>
       <view class="lesson-operate-bar">
-        <van-button size="mini" class="lesson-operate">分享</van-button>
-        <van-button size="mini" class="lesson-operate">下架</van-button>
         <van-button size="mini" class="lesson-operate">编辑</van-button>
+        <van-button size="mini" class="lesson-operate">下架</van-button>
+        <van-button size="mini" class="lesson-operate">分享</van-button>
+        <van-button size="mini" class="lesson-operate">预览</van-button>
       </view>
     </view>
   </view>
@@ -49,9 +50,10 @@
         <view class="lesson-times">{{item.lessonTimes}}课时</view>
       </view>
       <view style="width: 100%; float: right;">
-        <van-button size="mini" class="lesson-operate">分享</van-button>
-        <van-button size="mini" class="lesson-operate">下架</van-button>
         <van-button size="mini" class="lesson-operate">编辑</van-button>
+        <van-button size="mini" class="lesson-operate">上架</van-button>
+        <van-button size="mini" class="lesson-operate">删除</van-button>
+        <van-button size="mini" class="lesson-operate">预览</van-button>
       </view>
     </view>
   </view>

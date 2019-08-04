@@ -23,7 +23,7 @@
 </view>
 
 <block wx:if="{{currentTab==0}}">
-  <view wx:for="{{ allBills }}" wx:key="item.billLessonName" class="bills-item">
+  <view wx:for="{{ uncompleteBills }}" wx:key="item.billLessonName" class="bills-item">
     <view class="bill-lesson-picture" style="background-image: url({{ item.billLessonPicture }});"></view>
     <view class="bill-detail">
       <view class="bill-lesson-name">{{item.billLessonName}}</view>
@@ -39,7 +39,7 @@
 </block>
 
 <block wx:if="{{currentTab==1}}">
-  <view wx:for="{{ allBills }}" wx:key="item.billLessonName" class="bills-item">
+  <view wx:for="{{ completeBills }}" wx:key="item.billLessonName" class="bills-item">
     <view class="bill-lesson-picture" style="background-image: url({{ item.billLessonPicture }});"></view>
     <view style="width: 65%; height: 240rpx; float: right;">
       <view class="bill-lesson-name">{{item.billLessonName}}</view>

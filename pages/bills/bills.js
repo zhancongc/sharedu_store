@@ -12,8 +12,16 @@ Page({
     tabBarActive: 2,
     tabBarUrls: ["/pages/index/index", "/pages/lesson/lesson", "/pages/bills/bills", "/pages/me/me"],
     currentTab: 0,
-    tabName: [{ index: 0, name: '全部订单' }, { index: 1, name: '待接单' }, {index: 2, name: '已完成'}],
+    tabName: [{ index: 0, name: '待接单' }, { index: 1, name: '已完成' }, {index: 2, name: '全部'}],
     tabColor: ['#ff6600', '#888', '#888'],
+    uncompleteBills: [{
+      billStatus: '待接单',
+      billLessonPicture: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJY3iauTMvLDsyB0cxoTfcGU1u1c7uwUz0JC3TjqmV9zhxjzRDPf1FtypEjjCeUolOLUdUGB2JtvXA/132',
+      billLessonName: '考研英语一阅读专项训练',
+      billAmount: 1188,
+      canReceiveOrder: true
+    }],
+    completeBills: [],
     allBills: [{
       billStatus: '待接单',
       billLessonPicture: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJY3iauTMvLDsyB0cxoTfcGU1u1c7uwUz0JC3TjqmV9zhxjzRDPf1FtypEjjCeUolOLUdUGB2JtvXA/132',
@@ -21,10 +29,9 @@ Page({
       billAmount: 1188,
       canReceiveOrder: true
     }],
-    uncompleteBills: [],
-    completeBills: []
   },
   switchTabs: function(e) {
+    console.log(e.currentTarget.dataset.index);
     var that = this;
     that.setData({
       currentTab: e.currentTarget.dataset.index,

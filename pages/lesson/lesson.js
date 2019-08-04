@@ -21,7 +21,12 @@ Page({
       lessonTimes: 10,
       lessonPicture: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJY3iauTMvLDsyB0cxoTfcGU1u1c7uwUz0JC3TjqmV9zhxjzRDPf1FtypEjjCeUolOLUdUGB2JtvXA/132',
     }],
-    outOfSaleLeson: []
+    outOfSaleLesson: [{
+      lessonName: '高一英语阅读理解强化训练',
+      lessonPrice: '599',
+      lessonTimes: 10,
+      lessonPicture: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJY3iauTMvLDsyB0cxoTfcGU1u1c7uwUz0JC3TjqmV9zhxjzRDPf1FtypEjjCeUolOLUdUGB2JtvXA/132',
+    }]
   },
   onTabBarChange(event) {
     var that = this;
