@@ -22,16 +22,17 @@
 </van-cell-group>
 
 <view style="margin-top:20rpx;">
-<van-row><van-col span="22" offset="1">
-<van-button type="primary" size="large" disabled="{{!agreement}}" bind:tap="userRegister">注册</van-button>
-</van-col>
-</van-row>
+  <van-row>
+    <van-col span="22" offset="1">
+      <van-button type="primary" size="large" disabled="{{!agreement}}" bind:tap="userRegister">注册</van-button>
+    </van-col>
+  </van-row>
 </view>
 
 <view style="margin-top:14rpx;">
-<van-row>
-<van-col span="20" offset="2" style="text-align: center; font-size: 24rpx; color: #666;margin-top: 10rpx;">
-<van-checkbox value="{{ agreement }}" checked-color="#07c160" bind:change="onChangeAgreement">我同意《服务条款》和《sharedu隐私政策》</van-checkbox>
-</van-col>
-</van-row>
+  <van-row>
+    <van-col span="20" offset="2" style="text-align: center; font-size: 24rpx; color: #666;margin-top: 10rpx;">
+    <van-checkbox value="{{ agreement }}" checked-color="#07c160" bind:change="onChangeAgreement">我同意《服务条款》和《sharedu隐私政策》</van-checkbox>
+    </van-col>
+  </van-row>
 </view>
