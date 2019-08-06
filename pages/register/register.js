@@ -15,6 +15,7 @@ Page({
     phone: '',
     password: '',
     verificationCode: '',
+    verificationCodeHint: '验证码',
     agreement: false
   },
   backHandler: function () {
@@ -80,7 +81,7 @@ Page({
   onChangePhone(event) {
     // event.detail 为当前输入的值
     var that = this;
-    that.data.phone = event.detail;
+    that.data.phone = event.detail.trim();
   },
   onChangePassword(event) {
     var that = this;
@@ -102,9 +103,18 @@ Page({
     wx.request({
       url: app.globalData.domainUrl + '/mobile/' + this.data.phone,
       method: 'get',
-      success: function () {},
-      fail: function () {},
-      complete: function() {}
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      success: function (res) {},
+      fail: function (res) {},
+      complete: function(res) {
+        if (res.code===0) {
+          that.setData({
+            verificationCodeHint: '已发送'
+          })
+        }
+      }
     })
   },
   userRegister: function() {

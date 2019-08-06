@@ -48,12 +48,12 @@
   <view wx:for="{{ outOfSaleLesson }}" wx:key="item.lessonName" class="bills-item">
     <view style="width: 94%; height: 306rpx; box-shadow: 1px 1px 5px #888; margin: 20rpx 20rpx;">
       <view style="background-image: url({{ item.lessonPicture }});" class="lesson-picture"></view>
-      <view style="width: 65%; float: right;">
+      <view class="lesson-detail">
         <view class="lesson-name">{{item.lessonName}}</view>
         <view class="lesson-price">￥{{item.lessonPrice}}</view>
         <view class="lesson-times">{{item.lessonTimes}}课时</view>
       </view>
-      <view style="width: 100%; float: right;">
+      <view class="lesson-operate-bar">
         <van-button size="mini" class="lesson-operate">编辑</van-button>
         <van-button size="mini" class="lesson-operate">上架</van-button>
         <van-button size="mini" class="lesson-operate">删除</van-button>
