@@ -96,14 +96,25 @@ Page({
       agreement: event.detail
     });
   },
+  getVerificationCode: function () {
+    // 获取验证码
+    var that = this;
+    wx.request({
+      url: app.globalData.domainUrl + '/mobile/' + this.data.phone,
+      method: 'get',
+      success: function () {},
+      fail: function () {},
+      complete: function() {}
+    })
+  },
   userRegister: function() {
     // 用户注册
     var that = this;
     console.log(that.data.phone, that.data.password, that.data.varificationCode);
     if (that.data.phone === '123' && that.data.varificationCode === '123') {
       wx.showToast({title: '注册成功',})
-      wx.navigateTo({ url: '/pages/index/index', });
-      // wx.redirectTo({url: '/pages/index/index',})
+      // wx.navigateTo({ url: '/pages/index/index', });
+      wx.redirectTo({url: '/pages/index/index',})
     }
   }
 })
