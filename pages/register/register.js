@@ -126,5 +126,11 @@ Page({
       // wx.navigateTo({ url: '/pages/index/index', });
       wx.redirectTo({url: '/pages/index/index',})
     }
+    wx.request({
+      url: '',
+      method: 'post',
+      header: '',
+      
+    })
   }
 })
