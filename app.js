@@ -42,6 +42,7 @@ App({
     domainUrl: "https://store.sharedu.co/",
     userInfo: null,
     navHeight: 20,
-    isIdentificated: true
+    isIdentificated: true,
+    addLessonIntro: ''
   }
 })

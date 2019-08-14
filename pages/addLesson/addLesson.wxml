@@ -33,10 +33,10 @@
 <view style="margin-top: -70rpx;">
   <van-cell-group>
     <van-field label="课程名称" value="{{ lessonName }}" required="true" placeholder="请输入课程名称" border="{{ true }}" maxlength="30" focus="true" bind:change="onChangeLessonName" />
-    <van-field readonly label="课程类别" value="{{ lessonType }}" type="text" required="true" placeholder="请选择最相近的课程类别" border="{{ true }}" maxlength="30" is-link="false" bind:tap="onTapLessonType" style="color: black;" />
+    <van-field readonly label="课程类别" value="{{ lessonType }}" type="text" required="true" placeholder="请选择最相近的课程类别" border="{{ true }}" maxlength="30" is-link="false" bind:tap="chooseLessonType" style="color: black;" />
     <van-field value="{{ lessonTimes }}" type="number" label="课时数" required="true" placeholder="请输入课时数" border="{{ true }}" maxlength="10" bind:change="onChangeLessonTimes" />
     <van-field label="课程价格" value="{{ lessonPrice }}" type="digit" required="true" placeholder="请输入该课程的价格" border="{{ true }}" bind:change="onChangeLessonPrice" />
-    <van-field readonly value="{{ lessonIntro }}" type="text" label="课程介绍" required="true" placeholder="请输入该课程的介绍" border="{{ true }}" bind:tap="addLessonIntro" is-link="false" />
+    <van-field readonly value="{{ lessonIntroState }}" type="text" label="课程介绍" required="true" placeholder="请输入该课程的介绍" border="{{ true }}" bind:tap="addLessonIntro" is-link="false" />
   </van-cell-group>
 </view>
 
@@ -47,8 +47,8 @@
   </van-row>
 </view>
 
-<view class='mask' wx:if="{{ cityPicker }}"></view>
-  <view wx:if="{{ cityPicker }}" style="position: fixed; bottom: 0rpx; left: 0rpx; width:100%;">
-  <van-area title="选择课程类别" area-list="{{ areaList }}" bind:cancel="onCancelCityName" bind:confirm="onConfirmCityName" />
+<view class="mask" wx:if="{{ lessonPicker }}" bindtap="onHidePicker"></view>
+<view wx:if="{{ lessonPicker }}" style="position: fixed; bottom: 0rpx; left: 0rpx; width:100%; z-index: 9999;">
+  <van-picker show-toolbar title="选择类别" columns="{{ columns }}" bind:cancel="onCancelPicker" bind:confirm="onConfirmPicker" bind:change="onChangePicker" confirm-button-text="确定" />
 </view>
 
