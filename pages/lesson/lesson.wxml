@@ -30,7 +30,12 @@
 <block wx:if="{{currentTab==0}}">
   <view wx:for="{{ forSaleLesson }}" wx:key="item.lessonName" class="bills-item">
     <view style="width: 94%; height: 306rpx; box-shadow: 1px 1px 5px #888; margin: 20rpx 20rpx;">
-      <view style="background-image: url({{ item.lessonPicture }});" class="lesson-picture"></view>
+      <!--view style="background-image: url({{ item.lessonPicture }});" class="lesson-picture">
+      <image src="{{item.lessonPicture}}" mode="aspectFill"></image>
+      </view-->
+      <view style="width: 200rpx;height: 200rpx; float: left; margin: 20rpx 20rpx 20rpx 20rpx;">
+        <image style="width: 200rpx; height: 200rpx; border-radius: 10rpx;" src="{{item.lessonPicture}}" mode="aspectFill"></image>
+      </view>
       <view class="lesson-detail">
         <view class="lesson-name">{{item.lessonName}}</view>
         <view class="lesson-price">￥{{item.lessonPrice}}</view>

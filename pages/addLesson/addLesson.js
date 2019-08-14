@@ -69,6 +69,8 @@ Page({
   },
   onChangePicker(event) {
     console.log(event.detail);
+    const { picker, value, index } = event.detail;
+    picker.setColumnValues(1, lessons[value[0]]);
     var tempType = event.detail.value;
     this.setData({lessonType: tempType[1]});
   },
