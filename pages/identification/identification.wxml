@@ -36,8 +36,8 @@
 </van-cell-group>
 </view>
 
-<view style="width: 100%; height:500rpx; text-align: center; vertical-align: middle">
-<image mode="aspectFit" src="{{liencePhoto}}"></image>
+<view wx:if="{{liencePhoto}}" style="width: 100%; height:500rpx; text-align: center; vertical-align: middle">
+  <image mode="aspectFit" src="{{liencePhoto}}"></image>
 </view>
 
 <view style="margin-top:20rpx;">

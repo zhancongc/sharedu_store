@@ -16,9 +16,9 @@ Page({
     tabColor: ['#ff6600', '#888', '#888'],
     uncompleteBills: [{
       billStatus: '待接单',
-      billLessonPicture: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJY3iauTMvLDsyB0cxoTfcGU1u1c7uwUz0JC3TjqmV9zhxjzRDPf1FtypEjjCeUolOLUdUGB2JtvXA/132',
-      billLessonName: '考研英语一阅读专项训练',
-      billAmount: 1188,
+      billLessonPicture: '/images/English.jpg',
+      billLessonName: '考研英语一基础强化训练',
+      billAmount: 388,
       canReceiveOrder: true
     }],
     completeBills: [],

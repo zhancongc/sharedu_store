@@ -1,11 +1,19 @@
 // pages/aboutUs/aboutUs.js
+const app = getApp()
 Page({
 
   /**
    * Page initial data
    */
   data: {
+    navbarData: {
+      navHeight: app.globalData.navHeight,
+      pageTitle: '账号设置'
+    },
+  },
 
+  backHandler: function () {
+    wx.navigateBack()
   },
 
   /**

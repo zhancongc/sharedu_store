@@ -4,8 +4,10 @@
     <view class='palce-holder-nav' style="height: {{navbarData.navHeight}}px;"></view>
     <van-row class='main-navbar' style="height: {{2.2*navbarData.navHeight}}px;line-height: {{2.2*navbarData.navHeight}}px">
       <van-col span="6" class="back-word">
-        <text bind:tap="backHandler" style="width: 80rpx; height:56rpx; color: #fff; vertical-align:0%;" class="fa fa-plus-circle fa-lg"></text>
-        <text style="color: #fff;">添加</text>
+        <view bindtap="toAddLesson">
+          <text style="width: 80rpx; height:56rpx; color: #fff; vertical-align:0%;" class="fa fa-plus-circle fa-lg"></text>
+          <text style="color: #fff;">添加</text>
+        </view>
       </van-col>
       <van-col span="8" offset="2" class="page-title">{{navbarData.pageTitle}}</van-col>
     </van-row>

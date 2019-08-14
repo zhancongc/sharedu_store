@@ -16,17 +16,12 @@ Page({
     tabName: [{index: 0, name: '上架课程'}, {index: 1, name: '下架课程'}],
     tabColor: ['#ff6600', '#888'],
     forSaleLesson: [{
-      lessonName: '高二数学精讲',
-      lessonPrice: '899',
+      lessonName: '考研英语',
+      lessonPrice: '799',
       lessonTimes: 10,
-      lessonPicture: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJY3iauTMvLDsyB0cxoTfcGU1u1c7uwUz0JC3TjqmV9zhxjzRDPf1FtypEjjCeUolOLUdUGB2JtvXA/132',
+      lessonPicture: '/images/English.jpg',
     }],
-    outOfSaleLesson: [{
-      lessonName: '高一英语阅读理解强化训练',
-      lessonPrice: '599',
-      lessonTimes: 10,
-      lessonPicture: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJY3iauTMvLDsyB0cxoTfcGU1u1c7uwUz0JC3TjqmV9zhxjzRDPf1FtypEjjCeUolOLUdUGB2JtvXA/132',
-    }]
+    outOfSaleLesson: []
   },
   onTabBarChange(event) {
     var that = this;
@@ -112,5 +107,10 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  toAddLesson : function() {
+    wx.navigateTo({
+      url: '/pages/addLesson/addLesson',
+    })
   }
 })

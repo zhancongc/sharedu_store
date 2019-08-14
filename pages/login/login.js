@@ -1,4 +1,10 @@
 // pages/login/login.js
+var CryptoJS = require('../../utils/core.js')
+//var key = CryptoJS.enc.Utf8.parse("xxxxxxx-key");
+//var iv = CryptoJS.enc.Utf8.parse("xxxxxxxxx-iv");
+//var pwd = CryptoJS.encrypt(this.data.pwdVal, key, iv)
+//var original = CryptoJS.encrypt(pwd, key, iv)
+
 const app = getApp() 
 Page({
 
@@ -25,7 +31,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.request({
+      url: app.globalData.domainUrl + ''
+    })
   },
 
   /**
@@ -101,28 +109,65 @@ Page({
     var that = this;
     that.data.verificationCode = event.detail;
   },
-  userLogin:function () {
-    // 用户登录
+  loginConfirm:function () {
     var that = this;
     var passkey;
-    console.log(that.data.loginViaPassword)
     if(that.data.loginViaPassword) {
       passkey = that.data.password
     } else {
       passkey = that.data.verificationCode
     }
-    console.log(that.data.phone, passkey);
-    if(that.data.phone === '123' && passkey === '123') {
+    if(that.data.phone && passkey) {
       wx.showToast({
         title: '正在登录',
       })
-      wx.navigateTo({ url: '/pages/index/index',})
-      // wx.redirectTo({url: '/pages/identification/identification',})
-    } else if (that.data.phone === '' && passkey === '') {
-      wx.showToast({ title: '账号或密码为空',})
-    } 
-    else {
+      that.userLogin()
+    } else {
       wx.showToast({title: '账号或密码错误',})
     }
-  }
+  },
+  userLogin: function (account, pass) {
+    var that = this;
+    out = that.crypto('password', '123456')
+    console.log(out)
+    /*wx.request({
+      method: 'post',
+      url: app.globalData.domainUrl + '',
+      header: { 
+        'Authorization': 'Basic cGlnOnBpZw==',
+        'Content-Type': 'application/json'
+      },
+      data: { 
+        username: that.data.phone,
+        password: 'rKu1/348LvKp0rsVC06eCA==',
+        randomStr: '95691565501687323',
+        code: '1234',
+        grant_type: 'password',
+        scope: 'server'
+      },
+      success: function (res) {
+        if (res.code==0) {
+          wx.redirectTo({
+            url: '/pages/index/index',
+          })
+        }
+      },
+      fail: function() {},
+      complete: function(){}
+    })*/
+  },
+  crypto: function (key, data) {
+    key = CryptoJS.enc.Latin1.parse(key)
+    var iv = key
+    // 加密
+    var encrypted = CryptoJS.AES.encrypt(
+      data,
+      key, {
+        iv: iv,
+        mode: CryptoJS.mode.CBC,
+        padding: CryptoJS.pad.ZeroPadding
+      })
+    result = encrypted.toString()
+    return result
+  },
 })

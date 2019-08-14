@@ -101,10 +101,10 @@ Page({
     // 获取验证码
     var that = this;
     wx.request({
-      url: app.globalData.domainUrl + '/mobile/' + this.data.phone,
+      url: app.globalData.domainUrl + '/admin/mobile/' + this.data.phone,
       method: 'get',
       header: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
       },
       success: function (res) {},
       fail: function (res) {},
@@ -117,14 +117,58 @@ Page({
       }
     })
   },
-  userRegister: function() {
+  userRegister: function () {
+    var that = this;
+    wx.request({
+      method: 'post',
+      url: app.globalData.domainUrl + '/admin/user/storeRegistry',
+      header: {'Content-Type': 'application/json'},
+      data: { 
+        phone: that.data.phone,
+        verificationCode: that.data.varificationCode,
+        password: that.data.password
+      },
+      success: function () {
+        wx.redirectTo({
+          url: '/pages/index/index',
+        })
+      },
+      fail: function () {},
+      complete: function() {}
+    })
+  },
+  registerConfirm: function() {
     // 用户注册
     var that = this;
     console.log(that.data.phone, that.data.password, that.data.varificationCode);
-    if (that.data.phone === '123' && that.data.varificationCode === '123') {
-      wx.showToast({title: '注册成功',})
-      // wx.navigateTo({ url: '/pages/index/index', });
-      wx.redirectTo({url: '/pages/index/index',})
+    if (!that.isPhoneNumber(that.data.phone)){
+      wx.showToast({
+        title: '请输入正确格式的手机号码',
+      })
+      return;
+    } 
+    if (!that.isVerificationCode(that.data.varificationCode)) {
+      wx.showToast({
+        title: '请输入正确格式的手机号码',
+      })
+      return;
     }
+    if (!that.data.varificationCode) {
+      wx.showToast({
+        title: '请填写密码',
+      })
+      return;
+    }
+    that.userRegister()
+  },
+  /*校验是否全由8位数字组成 */
+  isVerificationCode: function(str) {
+    var reg = /^[0-9]{4}$/;   /*定义验证表达式*/
+    return reg.test(str);     /*进行验证*/
+  },
+  /*校验手机号码格式 */
+  isPhoneNumber: function(str) {
+    var reg = /^(1[345789]\d{9})$/;
+    return reg.test(str);
   }
 })
