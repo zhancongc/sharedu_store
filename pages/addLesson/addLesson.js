@@ -122,7 +122,7 @@ Page({
    */
   onShow: function () {
     var that = this;
-    if (app.globalData.addLessonIntro) {
+    if (app.globalData.addLessonIntro.length !== 0) {
       that.setData({
         lessonIntro: app.globalData.addLessonIntro,
         lessonIntroState: '已填写'
@@ -165,7 +165,19 @@ Page({
   },
   addLessonCommit: function () {
     var that = this;
-    if (that.data.uploadPhotoes && that.data.lessonName && that.data.lessonType && that.data.lessonTimes && that.data.lessonPrices && that.data.lessonIntro) {
+    if (that.data.uploadPhotoes && that.data.lessonName && that.data.lessonType && that.data.lessonTimes && that.data.lessonPrice && that.data.lessonIntro.length > 0) {
+      wx.uploadFile({
+        url: 'https://example.weixin.qq.com/upload',
+        filePath: tempFilePaths[0],
+        name: 'file',
+        formData: {
+          'user': 'test'
+        },
+        success(res) {
+          const data = res.data
+          //do something
+        }
+      })
       app.globalData.isIdentificated = true;
       wx.navigateBack();
     } else {

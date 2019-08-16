@@ -43,6 +43,6 @@ App({
     userInfo: null,
     navHeight: 20,
     isIdentificated: true,
-    addLessonIntro: ''
+    addLessonIntro: []
   }
 })

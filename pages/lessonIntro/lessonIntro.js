@@ -49,9 +49,9 @@ Page({
     this.setData({ actionSheetShow: false });
   },
   selectActionSheet(event) {
+    console.log(event.detail);
     var that = this;
     var tempIntro = that.data.intro;
-    console.log(event.detail);
     if (event.detail.name == '文字') {
       var timestamp = (new Date()).getTime();
       tempIntro.push({
@@ -59,7 +59,7 @@ Page({
         type: 'text',
         content: ''
       })
-      that.setData({ intro: tempIntro })
+      that.setData({ intro: tempIntro });
       that.setData({ actionSheetShow: false });
     }
     if (event.detail.name == '图片') {
@@ -125,6 +125,10 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
+    var that = this;
+    that.setData({
+      intro: app.globalData.addLessonIntro
+    })
     app.globalData.addLessonIntro = '';
   },
 

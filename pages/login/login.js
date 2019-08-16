@@ -1,9 +1,5 @@
 // pages/login/login.js
-var CryptoJS = require('../../utils/core.js')
-//var key = CryptoJS.enc.Utf8.parse("xxxxxxx-key");
-//var iv = CryptoJS.enc.Utf8.parse("xxxxxxxxx-iv");
-//var pwd = CryptoJS.encrypt(this.data.pwdVal, key, iv)
-//var original = CryptoJS.encrypt(pwd, key, iv)
+
 
 const app = getApp() 
 Page({
@@ -156,18 +152,19 @@ Page({
       complete: function(){}
     })*/
   },
-  crypto: function (key, data) {
-    key = CryptoJS.enc.Latin1.parse(key)
-    var iv = key
-    // 加密
-    var encrypted = CryptoJS.AES.encrypt(
-      data,
-      key, {
-        iv: iv,
-        mode: CryptoJS.mode.CBC,
-        padding: CryptoJS.pad.ZeroPadding
-      })
-    result = encrypted.toString()
-    return result
-  },
+  getImageCode=function(){
+    var timestamp = (new Date()).getTime().toString()
+    var randomCode = (Math.trunc(Math.random() * 10000000)).toString()
+    wx.request({
+      method: 'get',
+      url: 'https://store.sharedu.co/code?randomStr=' + randomCode + timestamp,
+      success: function(res){
+        console.log(res)
+        const fs = wx.getFileSystemManager()
+        fs.writeFileSync(`${wx.env.USER_DATA_PATH}/imageCode.png`, res.data, 'binary')
+      },
+      fail: function() {},
+      complete: function() {}
+    })
+  }
 })

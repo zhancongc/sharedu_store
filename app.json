@@ -1,19 +1,18 @@
 {
   "pages": [
-    "pages/lesson/lesson",
-    "pages/addLesson/addLesson",
-    "pages/lessonIntro/lessonIntro",
-    
     "pages/welcome/welcome",
     "pages/register/register",
     "pages/login/login",
     "pages/identification/identification",
     "pages/comment/comment",
     "pages/index/index",
-    
+    "pages/lesson/lesson",
+    "pages/addLesson/addLesson",
+    "pages/lessonIntro/lessonIntro",
     "pages/bills/bills",
     "pages/me/me",
     "pages/account/account",
+    "pages/accountModify/accountModify",
     "pages/feedback/feedback",
     "pages/help/help",
     "pages/aboutUs/aboutUs",

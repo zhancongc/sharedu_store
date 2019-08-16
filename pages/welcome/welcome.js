@@ -82,5 +82,8 @@ Page({
     wx.navigateTo({
       url: '/pages/index/index',
     })
+  },
+  bindGetUserInfo(event){
+    console.log(event);
   }
 })
