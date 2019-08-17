@@ -1,6 +1,5 @@
 // pages/login/login.js
-
-
+const fs = wx.getFileSystemManager()
 const app = getApp() 
 Page({
 
@@ -16,20 +15,26 @@ Page({
     loginViaPassword: true,
     phone: '',
     password: '',
-    verificationCode: ''
+    verificationCode: '',
+    imageCode: '',
+    imageCodeUrl: '',
+    randomStr: '',
   },
   backWordHandler: function () {
     wx.redirectTo({
       url: '/pages/register/register',
     })
   },
+  /*校验手机号码格式 */
+  isPhoneNumber: function (str) {
+    var reg = /^(1[345789]\d{9})$/;
+    return reg.test(str);
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.request({
-      url: app.globalData.domainUrl + ''
-    })
+    this.getImageCode()
   },
 
   /**
@@ -95,54 +100,97 @@ Page({
   onChangePhone(event) {
     // event.detail 为当前输入的值
     var that = this;
-    that.data.phone = event.detail;
+    that.setData({ phone: event.detail.trim() })
   },
   onChangePassword(event) {
     var that = this;
-    that.data.password = event.detail;
+    that.setData({ password: event.detail.trim() })
+  },
+  onChangeImageCode(event) {
+    var that = this;
+    console.log(event.detail)
+    that.setData({ imageCode: event.detail.trim() })
   },
   onChangeVerificationCode(event) {
     var that = this;
-    that.data.verificationCode = event.detail;
+    that.setData({ verificationCode: event.detail.trim() })
   },
   loginConfirm:function () {
     var that = this;
-    var passkey;
     if(that.data.loginViaPassword) {
-      passkey = that.data.password
+      var loginForm = {
+        phone: that.data.phone,
+        password: that.data.password,
+        imageCode: that.data.imageCode,
+        randomStr: that.data.randomStr
+      }
+      if (loginForm.phone !== '' && loginForm.password!=='' && loginForm.imageCode!=='' && loginForm.randomStr!==''){
+        that.passwordLogin(loginForm)
+      }
     } else {
-      passkey = that.data.verificationCode
-    }
-    if(that.data.phone && passkey) {
-      wx.showToast({
-        title: '正在登录',
-      })
-      that.userLogin()
-    } else {
-      wx.showToast({title: '账号或密码错误',})
+      var loginForm = {
+        phone: that.data.phone,
+        verificationCode: that.data.verificationCode
+      }
+      if (loginForm.phone !== '' && loginForm.verificationCode!=='') {
+        that.verificationCodeLogin(loginForm)
+      }
     }
   },
-  userLogin: function (account, pass) {
+  getImageCode: function () {
     var that = this;
-    out = that.crypto('password', '123456')
-    console.log(out)
-    /*wx.request({
+    var timestamp = (new Date()).getTime().toString()
+    var randomCode = (Math.trunc(Math.random() * 10000000)).toString()
+    that.setData({})
+    console.log("OK")
+    wx.downloadFile({
+      method: 'get',
+      url: app.globalData.domainUrl + 'code?randomStr=' + that.data.randomStr,
+      header: {
+        'Accept': 'image/webp,image/apng,image/*,*/*;q=0.8',
+        'Accept-Encoding': 'gzip, deflate, br'
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          that.setData({
+            randomStr: randomCode + timestamp,
+            imageCodeUrl: res.tempFilePath
+          })
+        }
+      },
+      fail: function () { },
+      complete: function () { }
+    })
+  },
+  passwordLogin: function (loginForm) {
+    var that = this;
+    var data = {
+      username: that.data.phone,
+      password: that.data.password,
+      randomStr: that.data.randomStr,
+      code: that.data.imageCode,
+      grant_type: 'password',
+      scope: 'server'
+      };
+    console.log(data);
+    wx.request({
       method: 'post',
-      url: app.globalData.domainUrl + '',
+      url: app.globalData.domainUrl + 'auth/oauth/token',
       header: { 
-        'Authorization': 'Basic cGlnOnBpZw==',
+        'Authorization': 'Basic c3RvcmU6c3RvcmU==',
         'Content-Type': 'application/json'
       },
       data: { 
         username: that.data.phone,
-        password: 'rKu1/348LvKp0rsVC06eCA==',
-        randomStr: '95691565501687323',
-        code: '1234',
+        password: that.data.password,
+        randomStr: that.data.randomStr,
+        code: that.data.imageCode,
         grant_type: 'password',
         scope: 'server'
       },
       success: function (res) {
-        if (res.code==0) {
+        console.log(res)
+        if (res.data.code==0) {
           wx.redirectTo({
             url: '/pages/index/index',
           })
@@ -150,21 +198,59 @@ Page({
       },
       fail: function() {},
       complete: function(){}
-    })*/
+    })
   },
-  getImageCode=function(){
-    var timestamp = (new Date()).getTime().toString()
-    var randomCode = (Math.trunc(Math.random() * 10000000)).toString()
+  getVerificationCode: function (event) {
+    // 获取验证码
+    var that = this;
+    console.log(event)
+    if (!that.isPhoneNumber(that.data.phone)) {
+      wx.showToast({
+        icon: 'none',
+        title: '请输入正确的手机号码',
+      })
+      return;
+    }
     wx.request({
+      url: app.globalData.domainUrl + '/admin/mobile/' + this.data.phone,
       method: 'get',
-      url: 'https://store.sharedu.co/code?randomStr=' + randomCode + timestamp,
-      success: function(res){
-        console.log(res)
-        const fs = wx.getFileSystemManager()
-        fs.writeFileSync(`${wx.env.USER_DATA_PATH}/imageCode.png`, res.data, 'binary')
+      header: {
+        'Content-Type': 'application/json',
       },
-      fail: function() {},
-      complete: function() {}
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) {
+        if (res.code === 0) {
+          that.setData({
+            verificationCodeHint: '已发送'
+          })
+        }
+      }
+    })
+  },
+  verificationCodeLogin: function(loginForm) {
+    var that = this;
+    wx.request({
+      method: 'post',
+      url: app.globalData.domainUrl + 'auth/mobile/token/sms',
+      header: {
+        'Authorization': 'Basic c3RvcmU6c3RvcmU==',
+        'Content-Type': 'application/json'
+      },
+      data: {
+        username: 'SMS@'+that.data.phone,
+        verificationCode: that.data.verificationCode,
+        grant_type: 'mobile',
+      },
+      success: function (res) {
+        if (res.code == 200) {
+          wx.redirectTo({
+            url: '/pages/index/index',
+          })
+        }
+      },
+      fail: function () { },
+      complete: function () { }
     })
   }
 })
