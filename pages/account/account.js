@@ -10,12 +10,21 @@ Page({
       navHeight: app.globalData.navHeight,
       pageTitle: '账号设置'
     },
+    modifyType: 0,
+    oldPassword: '',
+    newPassword: '',
+    retypePassword: '',
+    verificationCode: ''
   },
 
   backHandler: function () {
     wx.navigateBack()
   },
-
+  changePassword: function() {
+    this.setData({
+      
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

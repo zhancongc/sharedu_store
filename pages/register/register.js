@@ -81,56 +81,93 @@ Page({
   onChangePhone(event) {
     // event.detail 为当前输入的值
     var that = this;
-    that.data.phone = event.detail.trim();
+    that.setData({ phone: event.detail.trim() })
   },
   onChangePassword(event) {
     var that = this;
-    that.data.password = event.detail;
+    that.setData({ password: event.detail.trim() })
   },
   onChangeVerificationCode(event) {
     var that = this;
-    that.data.verificationCode = event.detail;
+    that.setData({ verificationCode: event.detail.trim() })
   },
   onChangeAgreement(event) {
     var that = this;
-    that.setData({
-      agreement: event.detail
-    });
+    console.log(event)
+    that.setData({ agreement: !that.data.agreement });
   },
-  getVerificationCode: function () {
+  getVerificationCode: function (event) {
     // 获取验证码
     var that = this;
+    console.log(event)
+    if (!that.isPhoneNumber(that.data.phone)) {
+      wx.showToast({
+        icon: 'none',
+        title: '请输入正确的手机号码',
+      })
+      return ;
+    }
     wx.request({
-      url: app.globalData.domainUrl + '/mobile/' + this.data.phone,
+      url: app.globalData.domainUrl + 'admin/mobile/' + this.data.phone,
       method: 'get',
       header: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
       },
-      success: function (res) {},
-      fail: function (res) {},
-      complete: function(res) {
-        if (res.code===0) {
+      success: function (res) {
+        console.log(res)
+        if (res.data.code === 0) {
           that.setData({
             verificationCodeHint: '已发送'
           })
+          if (res.data.data === false) {
+            wx.showToast({
+              icon: 'none',
+              title: '验证码已发送',
+            })
+          }
         }
-      }
+      },
+      fail: function (res) {},
+      complete: function(res) {}
     })
   },
-  userRegister: function() {
+  userRegister: function () {
+    var that = this;
+    wx.request({
+      method: 'post',
+      url: app.globalData.domainUrl + 'admin/user/storeRegistry',
+      header: { 
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic c3RvcmU6c3RvcmU=='
+      },
+      data: { 
+        phone: that.data.phone,
+        verificationCode: that.data.verificationCode,
+        password: that.data.password
+      },
+      success: function (res) {
+        console.log(res)
+        if (res.data.code==0){
+          wx.redirectTo({
+            url: '/pages/index/index',
+          })
+        }
+      },
+      fail: function () {},
+      complete: function() {}
+    })
+  },
+  registerConfirm: function() {
     // 用户注册
     var that = this;
-    console.log(that.data.phone, that.data.password, that.data.varificationCode);
-    if (that.data.phone === '123' && that.data.varificationCode === '123') {
-      wx.showToast({title: '注册成功',})
-      // wx.navigateTo({ url: '/pages/index/index', });
-      wx.redirectTo({url: '/pages/index/index',})
+    if (!that.data.agreement) {
+      return ;
     }
     wx.request({
       url: '',
       method: 'post',
-      header: '',
-      
+      header: '', 
     })
+
   }
 })

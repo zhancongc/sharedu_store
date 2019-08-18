@@ -24,7 +24,7 @@
 <view style="margin-top:20rpx;">
   <van-row>
     <van-col span="22" offset="1">
-      <van-button type="primary" size="large" disabled="{{!agreement}}" bind:tap="userRegister">注册</van-button>
+      <van-button type="primary" size="large" disabled="{{!agreement}}" bind:tap="registerConfirm">注册</van-button>
     </van-col>
   </van-row>
 </view>
