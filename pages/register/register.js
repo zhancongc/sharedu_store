@@ -163,11 +163,38 @@ Page({
     if (!that.data.agreement) {
       return ;
     }
-    wx.request({
-      url: '',
-      method: 'post',
-      header: '', 
-    })
-
+    console.log(that.data.phone, that.data.password, that.data.verificationCode);
+    if (!that.isPhoneNumber(that.data.phone)){
+      wx.showToast({
+        icon: 'none',
+        title: '请输入正确格式的手机号码',
+      })
+      return;
+    } 
+    if (!that.isVerificationCode(that.data.verificationCode)) {
+      wx.showToast({
+        icon: 'none',
+        title: '请输入正确格式的验证码',
+      })
+      return;
+    }
+    if (!that.data.verificationCode) {
+      wx.showToast({
+        icon: 'none',
+        title: '请填写密码',
+      })
+      return;
+    }
+    that.userRegister()
+  },
+  /*校验是否全由8位数字组成 */
+  isVerificationCode: function(str) {
+    var reg = /^[0-9]{4}$/;   /*定义验证表达式*/
+    return reg.test(str);     /*进行验证*/
+  },
+  /*校验手机号码格式 */
+  isPhoneNumber: function(str) {
+    var reg = /^(1[345789]\d{9})$/;
+    return reg.test(str);
   }
 })

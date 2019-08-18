@@ -29,5 +29,5 @@
 <van-button size="large" type="default" bindtap="toIndex">去首页</van-button>
 </view>
 <view style="margin-top: 40rpx;">
-  <van-button size="large" type="default" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">去首页</van-button>
+  <van-button size="large" type="default" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权</van-button>
 </view>

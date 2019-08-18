@@ -141,11 +141,11 @@ Page({
     var that = this;
     var timestamp = (new Date()).getTime().toString()
     var randomCode = (Math.trunc(Math.random() * 10000000)).toString()
-    that.setData({})
+    var randomStr = randomCode + timestamp
     console.log("OK")
     wx.downloadFile({
       method: 'get',
-      url: app.globalData.domainUrl + 'code?randomStr=' + that.data.randomStr,
+      url: app.globalData.domainUrl + 'code?randomStr=' + randomStr,
       header: {
         'Accept': 'image/webp,image/apng,image/*,*/*;q=0.8',
         'Accept-Encoding': 'gzip, deflate, br'
@@ -153,9 +153,10 @@ Page({
       success: function (res) {
         if (res.statusCode == 200) {
           that.setData({
-            randomStr: randomCode + timestamp,
+            randomStr: randomStr,
             imageCodeUrl: res.tempFilePath
           })
+          console.log(that.data.imageCodeUrl)
         }
       },
       fail: function () { },
@@ -178,9 +179,9 @@ Page({
       url: app.globalData.domainUrl + 'auth/oauth/token',
       header: { 
         'Authorization': 'Basic c3RvcmU6c3RvcmU==',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/x-www-form-urlencoded'
       },
-      data: { 
+      data: {
         username: that.data.phone,
         password: that.data.password,
         randomStr: that.data.randomStr,
@@ -212,20 +213,27 @@ Page({
       return;
     }
     wx.request({
-      url: app.globalData.domainUrl + '/admin/mobile/' + this.data.phone,
+      url: app.globalData.domainUrl + 'admin/mobile/' + this.data.phone,
       method: 'get',
       header: {
         'Content-Type': 'application/json',
       },
-      success: function (res) { },
-      fail: function (res) { },
-      complete: function (res) {
-        if (res.code === 0) {
+      success: function (res) {
+        console.log(res)
+        if (res.data.code === 0) {
           that.setData({
             verificationCodeHint: '已发送'
           })
+          if (res.data.data === false) {
+            wx.showToast({
+              icon: 'none',
+              title: '验证码已发送',
+            })
+          }
         }
-      }
+      },
+      fail: function (res) { },
+      complete: function (res) { }
     })
   },
   verificationCodeLogin: function(loginForm) {
@@ -238,8 +246,8 @@ Page({
         'Content-Type': 'application/json'
       },
       data: {
-        username: 'SMS@'+that.data.phone,
-        verificationCode: that.data.verificationCode,
+        mobile: 'SMS@'+that.data.phone,
+        code: that.data.verificationCode,
         grant_type: 'mobile',
       },
       success: function (res) {
