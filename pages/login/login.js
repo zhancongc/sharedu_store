@@ -176,11 +176,12 @@ Page({
     console.log(data);
     wx.request({
       method: 'post',
-      url: app.globalData.domainUrl + 'auth/oauth/token',
+      //url: app.globalData.domainUrl + 'auth/oauth/token',
+      url: app.globalData.domainUrl + "auth/oauth/token?username=" + that.data.phone + "&password=" + that.data.password + "&randomStr=" + that.data.randomStr + "&code=" + that.data.imageCode + "&grant_type=password&scope=server",
       header: { 
         'Authorization': 'Basic c3RvcmU6c3RvcmU==',
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
+        'Content-Type': 'application/json, '
+      },/*
       data: {
         username: that.data.phone,
         password: that.data.password,
@@ -188,7 +189,7 @@ Page({
         code: that.data.imageCode,
         grant_type: 'password',
         scope: 'server'
-      },
+      },*/
       success: function (res) {
         console.log(res)
         if (res.data.code==0) {
