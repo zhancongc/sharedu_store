@@ -167,35 +167,43 @@ Page({
     var that = this;
     var data = {
       username: that.data.phone,
-      password: that.data.password,
-      randomStr: that.data.randomStr,
-      code: that.data.imageCode,
-      grant_type: 'password',
-      scope: 'server'
-      };
+        password: that.data.password,
+          randomStr: that.data.randomStr,
+            code: that.data.imageCode,
+              grant_type: 'password',
+                scope: 'server'
+    }
     console.log(data);
     wx.request({
       method: 'post',
-      //url: app.globalData.domainUrl + 'auth/oauth/token',
-      url: app.globalData.domainUrl + "auth/oauth/token?username=" + that.data.phone + "&password=" + that.data.password + "&randomStr=" + that.data.randomStr + "&code=" + that.data.imageCode + "&grant_type=password&scope=server",
+      url: app.globalData.domainUrl + 'auth/oauth/token?randomStr=' + that.data.randomStr + '&code='+ that.data.imageCode,
       header: { 
-        'Authorization': 'Basic c3RvcmU6c3RvcmU==',
-        'Content-Type': 'application/json, '
-      },/*
+        'Authorization': 'Basic c3RvcmU6c3RvcmU=',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
       data: {
         username: that.data.phone,
         password: that.data.password,
-        randomStr: that.data.randomStr,
-        code: that.data.imageCode,
+        //randomStr: that.data.randomStr,
+        //code: that.data.imageCode,
         grant_type: 'password',
         scope: 'server'
-      },*/
+      },
       success: function (res) {
         console.log(res)
-        if (res.data.code==0) {
-          wx.redirectTo({
-            url: '/pages/index/index',
+        if (res.statusCode === 200){
+          if (res.errMsg === "request:ok") {
+            res.data.access_token
+            wx.redirectTo({
+              url: '/pages/index/index',
+            })
+          }
+        } else {
+          wx.showToast({
+            icon: 'none',
+            title: '登陆失败',
           })
+          that.getImageCode()
         }
       },
       fail: function() {},
