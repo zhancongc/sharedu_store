@@ -43,6 +43,7 @@ App({
     userInfo: null,
     navHeight: 20,
     isIdentificated: true,
+    storeId: 0,
     addLessonIntro: []
   }
 })

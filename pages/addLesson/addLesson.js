@@ -86,7 +86,7 @@ Page({
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success: function (res) {
-        const tempFilePaths = res.tempFilePaths;
+        var tempFilePaths = res.tempFilePaths;
         if (tempFilePaths) {
           that.setData({
             addPhotoCSSIndex: 0,
@@ -163,21 +163,49 @@ Page({
   onShareAppMessage: function () {
 
   },
-  addLessonCommit: function () {
+  uploadFile (filename) {
+    wx.uploadFile({
+      url: app.globalData.domainUrl + 'edu/oss/upload',
+      filePath: filename,
+      //name: 'file',
+      success(res) {
+        console.log(res)
+        //do something
+      }
+    })
+  },
+  sendLessonInfo() {
+    var that = this;
+    wx.request({
+      method: 'post',
+      url: app.globalData.domainUrl + 'edu/course/insert',
+      header: {
+        'Authorization': 'Basic c3RvcmU6c3RvcmU=',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        title: that.data.lessonName,
+        classHours: that.data.lessonTimes,
+        course: that.data.lessonType,
+        experiencePrice: that.data.lessonPrice,
+        storeId: app.globalData.storeId,
+      }
+    })
+  },
+  addLessonCommit() {
     var that = this;
     if (that.data.uploadPhotoes && that.data.lessonName && that.data.lessonType && that.data.lessonTimes && that.data.lessonPrice && that.data.lessonIntro.length > 0) {
-      wx.uploadFile({
-        url: 'https://example.weixin.qq.com/upload',
-        filePath: tempFilePaths[0],
-        name: 'file',
-        formData: {
-          'user': 'test'
-        },
-        success(res) {
-          const data = res.data
-          //do something
+      // 上传课程图片
+      for (var fp in that.data.uploadPhotoes) {
+        that.uploadFile(that.data.uploadPhotoes[fp])
+      }
+      // 上传
+      for (var index in that.data.lessonIntro) {
+        if (that.data.lessonIntro[index].type == 'images'){
+          that.uploadFile(that.data.lessonIntro[index])
         }
-      })
+      }
+      
       app.globalData.isIdentificated = true;
       wx.navigateBack();
     } else {
@@ -188,12 +216,12 @@ Page({
       })
     }
   },
-  addLessonIntro: function () {
+  toLessonIntro() {
     wx.navigateTo({
       url: '/pages/lessonIntro/lessonIntro',
     })
   },
-  chooseLessonType: function () {
+  chooseLessonType() {
     this.setData({lessonPicker: true})
   }
 })

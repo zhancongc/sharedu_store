@@ -13,8 +13,8 @@ Page({
       pageTitle: '登录'
     },
     loginViaPassword: true,
-    phone: '',
-    password: '',
+    phone: '15821381315',
+    password: '123456',
     verificationCode: '',
     imageCode: '',
     imageCodeUrl: '',

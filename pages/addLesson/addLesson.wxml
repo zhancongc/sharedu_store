@@ -36,7 +36,7 @@
     <van-field readonly label="课程类别" value="{{ lessonType }}" type="text" required="true" placeholder="请选择最相近的课程类别" border="{{ true }}" maxlength="30" is-link="false" bind:tap="chooseLessonType" style="color: black;" />
     <van-field value="{{ lessonTimes }}" type="number" label="课时数" required="true" placeholder="请输入课时数" border="{{ true }}" maxlength="10" bind:change="onChangeLessonTimes" />
     <van-field label="课程价格" value="{{ lessonPrice }}" type="digit" required="true" placeholder="请输入该课程的价格" border="{{ true }}" bind:change="onChangeLessonPrice" />
-    <van-field readonly value="{{ lessonIntroState }}" type="text" label="课程介绍" required="true" placeholder="请输入该课程的介绍" border="{{ true }}" bind:tap="addLessonIntro" is-link="false" />
+    <van-field readonly value="{{ lessonIntroState }}" type="text" label="课程介绍" required="true" placeholder="请输入该课程的介绍" border="{{ true }}" bind:tap="toLessonIntro" is-link="false" />
   </van-cell-group>
 </view>
 
