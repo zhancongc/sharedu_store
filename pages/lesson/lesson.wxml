@@ -3,13 +3,18 @@
   <view class='custom-navbar'>
     <view class='palce-holder-nav' style="height: {{navbarData.navHeight}}px;"></view>
     <van-row class='main-navbar' style="height: {{2.2*navbarData.navHeight}}px;line-height: {{2.2*navbarData.navHeight}}px">
+    <block wx:if="{{isIdentificated}}">
       <van-col span="6" class="back-word">
-        <view bindtap="toAddLesson">
+        <view  bindtap="toAddLesson">
           <text style="width: 80rpx; height:56rpx; color: #fff; vertical-align:0%;" class="fa fa-plus-circle fa-lg"></text>
           <text style="color: #fff;">添加</text>
         </view>
       </van-col>
       <van-col span="8" offset="2" class="page-title">{{navbarData.pageTitle}}</van-col>
+    </block>
+    <block wx:if="{{!isIdentificated}}">
+      <van-col span="8" offset="8" class="page-title">{{navbarData.pageTitle}}</van-col>
+    </block>
     </van-row>
   </view>
 </view>
@@ -23,6 +28,7 @@
   <van-tabbar-item icon="user-circle-o">我的</van-tabbar-item>
 </van-tabbar>
 
+<block wx:if="{{isIdentificated}}">
 <view style="width: 94%; height: 88rpx; margin: 0 auto; color: #888;">
   <view wx:for="{{tabName}}" wx:key="{{tabColor}}" class="tabs-item" style="color:{{ tabColor[item.index] }}" data-index="{{item.index}}" bindtap="switchTabs">{{item.name}}</view>
 </view>
@@ -34,8 +40,7 @@
       <image src="{{item.lessonPicture}}" mode="aspectFill"></image>
       </view-->
       <view style="width: 200rpx;height: 200rpx; float: left; margin: 20rpx 20rpx 20rpx 20rpx;">
-        <image style="width: 200rpx; height: 200rpx; border-radius: 10rpx;" src="{{item.lessonPicture}}" mode="aspectFill"></image>
-      </view>
+        <image style="width: 200rpx; height: 200rpx; border-radius: 10rpx;" src="{{item.lessonPicture}}" mode="aspectFill"></image></view>
       <view class="lesson-detail">
         <view class="lesson-name">{{item.lessonName}}</view>
         <view class="lesson-price">￥{{item.lessonPrice}}</view>
@@ -54,7 +59,9 @@
 <block wx:if="{{currentTab==1}}">
   <view wx:for="{{ outOfSaleLesson }}" wx:key="item.lessonName" class="bills-item">
     <view style="width: 94%; height: 306rpx; box-shadow: 1px 1px 5px #888; margin: 20rpx 20rpx;">
-      <view style="background-image: url({{ item.lessonPicture }});" class="lesson-picture"></view>
+      <!--view style="background-image: url({{ item.lessonPicture }});" class="lesson-picture"></view-->
+      <view style="width: 200rpx;height: 200rpx; float: left; margin: 20rpx 20rpx 20rpx 20rpx;">
+        <image style="width: 200rpx; height: 200rpx; border-radius: 10rpx;" src="{{item.lessonPicture}}" mode="aspectFill"></image></view>
       <view class="lesson-detail">
         <view class="lesson-name">{{item.lessonName}}</view>
         <view class="lesson-price">￥{{item.lessonPrice}}</view>
@@ -67,5 +74,13 @@
         <van-button size="mini" class="lesson-operate">预览</van-button>
       </view>
     </view>
+  </view>
+</block>
+</block>
+
+<block wx:if="{{!isIdentificated}}">
+  <view style="text-align: center; width: 94%; margin: auto;margin-top: 400rpx;">
+    <van-button type="primary" size="large" bind:click="toIdentification">
+    立即认证</van-button>
   </view>
 </block>

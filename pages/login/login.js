@@ -48,7 +48,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    that.loginDataAutoFilled()
   },
 
   /**
@@ -115,7 +116,7 @@ Page({
     var that = this;
     that.setData({ verificationCode: event.detail.trim() })
   },
-  loginConfirm:function () {
+  loginConfirm () {
     var that = this;
     if(that.data.loginViaPassword) {
       var loginForm = {
@@ -137,12 +138,11 @@ Page({
       }
     }
   },
-  getImageCode: function () {
+  getImageCode() {
     var that = this;
-    var timestamp = (new Date()).getTime().toString()
-    var randomCode = (Math.trunc(Math.random() * 10000000)).toString()
-    var randomStr = randomCode + timestamp
-    console.log("OK")
+    var timestamp = (new Date()).getTime().toString();
+    var randomCode = (Math.trunc(Math.random() * 10000000)).toString();
+    var randomStr = randomCode + timestamp;
     wx.downloadFile({
       method: 'get',
       url: app.globalData.domainUrl + 'code?randomStr=' + randomStr,
@@ -163,7 +163,7 @@ Page({
       complete: function () { }
     })
   },
-  passwordLogin: function (loginForm) {
+  passwordLogin(loginForm) {
     var that = this;
     var data = {
       username: that.data.phone,
@@ -184,8 +184,6 @@ Page({
       data: {
         username: that.data.phone,
         password: that.data.password,
-        //randomStr: that.data.randomStr,
-        //code: that.data.imageCode,
         grant_type: 'password',
         scope: 'server'
       },
@@ -193,7 +191,10 @@ Page({
         console.log(res)
         if (res.statusCode === 200){
           if (res.errMsg === "request:ok") {
-            res.data.access_token
+            if (res.data.store_id) {
+              app.globalData.isIdentificated = true
+            }
+            that.loginDataRemember()
             wx.redirectTo({
               url: '/pages/index/index',
             })
@@ -210,7 +211,7 @@ Page({
       complete: function(){}
     })
   },
-  getVerificationCode: function (event) {
+  getVerificationCode(event) {
     // 获取验证码
     var that = this;
     console.log(event)
@@ -245,14 +246,14 @@ Page({
       complete: function (res) { }
     })
   },
-  verificationCodeLogin: function(loginForm) {
+  verificationCodeLogin(loginForm) {
     var that = this;
     wx.request({
       method: 'post',
       url: app.globalData.domainUrl + 'auth/mobile/token/sms',
       header: {
         'Authorization': 'Basic c3RvcmU6c3RvcmU==',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/x-www-form-urlencoded'
       },
       data: {
         mobile: 'SMS@'+that.data.phone,
@@ -261,6 +262,10 @@ Page({
       },
       success: function (res) {
         if (res.code == 200) {
+          if (res.data.store_id) {
+            app.globalData.isIdentificated = true
+          }
+          that.loginDataRemember()
           wx.redirectTo({
             url: '/pages/index/index',
           })
@@ -268,6 +273,18 @@ Page({
       },
       fail: function () { },
       complete: function () { }
+    })
+  },
+  loginDataRemember() {
+    var that = this;
+    wx.setStorage({ key: 'phone', data: that.data.phone })
+    wx.setStorage({ key: 'password', data: that.data.password })
+  },
+  loginDataAutoFilled() {
+    var that = this;
+    that.setData({
+      phone: wx.getStorageSync('phone'),
+      password: wx.getStorageSync('password')
     })
   }
 })

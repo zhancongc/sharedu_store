@@ -11,7 +11,8 @@ Page({
       pageTitle: '我的店铺'
     },
     tabBarActive: 3,
-    tabBarUrls: ["/pages/index/index", "/pages/lesson/lesson", "/pages/bills/bills", "/pages/me/me"]
+    tabBarUrls: ["/pages/index/index", "/pages/lesson/lesson", "/pages/bills/bills", "/pages/me/me"],
+    isIdentificated: false
   },
   onTabBarChange(event) {
     var that = this;
@@ -40,7 +41,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    that.setData({
+      isIdentificated: app.globalData.isIdentificated
+    })
   },
 
   /**
@@ -105,6 +109,11 @@ Page({
   toFeedback: function() {
     wx.navigateTo({
       url: '/pages/feedback/feedback',
+    })
+  },
+  toIdentification: function () {
+    wx.navigateTo({
+      url: '/pages/identification/identification',
     })
   }
 })

@@ -49,6 +49,6 @@
 
 <view class='mask' wx:if="{{ cityPicker }}"></view>
 <view wx:if="{{ cityPicker }}" style="position: fixed; bottom: 0rpx; left: 0rpx; width:100%;">
-<van-area title="选择城市" area-list="{{ areaList }}" bind:cancel="onCancelCityName" bind:confirm="onConfirmCityName" />
+  <van-area title="选择城市" area-list="{{ areaList }}" bind:cancel="onCancelCityName" bind:confirm="onConfirmCityName" />
 </view>
 

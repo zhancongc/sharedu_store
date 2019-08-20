@@ -66,10 +66,10 @@ Page({
     var that = this;
     wx.request({
       method: 'get',
-      url: app.globalData.domainUrl + '/edu/statistic/today',
+      url: app.globalData.domainUrl + 'edu/statistic/today',
       header: {
-        'Authorization': 'Basic cGlnOnBpZw==',
-        'Content-Type': 'application/json'
+        'Authorization': 'Basic c3RvcmU6c3RvcmU=',
+        'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: function () {},
       fail: function () {},

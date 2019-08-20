@@ -33,6 +33,7 @@ Page({
     lessonIntro: '',
     lessonIntroState: '',
     lessonPicker: false,
+    allLesson: '',
     columns: [
       {
         values: Object.keys(lessons),
@@ -107,7 +108,23 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-
+    var that = this;
+    wx.request({
+      method: 'get',
+      url: app.globalData.domainUrl +'edu/courseCategory/findPage?pageSize=100',
+      header: {
+        'Authorization': 'Basic c3RvcmU6c3RvcmU==',
+        'Content-Type': 'application/json'
+      },
+      success(res){
+        console.log(res);
+        that.setData({
+          allLesson: res.data
+        })
+      },
+      fail() {},
+      complete() {}
+    })
   },
 
   /**
@@ -205,7 +222,6 @@ Page({
           that.uploadFile(that.data.lessonIntro[index])
         }
       }
-      
       app.globalData.isIdentificated = true;
       wx.navigateBack();
     } else {

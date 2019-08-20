@@ -17,14 +17,16 @@
   <van-tabbar-item icon="user-circle-o">我的</van-tabbar-item>
 </van-tabbar>
 
-
+<block wx:if="{{isIdentificated}}">
 <view style="width: 94%; height: 88rpx; margin: 0 auto; color: #888;">
   <view wx:for="{{tabName}}" wx:key="{{tabColor}}" class="tabs-item" style="color:{{ tabColor[item.index] }}" data-index="{{item.index}}" bindtap="switchTabs">{{item.name}}</view>
 </view>
 
 <block wx:if="{{currentTab==0}}">
   <view wx:for="{{ uncompleteBills }}" wx:key="item.billLessonName" class="bills-item">
-    <view class="bill-lesson-picture" style="background-image: url({{ item.billLessonPicture }});"></view>
+    <!--view class="bill-lesson-picture" style="background-image: url({{ item.billLessonPicture }});"></view-->
+    <view style="width: 200rpx;height: 200rpx; float: left; margin: 20rpx 20rpx 20rpx 20rpx;">
+      <image style="width: 200rpx; height: 200rpx; border-radius: 10rpx;" src="{{item.billLessonPicture}}" mode="aspectFill"></image></view>
     <view class="bill-detail">
       <view class="bill-lesson-name">{{item.billLessonName}}</view>
       <view class="bill-amount">￥{{item.billAmount}}</view>
@@ -40,7 +42,9 @@
 
 <block wx:if="{{currentTab==1}}">
   <view wx:for="{{ completeBills }}" wx:key="item.billLessonName" class="bills-item">
-    <view class="bill-lesson-picture" style="background-image: url({{ item.billLessonPicture }});"></view>
+    <!--view class="bill-lesson-picture" style="background-image: url({{ item.billLessonPicture }});"></view-->
+    <view style="width: 200rpx;height: 200rpx; float: left; margin: 20rpx 20rpx 20rpx 20rpx;">
+      <image style="width: 200rpx; height: 200rpx; border-radius: 10rpx;" src="{{item.billLessonPicture}}" mode="aspectFill"></image></view>
     <view style="width: 65%; height: 240rpx; float: right;">
       <view class="bill-lesson-name">{{item.billLessonName}}</view>
       <view class="bill-amount">￥{{item.billAmount}}</view>
@@ -56,7 +60,9 @@
 
 <block wx:if="{{currentTab==2}}">
   <view wx:for="{{ allBills }}" wx:key="item.billLessonName" class="bills-item">
-    <view class="bill-lesson-picture" style="background-image: url({{ item.billLessonPicture }});"></view>
+    <!--view class="bill-lesson-picture" style="background-image: url({{ item.billLessonPicture }});"></view-->
+    <view style="width: 200rpx;height: 200rpx; float: left; margin: 20rpx 20rpx 20rpx 20rpx;">
+      <image style="width: 200rpx; height: 200rpx; border-radius: 10rpx;" src="{{item.billLessonPicture}}" mode="aspectFill"></image></view>
     <view style="width: 65%; height: 240rpx; float: right;">
       <view class="bill-lesson-name">{{item.billLessonName}}</view>
       <view class="bill-amount">￥{{item.billAmount}}</view>
@@ -67,5 +73,12 @@
         <van-button size="mini" class="bill-operate">接单</van-button>
       </view>
     </block>
+  </view>
+</block>
+</block>
+<block wx:if="{{!isIdentificated}}">
+  <view style="text-align: center; width: 94%; margin: auto;margin-top: 400rpx;">
+    <van-button type="primary" size="large" bind:click="toIdentification">
+    立即认证</van-button>
   </view>
 </block>

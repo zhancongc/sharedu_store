@@ -11,7 +11,8 @@ Page({
       pageTitle: '课程管理'
     },
     tabBarActive: 1,
-    tabBarUrls: ["/pages/index/index", "/pages/lesson/lesson", "/pages/bills/bills", "/pages/me/me"],
+    tabBarUrls: ["/pages/index/index", "/pages/lesson/lesson", "/pages/bills/bills", "/pages/me/me"], 
+    isIdentificated: false,
     currentTab: 0,
     tabName: [{index: 0, name: '上架课程'}, {index: 1, name: '下架课程'}],
     tabColor: ['#ff6600', '#888'],
@@ -71,7 +72,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    that.setData({
+      isIdentificated: app.globalData.isIdentificated
+    })
   },
 
   /**
@@ -112,5 +116,10 @@ Page({
     wx.navigateTo({
       url: '/pages/addLesson/addLesson',
     })
-  }
+  },
+  toIdentification: function () {
+    wx.navigateTo({
+      url: '/pages/identification/identification',
+    })
+  },
 })

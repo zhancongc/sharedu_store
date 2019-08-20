@@ -11,6 +11,7 @@ Page({
     },
     tabBarActive: 2,
     tabBarUrls: ["/pages/index/index", "/pages/lesson/lesson", "/pages/bills/bills", "/pages/me/me"],
+    isIdentificated: false,
     currentTab: 0,
     tabName: [{ index: 0, name: '待接单' }, { index: 1, name: '已完成' }, {index: 2, name: '全部'}],
     tabColor: ['#ff6600', '#888', '#888'],
@@ -85,7 +86,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    that.setData({
+      isIdentificated: app.globalData.isIdentificated
+    })
   },
 
   /**
@@ -121,5 +125,10 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  toIdentification: function () {
+    wx.navigateTo({
+      url: '/pages/identification/identification',
+    })
   }
 })
