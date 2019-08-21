@@ -25,7 +25,7 @@ Page({
     completeBills: [],
     allBills: [{
       billStatus: '待接单',
-      billLessonPicture: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJY3iauTMvLDsyB0cxoTfcGU1u1c7uwUz0JC3TjqmV9zhxjzRDPf1FtypEjjCeUolOLUdUGB2JtvXA/132',
+      billLessonPicture: '/images/English.jpg',
       billLessonName: '考研英语一阅读专项训练',
       billAmount: 1188,
       canReceiveOrder: true

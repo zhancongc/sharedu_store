@@ -197,7 +197,7 @@ Page({
       method: 'post',
       url: app.globalData.domainUrl + 'edu/course/insert',
       header: {
-        'Authorization': 'Basic c3RvcmU6c3RvcmU=',
+        'Authorization': 'Bearer ' + app.globalData.accessToken,
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       data: {

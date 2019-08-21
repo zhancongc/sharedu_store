@@ -18,7 +18,7 @@
 </van-tabbar>
 
 <van-cell-group>
-  <van-cell icon="setting-o" title="账号设置" is-link="true" bind:tap="toAccount" />
+  <van-cell icon="setting-o" title="修改密码" is-link="true" bind:tap="toAccount" />
   <van-cell icon="paid" title="我的钱包" is-link="true" bind:tap="toWallet" />
   <van-cell icon="newspaper-o" title="门店信息" is-link="true" bind:tap="toStoreDetail" />
 </van-cell-group>

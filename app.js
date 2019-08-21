@@ -39,11 +39,19 @@ App({
     })
   },
   globalData: {
-    domainUrl: "https://store.sharedu.co/",
-    userInfo: null,
+    // 状态栏高度
     navHeight: 20,
+    // 商户端服务器url
+    domainUrl: "https://store.sharedu.co/",
+    // 请求凭证
+    accessToken: '',
+    // 用户信息
+    userInfo: null,
+    // 是否认证
     isIdentificated: false,
+    // 店铺id
     storeId: 0,
+    // 添加课程信息，临时存放
     addLessonIntro: []
   }
 })

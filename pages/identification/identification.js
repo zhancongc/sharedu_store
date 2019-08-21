@@ -3969,10 +3969,10 @@ Page({
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success: function(res) {
-        const tempFilePaths = res.tempFilePaths;
+        var tempFilePaths = res.tempFilePaths;
         if (tempFilePaths) {
           that.setData({
-            liencePhoto: tempFilePaths
+            liencePhoto: tempFilePaths[0]
           })
         }
       },
@@ -3980,6 +3980,7 @@ Page({
   },
   identificationCommit() {
     var that = this;
+    console.log('点击提交')
     if (that.data.storeName && that.data.cityName && that.data.detailAddress && that.data.uploadPhotoes && that.data.liencePhoto) {
       that.sendStoreRegisterData()
     } else {
@@ -3993,11 +3994,22 @@ Page({
   sendStoreRegisterData () {
     var that = this;
     var phone = wx.getStorageSync('phone')
+    var data = {
+      businessLicenseUrl: that.data.liencePhoto,
+      contact: phone,
+      name: phone,
+      particularAddress: that.data.detailAddress,
+      phone: phone,
+      primaryAddress: that.data.cityName,
+      storePictures: that.data.uploadPhotoes
+    }
+    console.log('门店入驻')
+    console.log(data);
     wx.request({
       method: 'post',
       url: app.globalData.domainUrl + 'edu/store/insert',
       header: {
-        'Authorization': 'Basic c3RvcmU6c3RvcmU=',
+        'Authorization': 'Bearer ' + app.globalData.accessToken,
         'Content-Type': 'application/json'
       },
       data: {
@@ -4007,7 +4019,7 @@ Page({
         particularAddress: that.data.detailAddress,
         phone: phone,
         primaryAddress: that.data.cityName,
-        storePictures: that.data.storePictures
+        storePictures: that.data.uploadPhotoes
       },
       success (res) {
         console.log(res)

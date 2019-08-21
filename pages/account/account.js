@@ -10,7 +10,7 @@ Page({
       navHeight: app.globalData.navHeight,
       pageTitle: '账号设置'
     },
-    modifyType: 0,
+    modifyType: 1,
     oldPassword: '',
     newPassword: '',
     retypePassword: '',
@@ -20,10 +20,14 @@ Page({
   backHandler: function () {
     wx.navigateBack()
   },
-  changePassword: function() {
-    this.setData({
-      
-    })
+  onOldPasswordChange(event) {
+    this.setData({ oldPassword: event.detail })
+  },
+  onNewPasswordChange(event) {
+    this.setData({ newPassword: event.detail })
+  },
+  onRetypePasswordChange(event) {
+    this.setData({ retypePassword: event.detail })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -79,5 +83,28 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  changePassword() {
+    var that = this;
+    that.setData({
+      modifyType: 1
+    })
+  },
+  changePasswordCommit(){
+    var that = this;
+    wx.request({
+      method: 'put',
+      url: app.globalData.domainUrl + 'admin/user/edit',
+      header: {
+        'Authorization': 'Bearer 65b2e95e-b4e7-463a-99da-752355a0f2e7',
+        'Content-Type': 'application/json;charset=UTF-8'
+      },
+      data: {
+        "username": "15821381315", "password": "123456", "newpassword1": "123456", "newpassword2": "123456", "avatar": null, "phone": "15821381315"
+      },
+      success() {},
+      fail() {},
+      complete() {}
+    })
   }
 })

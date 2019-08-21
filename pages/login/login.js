@@ -194,6 +194,7 @@ Page({
             if (res.data.store_id) {
               app.globalData.isIdentificated = true
             }
+            app.globalData.accessToken = res.data.access_token
             that.loginDataRemember()
             wx.redirectTo({
               url: '/pages/index/index',
