@@ -10,6 +10,7 @@ Page({
       navHeight: app.globalData.navHeight,
       pageTitle: '账号设置'
     },
+    phone: '',
     modifyType: 1,
     oldPassword: '',
     newPassword: '',
@@ -33,7 +34,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      phone: wx.getStorageSync('phone')
+    })
   },
 
   /**
@@ -96,15 +99,42 @@ Page({
       method: 'put',
       url: app.globalData.domainUrl + 'admin/user/edit',
       header: {
-        'Authorization': 'Bearer 65b2e95e-b4e7-463a-99da-752355a0f2e7',
+        'Authorization': 'Bearer ' + app.globalData.accessToken,
         'Content-Type': 'application/json;charset=UTF-8'
       },
       data: {
-        "username": "15821381315", "password": "123456", "newpassword1": "123456", "newpassword2": "123456", "avatar": null, "phone": "15821381315"
+        "username": that.data.phone,
+        "password": that.data.oldPassword,
+        "newpassword1": that.data.newPassword,
+        "newpassword2": that.data.retypePassword,
+        "avatar": null,
+        "phone": that.data.phone
       },
-      success() {},
+      success(res) {
+        console.log(res)
+        if (res.statusCode==200){
+          if (res.data.data){
+            wx.showToast({
+              icon: 'none',
+              title: '修改成功',
+            })
+          } else {
+            wx.showToast({
+              icon: 'none',
+              title: res.data.msg,
+            })
+          }
+        } else {
+          wx.showToast({
+            icon: 'none',
+            title: '网络请求失败',
+          })
+        }
+      },
       fail() {},
-      complete() {}
+      complete() {
+        wx.navigateBack()
+      }
     })
   }
 })

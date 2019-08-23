@@ -47,8 +47,21 @@ Page({
       url: '/pages/identification/identification',
     })
   },
-  onLoad: function () {
+  onLoad() {},
+  onReady() {},
+  onShow() {
+    var that = this;
+    that.setData({
+      isIdentificated: app.globalData.isIdentificated
+    })
+    if (that.data.isIdentificated){
+      that.getTodayStatistic()
+    }
   },
+  onHide() {},
+  onUnload() {},
+  onPullDownRefresh() {},
+  onReachBottom() {},
   getUserInfo: function(e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
@@ -56,24 +69,36 @@ Page({
       userInfo: e.detail.userInfo,
     })
   },
-  onShow: function() {
-    var that = this;
-    that.setData({
-      isIdentificated: app.globalData.isIdentificated
-    })
-  },
   getTodayStatistic: function () {
-    var that = this;
+    var that = this
     wx.request({
-      method: 'get',
+      method: 'post',
       url: app.globalData.domainUrl + 'edu/statistic/today',
       header: {
-        'Authorization': 'Basic c3RvcmU6c3RvcmU=',
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Authorization': 'Bearer ' + app.globalData.accessToken,
+        'Content-Type': 'application/json;charset=UTF-8'
       },
-      success: function () {},
-      fail: function () {},
-      complete: function () {}
+      data: {
+        storeId: app.globalData.storeId
+      },
+      success(res) {
+        console.log(res)
+        if (res.statusCode == 200) {
+          if (res.data.code == 0) {
+            wx.showToast({
+              icon: 'none',
+              title: '网络请求成功',
+            })
+          }
+        } else {
+          wx.showToast({
+            icon: 'none',
+            title: '网络请求失败',
+          })
+        }
+      },
+      fail(res) { },
+      complete(res) { }
     })
   }
 })
