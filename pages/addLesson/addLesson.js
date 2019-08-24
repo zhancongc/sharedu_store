@@ -1,7 +1,7 @@
 // pages/addLesson/addLesson.js
 const app = getApp()
 const lessons = {
-  "中小学文化课": ["语数外", "理化生", "政历地"],
+  "中小学文化课": ["语数外", "理化生", "政史地"],
   "早教课": ["学前智力开发", "艺术启蒙"],
   "健身户外": ["攀岩", "冲浪", "潜水",],
   "琴棋书画": ["乐器", "棋类", "书法", "绘画"],
@@ -9,6 +9,7 @@ const lessons = {
   "软件编程": ["青少年编程", "其它计算机技术"],
   "其它类": ["其它"]
 };
+const lessonsDict = {'中小学文化课': 1566295084992, '早教课': 1566295117317, '健身户外': 1566295178029, '体操舞蹈': 1566295209138, '软件编程': 1566295222585, '其它类': 1566295231348, '琴棋书画': 1566295415912, '语数外': 1566295561211, '理化生': 1566295570038, '政史地': 1566295576189, '学前智力开发': 1566295653403, '艺术启蒙': 1566295667369, '攀岩': 1566295689776, '冲浪': 1566295696729, '潜水': 1566295702471, '体操': 1566295784564, '舞蹈': 1566295793301, '青少年编程': 1566296043838, '其它计算机技术': 1566296075689, '乐器': 1566295739380, '棋类': 1566295744702, '书法': 1566295754157, '绘画': 1566295765198, '其它': 1566296081426}
 
 Page({
 
@@ -26,14 +27,16 @@ Page({
     addPhotoCSSIndex: 1,
     uploadPhotoes: [],
     // 添加课程
-    lessonName: '',
-    lessonType: '',
-    lessonTimes: '',
-    lessonPrice: '',
-    lessonIntro: '',
-    lessonIntroState: '',
-    lessonPicker: false,
-    allLesson: '',
+    lessonName: '', // 课程名称
+    lessonType: '', // 课程类型
+    lessonTimes: '', // 课时数
+    lessonPrice: '', // 课程价格
+    lessonIntro: '', // 课程介绍
+    lessonIntroState: '', // 课程介绍填写状态
+    lessonPicker: false, // 课程类别选择器显示状态
+    lessons: '',  // 课程类别大全
+    itemsList: [],
+    pictureUrlList: [],
     columns: [
       {
         values: Object.keys(lessons),
@@ -104,27 +107,42 @@ Page({
       complete: function (res) { }
     })
   },
+  getLessonsType(data) {
+    var tempLessons
+    for (var index in data) {
+      var tempList = []
+      for (var subindex in data[index].childCategoryList) {
+        tempList.push(data[index].childCategoryList[subindex])
+      }
+      tempLessons[data[index].name] = tempList
+    }
+    return tempLessons
+  },
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
+    /*
     var that = this;
     wx.request({
       method: 'get',
-      url: app.globalData.domainUrl +'edu/courseCategory/findPage?pageSize=100',
+      url: app.globalData.domainUrl +'edu/courseCategory/findAll',
       header: {
-        'Authorization': 'Basic c3RvcmU6c3RvcmU==',
+        'Authorization': 'Basic ' + app.globalData.accessToken,
         'Content-Type': 'application/json'
       },
       success(res){
-        console.log(res);
-        that.setData({
-          allLesson: res.data
-        })
+        console.log(res)
+        if (res.statusCode == 200) {
+          var tempLessons = that.getLessonsType(res.data.data)
+          that.setData({
+            lessons: tempLessons
+          })
+        }
       },
       fail() {},
       complete() {}
-    })
+    })*/
   },
 
   /**
@@ -184,10 +202,10 @@ Page({
     wx.uploadFile({
       url: app.globalData.domainUrl + 'edu/oss/upload',
       filePath: filename,
-      //name: 'file',
+      name: 'file',
       success(res) {
         console.log(res)
-        //do something
+        //return filename
       }
     })
   },
@@ -206,23 +224,39 @@ Page({
         course: that.data.lessonType,
         experiencePrice: that.data.lessonPrice,
         storeId: app.globalData.storeId,
-      }
+        courseCategoryId: lessonsDict[that.data.lessonType],
+        itemsList: that.data.itemsList,
+        pictureUrlList: ''
+      },
+      success(res) {},
+      fail(res) {},
+      complete(res) {}
     })
   },
   addLessonCommit() {
     var that = this;
     if (that.data.uploadPhotoes && that.data.lessonName && that.data.lessonType && that.data.lessonTimes && that.data.lessonPrice && that.data.lessonIntro.length > 0) {
+      wx.showLoading({
+        title: '上传中',
+      })
       // 上传课程图片
+      var tempUploadPhotoes = []
       for (var fp in that.data.uploadPhotoes) {
-        that.uploadFile(that.data.uploadPhotoes[fp])
+        tempUploadPhotoes.push(that.uploadFile(that.data.uploadPhotoes[fp]))
       }
       // 上传
-      for (var index in that.data.lessonIntro) {
-        if (that.data.lessonIntro[index].type == 'images'){
-          that.uploadFile(that.data.lessonIntro[index])
+      var obj = that.data.lessonIntro
+      for (var index in obj) {
+        if (obj[index].type == 'images' || obj[index].type == 'vedio'){
+          obj[index].url = that.uploadFile(obj[index].url)
         }
       }
+      that.setData({
+        pictureUrlList: tempUploadPhotoes,
+        itemsList: obj,
+      })
       app.globalData.isIdentificated = true;
+      wx.hideLoading()
       wx.navigateBack();
     } else {
       wx.showToast({

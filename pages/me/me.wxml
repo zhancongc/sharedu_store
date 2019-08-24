@@ -21,13 +21,8 @@
   <van-cell icon="setting-o" title="修改密码" is-link="true" bind:tap="toAccount" />
   <van-cell icon="paid" title="我的钱包" is-link="true" bind:tap="toWallet" />
   <van-cell icon="newspaper-o" title="门店信息" is-link="true" bind:tap="toStoreDetail" />
-</van-cell-group>
-
-<!--view style="width: 100%; height:40rpx;"></view-->
-
-<van-cell-group>
-  <van-cell title="使用帮助" is-link="true" bind:tap="toHelp" />
-  <van-cell title="意见反馈" is-link="true" bind:tap="toFeedback" />
-  <van-cell title="关于我们" is-link="true" bind:tap="toAboutUs" />
+  <!--van-cell title="使用帮助" is-link="true" bind:tap="toHelp" />
+  <van-cell title="意见反馈" is-link="true" bind:tap="toFeedback" /-->
+  <van-cell icon="more-o" title="关于我们" is-link="true" bind:tap="toAboutUs" />
 </van-cell-group>
 

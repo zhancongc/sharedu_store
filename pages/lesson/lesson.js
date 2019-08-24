@@ -122,4 +122,17 @@ Page({
       url: '/pages/identification/identification',
     })
   },
+  getAllLessons() {
+    wx.request({ 
+      method: 'get',
+      url: 'https://store.sharedu.co/edu/course/findOwnPage?pageSize=100',
+      header: { 'Authorization': 'Bearer ' + app.globalData.accessToken },
+      success(res) {
+        console.log(res)
+      },
+      fail(res) {},
+      complete(res) {}
+    })
+
+  }
 })
