@@ -26,7 +26,7 @@
 <van-cell-group>
   <van-field label="旧密码" value="{{ oldPassword }}" type="password" placeholder="请输入旧密码" border="{{ ture }}" bind:change="onOldPasswordChange" />
   <van-field label="新密码" value="{{ newPassword }}" type="password" placeholder="请输入新密码" border="{{true}}" bind:change="onNewPasswordChange" />
-  <van-field label="重复新密码" value="{{ reTypePassword }}" type="password" placeholder="请再次输入新密码" border="{{true}}" error-message="密码不一致" bind:change="onRetypePasswordChange" />
+  <van-field label="重复新密码" value="{{ reTypePassword }}" type="password" placeholder="请再次输入新密码" border="{{true}}" error-message="{{errorMessage}}" bind:change="onRetypePasswordChange" />
 </van-cell-group>
 <view><van-button size="large" bind:click="changePasswordCommit">提交</van-button></view>
 </block>

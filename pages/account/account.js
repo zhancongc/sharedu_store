@@ -15,7 +15,8 @@ Page({
     oldPassword: '',
     newPassword: '',
     retypePassword: '',
-    verificationCode: ''
+    verificationCode: '',
+    errorMessage: ""
   },
 
   backHandler: function () {
@@ -25,11 +26,22 @@ Page({
     this.setData({ oldPassword: event.detail })
   },
   onNewPasswordChange(event) {
-    this.setData({ newPassword: event.detail })
+    var that = this
+    if (event.detail!==that.data.retypePassword) {
+      that.setData({ errorMessage: "密码不一致", newPassword: event.detail })
+    }else {
+      that.setData({ errorMessage: "", newPassword: event.detail })
+    }
   },
   onRetypePasswordChange(event) {
-    this.setData({ retypePassword: event.detail })
+    var that = this
+    if (event.detail !== that.data.newPassword) {
+      that.setData({ errorMessage: "密码不一致", retypePassword: event.detail })
+    } else {
+      that.setData({ errorMessage: "", retypePassword: event.detail })
+    }
   },
+
   /**
    * 生命周期函数--监听页面加载
    */

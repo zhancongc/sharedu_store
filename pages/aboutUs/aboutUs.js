@@ -8,7 +8,7 @@ Page({
   data: {
     navbarData: {
       navHeight: app.globalData.navHeight,
-      pageTitle: '账号设置'
+      pageTitle: '享淘课'
     },
   },
 
