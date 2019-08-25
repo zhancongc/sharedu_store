@@ -103,7 +103,7 @@ Page({
     console.log(event.detail);
     this.setData({ actionSheetShow: false });
   },
-  getIntroText(event) {
+  /*getIntroText(event) {
     console.log(event);
     var tempIntro = this.data.intro;
     for(var i in tempIntro){
@@ -115,7 +115,16 @@ Page({
     this.setData({
       intro: tempIntro
     })
-    
+  },*/
+  getIntroText(event){
+    var tempIntro = this.data.intro
+    for(var index in tempIntro){
+      if (tempIntro[index].timestamp === event.target.dataset.timestamp) {
+        var content = event.detail.value
+        tempIntro[index].content = content
+      }
+    }
+    this.setData({ intro : tempIntro })
   },
   lessonIntroCommit: function() {
     app.globalData.addLessonIntro = this.data.intro;

@@ -23,7 +23,7 @@
 <block wx:if="{{intro.length !== 0}}">
   <view wx:for="{{intro}}" style="margin-top: 20rpx; margin-bottom: 20rpx;" wx:key="{{item.timestamp}}">
     <view wx:if="{{ item.type == 'text' }}" style="width: 100%;">
-      <textarea value="{{ item.content }}" placeholder="请输入课程介绍，限200字" maxlength="200" placeholder-style="font-size: 14px; color: #999;" style="margin: auto; width: 90%; height: 400rpx; font-size: 28rpx; color: black;" auto-focus="true" bindblur="getIntroText" data-timestamp="{{item.timestamp}}"></textarea>
+      <textarea value="{{ item.content }}" placeholder="请输入课程介绍，限200字" maxlength="200" placeholder-style="font-size: 14px; color: #999;" style="margin: auto; width: 90%; height: 400rpx; font-size: 28rpx; color: black;" auto-focus="true" bindinput="getIntroText" data-timestamp="{{item.timestamp}}"></textarea>
     </view>
     <view wx:if="{{ item.type == 'image' }}" style="width: 100%; text-align: center;">
       <image src="{{item.url}}" mode="aspectFill"  data-timestamp="{{item.timestamp}}"></image>

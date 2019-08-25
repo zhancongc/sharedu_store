@@ -199,7 +199,7 @@ Page({
       name: 'file',
       header: {
         'Authorization': 'Bearer ' + app.globalData.accessToken,
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json'
       },
       success(res) {
         console.log(res)
@@ -252,14 +252,32 @@ Page({
       // 上传课程图片
       var tempUploadPhotoes = []
       for (var fp in that.data.uploadPhotoes) {
-        tempUploadPhotoes.push(that.uploadFile(that.data.uploadPhotoes[fp]))
+        var tempImageUrl = that.uploadFile(that.data.uploadPhotoes[fp])
+        if (tempImageUrl){
+          tempUploadPhotoes.push()
+        } else {
+          wx.showToast({
+            icon: 'none',
+            title: '图片上传失败'
+          })
+          return ;
+        }
       }
-      // 上传
+      // 上传介绍里的图片
       var obj = that.data.lessonIntro
       var sendObj = []
       for (var index in obj) {
         if (obj[index].type == 'images' || obj[index].type == 'vedio'){
-          obj[index].url = that.uploadFile(obj[index].url)
+          var tempImageUrl= that.uploadFile(obj[index].url)
+          if (tempImageUrl) {
+            obj[index].url = tempImageUrl
+          } else {
+            wx.showToast({
+              icon: 'none',
+              title: '图片上传失败'
+            })
+            return;
+          }
         }
         sendObj.push(JSON.stringify(obj[index]))
       }
