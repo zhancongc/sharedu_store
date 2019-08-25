@@ -150,7 +150,7 @@ Page({
    * Lifecycle function--Called when page hide
    */
   onHide: function () {
-
+    this.setData({intro: []})
   },
 
   /**

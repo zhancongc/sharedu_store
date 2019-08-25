@@ -1,4 +1,4 @@
-<view style="background: linear-gradient(to right, #ffcc00, #ff6600);width:100%;height: {{3.2*navbarData.navHeight}}px; position: fixed;">
+<view class="state-bar" style="height: {{3.2*navbarData.navHeight}}px;">
 <view class='custom-navbar'>
   <view class='palce-holder-nav' style="height: {{navbarData.navHeight}}px;"></view>
   <van-row class='main-navbar' style="height: {{2.2*navbarData.navHeight}}px;line-height: {{2.2*navbarData.navHeight}}px">

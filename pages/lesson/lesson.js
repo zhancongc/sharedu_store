@@ -20,7 +20,7 @@ Page({
       lessonName: '考研英语',
       lessonPrice: '799',
       lessonTimes: 10,
-      lessonPicture: '/images/English.jpg',
+      lessonPicture: 'http://image.sharedu.co/20190825/3f0ec731bd50480592f0e3594385977d.jpg',
     }],
     outOfSaleLesson: []
   },
@@ -123,6 +123,7 @@ Page({
     })
   },
   getAllLessons() {
+    var that = this
     wx.request({ 
       method: 'get',
       url: 'https://store.sharedu.co/edu/course/findOwnPage?pageSize=100',
@@ -133,6 +134,19 @@ Page({
       fail(res) {},
       complete(res) {}
     })
-
+  },
+  getOfflineLesson() {
+    var that = this
+    wx.request({
+      method: 'get',
+      url: 'https://store.sharedu.co/edu/course/findOwnOfflinePage?pageSize=1000',
+      header: { 'Authorization': 'Bearer ' + app.globalData.accessToken },
+      success(res) {
+        console.log(res)
+      },
+      fail(res) { },
+      complete(res) { }
+    })
   }
+
 })

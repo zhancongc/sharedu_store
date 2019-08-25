@@ -3,5 +3,6 @@
 .container { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 200rpx 0; box-sizing: border-box;}
 .palce-holder-nav{ width: 100%; }
 .custom-navbar { border-bottom: 1rpx solid #dfdfdf; }
-.back-word { color: #666; font-size: 28rpx; text-align: center; }
+.back-word { color: #fff; font-size: 28rpx; text-align: center; }
 .page-title { color: #000; font-size: 35rpx; font-weight: bold; text-align: center; }
+.state-bar {background: linear-gradient(to right, #009999, #00ff66);width:100%;position: fixed;}

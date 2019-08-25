@@ -49,37 +49,31 @@ Page({
       }
     ]
   },
-  backHandler: function () {
+  backHandler() {
     wx.navigateBack()
   },
   onChangeLessonName(event) {
-    console.log(event.detail)
     this.setData({lessonName: event.detail})
   },
   onChangeLessonTimes(event) {
-    console.log(event.detail)
     this.setData({lessonTimes: event.detail})
   },
   onChangeLessonPrice(event) {
-    console.log(event.detail)
     this.setData({ lessonPrice: event.detail })
   },
   onHidePicker: function () {
     this.setData({lessonPicker: false})
   },
   onCancelPicker(event) {
-    console.log(event.detail);
     this.setData({lessonPicker: false});
   },
   onChangePicker(event) {
-    console.log(event.detail);
     const { picker, value, index } = event.detail;
     picker.setColumnValues(1, lessons[value[0]]);
     var tempType = event.detail.value;
     this.setData({lessonType: tempType[1]});
   },
   onConfirmPicker(event) {
-    console.log(event.detail);
     var tempType = event.detail.value;
     this.setData({ lessonType: tempType[1], lessonPicker: false });
   },
@@ -203,6 +197,10 @@ Page({
       url: app.globalData.domainUrl + 'edu/oss/upload',
       filePath: filename,
       name: 'file',
+      header: {
+        'Authorization': 'Bearer ' + app.globalData.accessToken,
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
       success(res) {
         console.log(res)
         //return filename
@@ -210,13 +208,24 @@ Page({
     })
   },
   sendLessonInfo() {
-    var that = this;
+    var that = this
+    var data = {
+      title: that.data.lessonName,
+      classHours: that.data.lessonTimes,
+      course: that.data.lessonType,
+      experiencePrice: that.data.lessonPrice,
+      storeId: app.globalData.storeId,
+      courseCategoryId: lessonsDict[that.data.lessonType],
+      itemsList: that.data.itemsList,
+      pictureUrlList: that.data.pictureUrlList
+    }
+    console.log(data)
     wx.request({
       method: 'post',
       url: app.globalData.domainUrl + 'edu/course/insert',
       header: {
         'Authorization': 'Bearer ' + app.globalData.accessToken,
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json'
       },
       data: {
         title: that.data.lessonName,
@@ -226,7 +235,7 @@ Page({
         storeId: app.globalData.storeId,
         courseCategoryId: lessonsDict[that.data.lessonType],
         itemsList: that.data.itemsList,
-        pictureUrlList: ''
+        pictureUrlList: that.data.pictureUrlList
       },
       success(res) {},
       fail(res) {},
@@ -239,6 +248,7 @@ Page({
       wx.showLoading({
         title: '上传中',
       })
+      app.globalData.addLessonIntro = ''
       // 上传课程图片
       var tempUploadPhotoes = []
       for (var fp in that.data.uploadPhotoes) {
@@ -246,15 +256,18 @@ Page({
       }
       // 上传
       var obj = that.data.lessonIntro
+      var sendObj = []
       for (var index in obj) {
         if (obj[index].type == 'images' || obj[index].type == 'vedio'){
           obj[index].url = that.uploadFile(obj[index].url)
         }
+        sendObj.push(JSON.stringify(obj[index]))
       }
       that.setData({
         pictureUrlList: tempUploadPhotoes,
-        itemsList: obj,
+        itemsList: sendObj,
       })
+      that.sendLessonInfo()
       app.globalData.isIdentificated = true;
       wx.hideLoading()
       wx.navigateBack();

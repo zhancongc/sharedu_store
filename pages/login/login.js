@@ -139,6 +139,7 @@ Page({
     }
   },
   getImageCode() {
+    console.log('get image code')
     var that = this;
     var timestamp = (new Date()).getTime().toString();
     var randomCode = (Math.trunc(Math.random() * 10000000)).toString();
@@ -151,12 +152,12 @@ Page({
         'Accept-Encoding': 'gzip, deflate, br'
       },
       success: function (res) {
+        console.log(res)
         if (res.statusCode == 200) {
           that.setData({
             randomStr: randomStr,
             imageCodeUrl: res.tempFilePath
           })
-          console.log(that.data.imageCodeUrl)
         }
       },
       fail: function () { },

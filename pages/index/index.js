@@ -6,7 +6,7 @@ Page({
   data: {
     navbarData: {
       navHeight: app.globalData.navHeight,
-      pageTitle: 'sharedu'
+      pageTitle: '享淘课'
     },
     tabBarActive: 0,
     tabBarUrls: ["/pages/index/index", "/pages/lesson/lesson", "/pages/bills/bills", "/pages/me/me"],

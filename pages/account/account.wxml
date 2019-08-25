@@ -1,5 +1,5 @@
 <!--pages/account/account.wxml-->
-<view class="" style="background: linear-gradient(to right, #ffcc00, #ff6600);width:100%;height: {{3.2*navbarData.navHeight}}px; position: fixed;">
+<view class="state-bar" style="height: {{3.2*navbarData.navHeight}}px;">
   <view class='custom-navbar'>
     <view class='palce-holder-nav' style="height: {{navbarData.navHeight}}px;"></view>
     <van-row class='main-navbar' style="height: {{2.2*navbarData.navHeight}}px;line-height: {{2.2*navbarData.navHeight}}px">
@@ -28,7 +28,7 @@
   <van-field label="新密码" value="{{ newPassword }}" type="password" placeholder="请输入新密码" border="{{true}}" bind:change="onNewPasswordChange" />
   <van-field label="重复新密码" value="{{ reTypePassword }}" type="password" placeholder="请再次输入新密码" border="{{true}}" error-message="{{errorMessage}}" bind:change="onRetypePasswordChange" />
 </van-cell-group>
-<view><van-button size="large" bind:click="changePasswordCommit">提交</van-button></view>
+<view><van-button type="primary" size="large" bind:click="changePasswordCommit">提交</van-button></view>
 </block>
 
 <block wx:if="{{modifyType === 2}}">
@@ -37,7 +37,7 @@
   <van-field value="{{ verificationCode }}" type="number" label="验证码" placeholder="请输入验证码" border="{{ false }}" bind:change="onChangeVerificationCode">
   <van-button slot="button" size="mini" type="primary" style="height:48rpx;line-height: 48rpx;">验证码</van-button></van-field>
 </van-cell-group>
-<view><van-button size="large" bind:click="changePhoneCommit">提交</van-button></view>
+<view><van-button type="primary" size="large" bind:click="changePhoneCommit">提交</van-button></view>
 </block>
 
 </view>

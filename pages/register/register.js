@@ -18,7 +18,7 @@ Page({
     verificationCodeHint: '验证码',
     agreement: false
   },
-  backHandler: function () {
+  backWordHandler: function () {
     wx.redirectTo({
       url: '/pages/login/login',
     })

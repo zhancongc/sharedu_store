@@ -22,7 +22,7 @@
 </van-row>
 </view>
 
-<view style="margin-top: 40rpx;">
+<!--view style="margin-top: 40rpx;">
 <van-button size="large" type="default" bindtap="toIdentification">去认证</van-button>
 </view>
 <view style="margin-top: 40rpx;">
@@ -30,4 +30,4 @@
 </view>
 <view style="margin-top: 40rpx;">
   <van-button size="large" type="default" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权</van-button>
-</view>
+</view-->
