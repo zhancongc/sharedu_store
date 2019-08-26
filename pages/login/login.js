@@ -198,6 +198,10 @@ Page({
             }
             app.globalData.accessToken = res.data.access_token
             that.loginDataRemember()
+            wx.showToast({
+              icon: 'none',
+              title: '登录成功',
+            })
             wx.redirectTo({
               url: '/pages/index/index',
             })

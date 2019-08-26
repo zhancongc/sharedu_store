@@ -85,10 +85,7 @@ Page({
         console.log(res)
         if (res.statusCode == 200) {
           if (res.data.code == 0) {
-            wx.showToast({
-              icon: 'none',
-              title: '网络请求成功',
-            })
+            // wx.showToast({ icon: 'none', title: '网络请求成功', })
           }
         } else {
           wx.showToast({
