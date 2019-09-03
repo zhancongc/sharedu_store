@@ -235,7 +235,8 @@ Page({
         storeId: app.globalData.storeId,
         courseCategoryId: lessonsDict[that.data.lessonType],
         itemsList: that.data.itemsList,
-        pictureUrlList: that.data.pictureUrlList
+        pictureUrlList: that.data.pictureUrlList,
+        detail: 'lesson intro'
       },
       success(res) {},
       fail(res) {},
