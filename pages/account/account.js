@@ -107,6 +107,13 @@ Page({
   },
   changePasswordCommit(){
     var that = this;
+    if (! that.data.changePassword || !that.data.password || !retypePassword) {
+      wx.showToast({
+        icon: 'none',
+        title: '有数据未填',
+      })
+      return 
+    }
     wx.request({
       method: 'put',
       url: app.globalData.domainUrl + 'admin/user/edit',

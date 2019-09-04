@@ -22,10 +22,7 @@ Page({
       item: '今日课程',
       amount: '0'
     },{
-      item: '今日好评',
-      amount: '0'
-    }, {
-      item: '今日中差评',
+      item: '今日评价',
       amount: '0'
     }],
   },

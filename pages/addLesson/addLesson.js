@@ -192,18 +192,33 @@ Page({
   onShareAppMessage: function () {
 
   },
-  uploadFile (filename) {
+  uploadFile(filename) {
     wx.uploadFile({
+      method: 'post',
       url: app.globalData.domainUrl + 'edu/oss/upload',
-      filePath: filename,
       name: 'file',
+      filePath: filename,
       header: {
         'Authorization': 'Bearer ' + app.globalData.accessToken,
-        'Content-Type': 'application/json'
+        //'Content-Type': 'application/json'
       },
       success(res) {
         console.log(res)
-        //return filename
+        var response = JSON.parse(res.data)
+        if (response.msg == 'success') {
+          return response.data
+        } else {
+          wx.showToast({
+            icon: 'none',
+            title: '上传图片失败',
+          })
+        }
+      },
+      fail() {
+        wx.showToast({
+          icon: 'none',
+          title: '网络请求失败，请重试',
+        })
       }
     })
   },
@@ -251,10 +266,10 @@ Page({
       app.globalData.addLessonIntro = ''
       // 上传课程图片
       var tempUploadPhotoes = []
-      for (var fp in that.data.uploadPhotoes) {
-        var tempImageUrl = that.uploadFile(that.data.uploadPhotoes[fp])
+      for (var index in that.data.uploadPhotoes) {
+        var tempImageUrl = that.uploadFile(that.data.uploadPhotoes[index])
         if (tempImageUrl){
-          tempUploadPhotoes.push()
+          tempUploadPhotoes.push(tempImageUrl)
         } else {
           wx.showToast({
             icon: 'none',

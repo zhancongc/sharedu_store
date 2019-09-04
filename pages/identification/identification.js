@@ -3938,6 +3938,38 @@ Page({
   onShareAppMessage: function () {
 
   },
+  uploadFile(filename) {
+    console.log(filename)
+    return new Promise((resolve, reject)=> {
+      wx.uploadFile({
+        method: 'post',
+        url: app.globalData.domainUrl + 'edu/oss/upload',
+        name: 'file',
+        filePath: filename,
+        header: {
+          'Authorization': 'Bearer ' + app.globalData.accessToken,
+        },
+        success(res) {
+          console.log(res)
+          var response = JSON.parse(res.data)
+          if (response.msg == 'success') {
+            return response.data
+          } else {
+            wx.showToast({
+              icon: 'none',
+              title: '上传图片失败',
+            })
+          }
+        },
+        fail() {
+          wx.showToast({
+            icon: 'none',
+            title: '网络请求失败，请重试',
+          })
+        }
+      })
+    })
+  },
   addStorePhoto() {
     var that = this;
     wx.chooseImage({
@@ -3981,9 +4013,34 @@ Page({
   identificationCommit() {
     var that = this;
     console.log('点击提交')
-    if (that.data.storeName && that.data.cityName && that.data.detailAddress && that.data.uploadPhotoes && that.data.liencePhoto) {
+    wx.showLoading({
+      title: '提交中...',
+    })
+    if (that.data.storeName && that.data.cityName && that.data.detailAddress && that.data.uploadPhotoes.length>0 && that.data.liencePhoto) {
+      var tempUploadPhotoes = []
+      for (var index in that.data.uploadPhotoes) {
+        console.log('开始上传图片')
+        var backUrl = that.uploadFile(that.data.uploadPhotoes[index])
+        console.log('上传图片完毕', backUrl)
+        if (!backUrl){
+          return
+        }
+        tempUploadPhotoes.push(backUrl)
+      }
+      console.log('开始上传证书', tempUploadPhotoes)
+      var liencePhoto = that.uploadFile(that.data.liencePhoto)
+      if (! liencePhoto){
+        return 
+      }
+      that.setData({
+        liencePhoto: liencePhoto,
+        uploadPhotoes: tempUploadPhotoes
+      })
+      console.log('开始认证')
       that.sendStoreRegisterData()
+      wx.hideLoading()
     } else {
+      wx.hideLoading()
       wx.showToast({
         title: '有些数据未填',
         duration: 1500,
