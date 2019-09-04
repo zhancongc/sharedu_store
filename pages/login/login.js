@@ -194,7 +194,7 @@ Page({
           if (res.errMsg === "request:ok") {
             if (res.data.store_id) {
               app.globalData.isIdentificated = true
-              app.globalData.store_id = res.data.store_id
+              app.globalData.storeId = res.data.store_id
             }
             app.globalData.accessToken = res.data.access_token
             that.loginDataRemember()
@@ -271,7 +271,7 @@ Page({
         if (res.code == 200) {
           if (res.data.store_id) {
             app.globalData.isIdentificated = true
-            app.globalData.store_id = res.data.store_id
+            app.globalData.storeId = res.data.store_id
           }
           that.loginDataRemember()
           wx.redirectTo({
