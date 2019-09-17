@@ -44,6 +44,8 @@ App({
     // 商户端服务器url
     domainUrl: "https://store.sharedu.co/",
     // 请求凭证
+    authorization: 'Basic c3RvcmU6c3RvcmU=',
+    // 请求凭证
     accessToken: '',
     // 用户信息
     userInfo: null,

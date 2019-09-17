@@ -96,6 +96,26 @@ Page({
     console.log(event)
     that.setData({ agreement: !that.data.agreement });
   },
+  checkPhone(event) {
+    var that = this;
+    wx.request({
+      method: 'get',
+      url: app.globalData.domainUrl + 'admin/userAgent/findCountByPhone?phone=' + that.data.phone + '&userType=1',
+      header: {
+        'Content-Type': 'application/json'
+      },
+      success(res) {
+        console.log(res)
+        if (res.data.data > 0) {
+          wx.showToast({
+            icon: 'none',
+            title: '手机号已被注册',
+          })
+          console.log("手机号已被注册")
+        }
+      },
+    })
+  },
   getVerificationCode: function (event) {
     // 获取验证码
     var that = this;

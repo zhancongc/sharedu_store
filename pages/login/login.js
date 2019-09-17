@@ -116,6 +116,26 @@ Page({
     var that = this;
     that.setData({ verificationCode: event.detail.trim() })
   },
+  checkPhone(event) {
+    var that = this;
+    wx.request({
+      method: 'get',
+      url: app.globalData.domainUrl + 'admin/userAgent/findCountByPhone?phone=' + that.data.phone + '&userType=1',
+      header: {
+        'Content-Type': 'application/json'
+      },
+      success(res) {
+        console.log(res)
+        if (res.data.data ===0 ){
+          wx.showToast({
+            icon: 'none',
+            title: '手机号不存在',
+          })
+          console.log("手机号不存在")
+        }
+      },
+    })
+  },
   loginConfirm () {
     var that = this;
     if(that.data.loginViaPassword) {
@@ -179,7 +199,7 @@ Page({
       method: 'post',
       url: app.globalData.domainUrl + 'auth/oauth/token?randomStr=' + that.data.randomStr + '&code='+ that.data.imageCode,
       header: { 
-        'Authorization': 'Basic c3RvcmU6c3RvcmU=',
+        'Authorization': app.globalData.authorization,
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       data: {
@@ -259,7 +279,7 @@ Page({
       method: 'post',
       url: app.globalData.domainUrl + 'auth/mobile/token/sms',
       header: {
-        'Authorization': 'Basic c3RvcmU6c3RvcmU==',
+        'Authorization': app.globalData.authorization,
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       data: {
@@ -285,8 +305,12 @@ Page({
   },
   loginDataRemember() {
     var that = this;
-    wx.setStorage({ key: 'phone', data: that.data.phone })
-    wx.setStorage({ key: 'password', data: that.data.password })
+    if (that.data.phone) {
+      wx.setStorage({ key: 'phone', data: that.data.phone })
+    }
+    if (that.data.password) {
+      wx.setStorage({ key: 'password', data: that.data.password })
+    }
   },
   loginDataAutoFilled() {
     var that = this;

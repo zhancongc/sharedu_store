@@ -15,7 +15,7 @@
 </van-row>
 
 <van-cell-group>
-  <van-field label="账号" value="{{ phone }}" placeholder="请输入手机号码" border="{{ false }}" bind:change="onChangePhone"/>
+  <van-field label="账号" value="{{ phone }}" placeholder="请输入手机号码" border="{{ false }}" bind:change="onChangePhone" onblur="checkPhone"/>
   <van-field value="{{ verificationCode }}" type="number" label="验证码" placeholder="请输入验证码" border="{{ false }}" bind:change="onChangeVerificationCode">
   <van-button slot="button" size="mini" type="primary" bind:click="getVerificationCode">{{verificationCodeHint}}</van-button></van-field>
   <van-field value="{{ password }}" type="password" label="密码" placeholder="请设置密码" border="{{ false }}" bind:change="onChangePassword"/>
