@@ -3953,12 +3953,13 @@ Page({
           console.log(res)
           var response = JSON.parse(res.data)
           if (response.msg == 'success') {
-            return response.data
+            resolve(response.data)
           } else {
             wx.showToast({
               icon: 'none',
               title: '上传图片失败',
             })
+            reject('')
           }
         },
         fail() {
@@ -3966,6 +3967,7 @@ Page({
             icon: 'none',
             title: '网络请求失败，请重试',
           })
+          reject('')
         }
       })
     })
