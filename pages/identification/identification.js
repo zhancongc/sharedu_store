@@ -15,15 +15,17 @@ Page({
     currentTab: '',
     addPhotoCSS: ['photo-preview', 'photo-upload'],
     addPhotoCSSIndex: 1,
-    uploadPhotoes: [],
-
+    // 商户图片
+    storePhotoes: [],
+    storePhotoesUpload: [],
     storeName: "",
     cityName: "",
     cityPicker: false,
     detailAddress: "",
     location: 'dddd',
-
+    // 商户执照图片
     liencePhoto: '',
+    liencePhotoUpload: '',
     areaList: null,
   },
   backHandler: function () {
@@ -88,7 +90,6 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    console.log(chinaAreaList);
     that.setData({
       areaList: chinaAreaList
     })
@@ -142,62 +143,29 @@ Page({
   onShareAppMessage: function () {
 
   },
-  uploadFile(filename) {
-    console.log(filename)
-    return new Promise((resolve, reject)=> {
-      wx.uploadFile({
-        method: 'post',
-        url: app.globalData.domainUrl + 'edu/oss/upload',
-        name: 'file',
-        filePath: filename,
-        header: {
-          'Authorization': 'Bearer ' + app.globalData.accessToken,
-        },
-        success(res) {
-          console.log(res)
-          var response = JSON.parse(res.data)
-          if (response.msg == 'success') {
-            resolve(response.data)
-          } else {
-            wx.showToast({
-              icon: 'none',
-              title: '上传图片失败',
-            })
-            reject('')
-          }
-        },
-        fail() {
-          wx.showToast({
-            icon: 'none',
-            title: '网络请求失败，请重试',
-          })
-          reject('')
-        }
-      })
-    })
-  },
   addStorePhoto() {
     var that = this;
     wx.chooseImage({
       count: 5,
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
-      success: function(res) {
-        const tempFilePaths = res.tempFilePaths;
+      success: function (res) {
+        let tempFilePaths = res.tempFilePaths;
         if (tempFilePaths) {
           that.setData({
             addPhotoCSSIndex: 0,
-            uploadPhotoes: tempFilePaths
+            storePhotoes: tempFilePaths,
           })
+          that.uploadStorePhoto()
         } else {
           that.setData({
             addPhotoCSSIndex: 1,
-            uploadPhotoes: []
+            storePhotoes: []
           })
         }
       },
-      fail(res) {},
-      complete (res){}
+      fail(res) { },
+      complete(res) { }
     })
   },
   addStoreLiencePhoto () {
@@ -212,8 +180,88 @@ Page({
           that.setData({
             liencePhoto: tempFilePaths[0]
           })
+          that.uploadLiencePhoto()
         }
       },
+    })
+  },
+  uploadStorePhoto() {
+    var that = this;
+    let tempStorePhotoes = []
+    for (var pic in that.data.storePhotoes) {
+      wx.showLoading({ title: '上传中', })
+      wx.uploadFile({
+        method: 'post',
+        url: app.globalData.domainUrl + 'edu/oss/upload',
+        name: 'file',
+        filePath: that.data.storePhotoes[pic],
+        header: {
+          'Authorization': 'Bearer ' + app.globalData.accessToken,
+        },
+        success(res) {
+          console.log(res)
+          var response = JSON.parse(res.data)
+          if (response.msg == 'success') {
+            console.log(response.data)
+            tempStorePhotoes.push(response.data)
+            that.setData({
+              storePhotoesUpload: tempStorePhotoes
+            })
+          } else {
+            wx.showToast({
+              icon: 'none',
+              title: '上传图片失败',
+            })
+          }
+        },
+        fail() {
+          wx.showToast({
+            icon: 'none',
+            title: '网络请求失败，请重试',
+          })
+        },
+        complete() {
+          wx.hideLoading()
+        }
+      })
+    }
+  },
+  uploadLiencePhoto() {
+    var that = this;
+    wx.showLoading({ title: '上传中', })
+    wx.uploadFile({
+      method: 'post',
+      url: app.globalData.domainUrl + 'edu/oss/upload',
+      name: 'file',
+      filePath: that.data.liencePhoto,
+      header: {
+        'Authorization': 'Bearer ' + app.globalData.accessToken,
+      },
+      success(res) {
+        console.log(res)
+        var response = JSON.parse(res.data)
+        if (response.msg == 'success') {
+          console.log(response.data)
+          that.setData({
+            liencePhotoUpload: response.data
+          })
+          
+        } else {
+          wx.showToast({
+            icon: 'none',
+            title: '上传图片失败',
+          })
+        }
+      },
+      fail() {
+        wx.showToast({
+          icon: 'none',
+          title: '网络请求失败，请重试',
+        })
+      },
+      complete() {
+        wx.hideLoading()
+      }
     })
   },
   identificationCommit() {
@@ -222,26 +270,7 @@ Page({
     wx.showLoading({
       title: '提交中...',
     })
-    if (that.data.storeName && that.data.cityName && that.data.detailAddress && that.data.uploadPhotoes.length>0 && that.data.liencePhoto) {
-      var tempUploadPhotoes = []
-      for (var index in that.data.uploadPhotoes) {
-        console.log('开始上传图片')
-        var backUrl = that.uploadFile(that.data.uploadPhotoes[index])
-        console.log('上传图片完毕', backUrl)
-        if (!backUrl){
-          return
-        }
-        tempUploadPhotoes.push(backUrl)
-      }
-      console.log('开始上传证书', tempUploadPhotoes)
-      var liencePhoto = that.uploadFile(that.data.liencePhoto)
-      if (! liencePhoto){
-        return 
-      }
-      that.setData({
-        liencePhoto: liencePhoto,
-        uploadPhotoes: tempUploadPhotoes
-      })
+    if (that.data.storeName && that.data.cityName && that.data.detailAddress && that.data.storePhotoes.length>0 && that.data.liencePhoto) {
       console.log('开始认证')
       that.sendStoreRegisterData()
       wx.hideLoading()
@@ -258,13 +287,13 @@ Page({
     var that = this;
     var phone = wx.getStorageSync('phone')
     var data = {
-      businessLicenseUrl: that.data.liencePhoto,
+      businessLicenseUrl: that.data.liencePhotoUpload,
       contact: phone,
       name: phone,
       particularAddress: that.data.detailAddress,
       phone: phone,
       primaryAddress: that.data.cityName,
-      storePictures: that.data.uploadPhotoes
+      storePictures: that.data.storePhotoesUpload
     }
     console.log('门店入驻')
     console.log(data);
@@ -276,21 +305,28 @@ Page({
         'Content-Type': 'application/json'
       },
       data: {
-        businessLicenseUrl: that.data.liencePhoto,
+        businessLicenseUrl: that.data.liencePhotoUpload,
         contact: phone,
         name: phone,
         particularAddress: that.data.detailAddress,
         phone: phone,
         primaryAddress: that.data.cityName,
-        storePictures: that.data.uploadPhotoes
+        storePictures: that.data.storePhotoesUpload
       },
       success (res) {
         console.log(res)
         if (res.statusCode === 200) {
-          app.globalData.isIdentificated = true
-          wx.redirectTo({
-            url: '/pages/index/index',
-          })
+          if (res.data.code === 0) {
+            app.globalData.isIdentificated = true
+            wx.redirectTo({
+              url: '/pages/index/index',
+            })
+          } else {
+            wx.showToast({
+              icon: 'none',
+              title: '入驻失败',
+            })
+          }
         } else {
           wx.showToast({
             icon: 'none',

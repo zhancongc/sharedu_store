@@ -280,7 +280,7 @@ Page({
       url: app.globalData.domainUrl + 'auth/mobile/token/sms',
       header: {
         'Authorization': app.globalData.authorization,
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json'
       },
       data: {
         mobile: 'SMS@'+that.data.phone,

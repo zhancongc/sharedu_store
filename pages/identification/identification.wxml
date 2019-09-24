@@ -19,7 +19,7 @@
 
 <block wx:if="{{!addPhotoCSSIndex}}">
   <swiper style="height: 400rpx;" class='videoSwiper' current="{{currentTab}}" duration="200" bindchange="swiperchange">
-    <block wx:for="{{uploadPhotoes}}">
+    <block wx:for="{{ storePhotoes }}">
     <swiper-item style="width: 100%;"><image src="{{item}}" mode="aspectFill" class="slide-image" style="width: 100%; height: 400rpx;"/></swiper-item>
     </block>
   </swiper>
@@ -29,6 +29,7 @@
 
 <view style="margin-top: -70rpx;">
 <van-cell-group>
+  <van-field label="邀请码" value="{{ invitationCode }}" required="true" placeholder="请输入代理商邀请码（可选）" border="{{ true }}" maxlength="30" focus="true" bind:change="onChangeStoreName"/>
   <van-field label="门店名称" value="{{ storeName }}" required="true" placeholder="请输入门店名称" border="{{ true }}" maxlength="30" focus="true" bind:change="onChangeStoreName"/>
     <van-field readonly label="所在城市" value="{{ cityName }}" required="true" placeholder="请选择所在城市" border="{{ true }}" maxlength="30" is-link="true" bind:tap="onTapCityName" style="color: black;"/>
   <van-field value="{{ detailAddress }}" label="详细地址" required="true" placeholder="请输入详细地址" border="{{ true }}" maxlength="60" bind:change="onChangeDetailAddress" icon="location" bind:click-icon="getLocation"/>
@@ -37,7 +38,7 @@
 </view>
 
 <view wx:if="{{liencePhoto}}" style="width: 100%; height:500rpx; text-align: center; vertical-align: middle; margin-top: 10rpx;">
-  <image mode="aspectFit" src="{{liencePhoto}}"></image>
+  <image style="width: 90%;" mode="aspectFit" src="{{liencePhoto}}"></image>
 </view>
 
 <view style="margin-top:10rpx;">
