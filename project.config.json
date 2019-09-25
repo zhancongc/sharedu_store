@@ -24,7 +24,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.8.0",
 	"appid": "wxa3d385eebdd96787",
-	"projectname": "sharedu",
+	"projectname": "sharedu_store",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},

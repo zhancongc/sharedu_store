@@ -168,6 +168,7 @@ Page({
       success: function (res) {
         console.log(res)
         if (res.data.code==0){
+          
           wx.redirectTo({
             url: '/pages/index/index',
           })

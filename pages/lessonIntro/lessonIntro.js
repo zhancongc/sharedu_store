@@ -78,6 +78,7 @@ Page({
               url: res.tempFilePaths[0]
             })
             that.setData({ intro: tempIntro })
+            that.uploadIntroFile(timestamp, tempIntro.url)
           } else {    //图片大于5M，弹出一个提示框
             wx.showToast({
               title: '上传图片不能大于5M!',  //标题
@@ -125,6 +126,49 @@ Page({
       }
     }
     this.setData({ intro : tempIntro })
+  },
+  uploadIntroFile(timestamp, fileName) {
+    var that = this;
+    let tempIntro = that.data.intro;
+    wx.showLoading({ title: '上传中', })
+    wx.uploadFile({
+      method: 'post',
+      url: app.globalData.domainUrl + 'edu/oss/upload',
+      name: 'file',
+      filePath: fileName,
+      header: {
+        'Authorization': 'Bearer ' + app.globalData.accessToken,
+      },
+      success(res) {
+        console.log(res)
+        var response = JSON.parse(res.data)
+        if (response.msg == 'success') {
+          console.log(response.data)
+          for (var item in tempIntro){
+            if (tempIntro[item]['timestamp'] == timestamp){
+              tempIntro[item].url = response.data
+            }
+          }
+          that.setData({
+            intro: tempIntro
+          })
+        } else {
+          wx.showToast({
+            icon: 'none',
+            title: '上传图片失败',
+          })
+        }
+      },
+      fail() {
+        wx.showToast({
+          icon: 'none',
+          title: '网络请求失败，请重试',
+        })
+      },
+      complete() {
+        wx.hideLoading()
+      }
+    })
   },
   lessonIntroCommit: function() {
     app.globalData.addLessonIntro = this.data.intro;

@@ -107,7 +107,8 @@ Page({
   },
   changePasswordCommit(){
     var that = this;
-    if (! that.data.changePassword || !that.data.password || !retypePassword) {
+    if (!that.data.oldPassword || !that.data.newPassword || !that.data.retypePassword) {
+      console.log()
       wx.showToast({
         icon: 'none',
         title: '有数据未填',

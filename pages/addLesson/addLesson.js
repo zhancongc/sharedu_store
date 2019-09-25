@@ -24,7 +24,7 @@ Page({
     currentTab: '',
     addPhotoCSS: ['photo-preview', 'photo-upload'],
     addPhotoCSSIndex: 1,
-    uploadPhotoes: [],
+    lessonImage: [],
     // 添加课程
     lessonName: '', // 课程名称
     lessonType: '', // 课程类型
@@ -87,12 +87,13 @@ Page({
         if (tempFilePaths) {
           that.setData({
             addPhotoCSSIndex: 0,
-            uploadPhotoes: tempFilePaths
+            lessonImage: tempFilePaths
           })
+          that.uploadLessonImage()
         } else {
           that.setData({
             addPhotoCSSIndex: 1,
-            uploadPhotoes: []
+            lessonImage: []
           })
         }
       },
@@ -191,14 +192,16 @@ Page({
   onShareAppMessage: function () {
 
   },
-  uploadFile(filename) {
-    console.log(filename)
-    return new Promise((resolve, reject) => {
+  uploadLessonImage(){
+    var that = this
+    var tempLessonImage = []
+    wx.showLoading({ title: '上传中', })
+    for (var index in that.data.lessonImage) {
       wx.uploadFile({
         method: 'post',
         url: app.globalData.domainUrl + 'edu/oss/upload',
         name: 'file',
-        filePath: filename,
+        filePath: that.data.lessonImage[index],
         header: {
           'Authorization': 'Bearer ' + app.globalData.accessToken,
         },
@@ -206,13 +209,16 @@ Page({
           console.log(res)
           var response = JSON.parse(res.data)
           if (response.msg == 'success') {
-            resolve(response.data)
+            console.log(response.data)
+            tempLessonImage.push(response.data)
+            that.setData({
+              lessonImage: tempLessonImage
+            })
           } else {
             wx.showToast({
               icon: 'none',
               title: '上传图片失败',
             })
-            reject('')
           }
         },
         fail() {
@@ -220,10 +226,12 @@ Page({
             icon: 'none',
             title: '网络请求失败，请重试',
           })
-          reject('')
+        },
+        complete() {
+          wx.hideLoading()
         }
       })
-    })
+    }
   },
   sendLessonInfo() {
     var that = this
@@ -252,62 +260,33 @@ Page({
         experiencePrice: that.data.lessonPrice,
         storeId: app.globalData.storeId,
         courseCategoryId: lessonsDict[that.data.lessonType],
-        itemsList: that.data.itemsList,
+        itemsList: that.data.lessonIntro,
         pictureUrlList: that.data.pictureUrlList,
-        detail: 'lesson intro'
+        detail: 'lessson detail'
       },
-      success(res) {},
+      success(res) {
+        if (res.statusCode == 200) {
+          var response = JSON.parse(res.data) 
+          if (response.code == 0) {
+            app.globalData.isIdentificated = true;
+            wx.navigateBack();
+          }
+        }
+      },
       fail(res) {},
-      complete(res) {}
+      complete(res) {
+        wx.hideLoading()
+      }
     })
   },
-  async addLessonCommit() {
+  addLessonCommit() {
     var that = this;
-    if (that.data.uploadPhotoes && that.data.lessonName && that.data.lessonType && that.data.lessonTimes && that.data.lessonPrice && that.data.lessonIntro.length > 0) {
+    if (that.data.lessonImage && that.data.lessonName && that.data.lessonType && that.data.lessonTimes && that.data.lessonPrice && that.data.lessonIntro.length > 0) {
       wx.showLoading({
         title: '上传中',
       })
       app.globalData.addLessonIntro = ''
-      // 上传课程图片
-      var tempUploadPhotoes = []
-      for (var index in that.data.uploadPhotoes) {
-        var tempImageUrl = await that.uploadFile(that.data.uploadPhotoes[index])
-        if (tempImageUrl){
-          tempUploadPhotoes.push(tempImageUrl)
-        } else {
-          wx.showToast({
-            icon: 'none',
-            title: '图片上传失败'
-          })
-          return ;
-        }
-      }
-      // 上传介绍里的图片
-      var obj = that.data.lessonIntro
-      var sendObj = []
-      for (var index in obj) {
-        if (obj[index].type == 'images' || obj[index].type == 'vedio'){
-          var tempImageUrl = await that.uploadFile(obj[index].url)
-          if (tempImageUrl) {
-            obj[index].url = tempImageUrl
-          } else {
-            wx.showToast({
-              icon: 'none',
-              title: '图片上传失败'
-            })
-            return;
-          }
-        }
-        sendObj.push(JSON.stringify(obj[index]))
-      }
-      that.setData({
-        pictureUrlList: tempUploadPhotoes,
-        itemsList: sendObj,
-      })
       that.sendLessonInfo()
-      app.globalData.isIdentificated = true;
-      wx.hideLoading()
-      wx.navigateBack();
     } else {
       wx.showToast({
         title: '有些数据未填',
