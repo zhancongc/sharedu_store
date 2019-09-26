@@ -167,11 +167,14 @@ Page({
       },
       success: function (res) {
         console.log(res)
-        if (res.data.code==0){
-          
-          wx.redirectTo({
-            url: '/pages/index/index',
-          })
+        if (res.statusCode == 200) {
+          var response = res.data
+          if (response.code == 0) {
+            app.globalData.accessToken = response.data.access_token
+            wx.redirectTo({
+              url: '/pages/index/index',
+            })
+          }
         }
       },
       fail: function () {},
