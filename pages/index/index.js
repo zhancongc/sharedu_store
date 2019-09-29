@@ -44,16 +44,16 @@ Page({
       url: '/pages/identification/identification',
     })
   },
-  onLoad() {},
-  onReady() {},
+  onLoad() { 
+    wx.showLoading({
+      title: '加载中',
+    })
+  },
+  onReady() { },
   onShow() {
     var that = this;
-    that.setData({
-      isIdentificated: app.globalData.isIdentificated
-    })
-    if (that.data.isIdentificated){
-      that.getTodayStatistic()
-    }
+    this.getStoreData()
+    wx.hideLoading()
   },
   onHide() {},
   onUnload() {},
@@ -64,6 +64,26 @@ Page({
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
+    })
+  },
+  getStoreData() {
+    var that = this;
+    wx.request({
+      method: 'post',
+      url: app.globalData.domainUrl + 'edu/store/own',
+      header: {
+        'Authorization': "bearer " + app.globalData.accessToken,
+        'Content-Type': 'application/json'
+      },
+      success(res) {
+        console.log(res)
+        if (res.statusCode == 200) {
+          let response = res.data
+          var storeData = response.data
+        }
+      },
+      fail() { },
+      complete() { }
     })
   },
   getTodayStatistic: function () {

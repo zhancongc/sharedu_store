@@ -188,11 +188,11 @@ Page({
     var that = this;
     var data = {
       username: that.data.phone,
-        password: that.data.password,
-          randomStr: that.data.randomStr,
-            code: that.data.imageCode,
-              grant_type: 'password',
-                scope: 'server'
+      password: that.data.password,
+      randomStr: that.data.randomStr,
+      code: that.data.imageCode,
+      grant_type: 'password',
+      scope: 'server'
     }
     console.log(data);
     wx.request({
@@ -217,6 +217,7 @@ Page({
               app.globalData.storeId = res.data.store_id
             }
             app.globalData.accessToken = res.data.access_token
+            console.log('记住access token')
             that.loginDataRemember()
             wx.showToast({
               icon: 'none',
@@ -289,10 +290,6 @@ Page({
       },
       success: function (res) {
         if (res.code == 200) {
-          if (res.data.store_id) {
-            app.globalData.isIdentificated = true
-            app.globalData.storeId = res.data.store_id
-          }
           that.loginDataRemember()
           wx.redirectTo({
             url: '/pages/index/index',
@@ -318,5 +315,5 @@ Page({
       phone: wx.getStorageSync('phone'),
       password: wx.getStorageSync('password')
     })
-  }
+  },
 })
