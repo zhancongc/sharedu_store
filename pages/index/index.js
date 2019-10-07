@@ -25,6 +25,7 @@ Page({
       item: '今日评价',
       amount: '0'
     }],
+    storePhotoes: [],
   },
   onTabBarChange(event) {
     var that = this;
@@ -80,6 +81,10 @@ Page({
         if (res.statusCode == 200) {
           let response = res.data
           var storeData = response.data
+          if (storeData.length > 0) {
+            that.setData({ isIdentificated: true, storePhotoes: storeData[0].storePictures })
+            app.globalData.isIdentificated = true
+          }
         }
       },
       fail() { },
