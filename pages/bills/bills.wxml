@@ -96,6 +96,6 @@
 <block wx:if="{{!isIdentificated}}">
   <view style="text-align: center; width: 94%; margin: auto;margin-top: 400rpx;">
     <van-button type="primary" size="large" bind:click="toIdentification">
-    立即认证</van-button>
+    立即入驻</van-button>
   </view>
 </block>

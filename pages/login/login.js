@@ -120,7 +120,7 @@ Page({
     var that = this;
     wx.request({
       method: 'get',
-      url: app.globalData.domainUrl + 'admin/userAgent/findCountByPhone?phone=' + that.data.phone + '&userType=1',
+      url: app.globalData.domainUrl + 'admin/user/findCountByPhone?phone=' + that.data.phone + '&userType=1',
       header: {
         'Content-Type': 'application/json'
       },

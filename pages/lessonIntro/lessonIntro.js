@@ -104,19 +104,6 @@ Page({
     console.log(event.detail);
     this.setData({ actionSheetShow: false });
   },
-  /*getIntroText(event) {
-    console.log(event);
-    var tempIntro = this.data.intro;
-    for(var i in tempIntro){
-      if (tempIntro[i].timestamp === event.target.dataset.timestamp) {
-        var content = event.detail.value;
-        tempIntro[i].content = content;
-      }
-    }
-    this.setData({
-      intro: tempIntro
-    })
-  },*/
   getIntroText(event){
     var tempIntro = this.data.intro
     for(var index in tempIntro){

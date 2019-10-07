@@ -37,18 +37,18 @@
 </van-cell-group>
 </view>
 
-<view wx:if="{{liencePhoto}}" style="width: 100%; height:500rpx; text-align: center; vertical-align: middle; margin-top: 10rpx;">
+<view wx:if="{{liencePhoto}}" style="width: 100%; height:480rpx; text-align: center; vertical-align: middle;">
   <image style="width: 90%;" mode="aspectFit" src="{{liencePhoto}}"></image>
 </view>
 
-<view style="margin-top:10rpx;">
+<view>
   <van-row><van-col span="22" offset="1">
     <van-button type="primary" size="large" bind:tap="identificationCommit">提交</van-button>
   </van-col>
   </van-row>
 </view>
 
-<view class='mask' wx:if="{{ cityPicker }}"></view>
+<view class='mask' wx:if="{{ cityPicker }}" style="z-index: 999;"></view>
 <view wx:if="{{ cityPicker }}" style="position: fixed; bottom: 0rpx; left: 0rpx; width:100%;">
   <van-area title="选择城市" area-list="{{ areaList }}" bind:cancel="onCancelCityName" bind:confirm="onConfirmCityName" />
 </view>
