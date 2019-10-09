@@ -5,7 +5,23 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    intro: [
+      {
+        timestamp: '',
+        type: 'image',
+        url: 'https://image.sharedu.co/20190928/785f5c74a6254cbaa8f7125b8c4887c1.jpg'
+      },
+      {
+        timestamp: '',
+        type: 'text',
+        content: ''
+      },
+      {
+        timestamp: '',
+        type: 'vedio',
+        url: '/images/logo.png'
+      },
+    ],
   },
 
   /**
@@ -81,6 +97,11 @@ Page({
   toIndex: function() {
     wx.navigateTo({
       url: '/pages/index/index',
+    })
+  },
+  toIntro() {
+    wx.navigateTo({
+      url: '/pages/lessonIntro/lessonIntro',
     })
   },
   bindGetUserInfo(event){

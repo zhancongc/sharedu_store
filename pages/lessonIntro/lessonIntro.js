@@ -104,10 +104,22 @@ Page({
     console.log(event.detail);
     this.setData({ actionSheetShow: false });
   },
+  deleteItem(event) {
+    console.log(event.currentTarget.dataset.timestamp)
+    var tempIntro = this.data.intro
+    for (var index in tempIntro) {
+      if (tempIntro[index].timestamp === event.currentTarget.dataset.timestamp) {
+        tempIntro.pop(tempIntro[index])
+        break
+      }
+    }
+    console.log(tempIntro)
+    this.setData({ intro: tempIntro })
+  },
   getIntroText(event){
     var tempIntro = this.data.intro
     for(var index in tempIntro){
-      if (tempIntro[index].timestamp === event.target.dataset.timestamp) {
+      if (tempIntro[index].timestamp === event.currentTarget.dataset.timestamp) {
         var content = event.detail.value
         tempIntro[index].content = content
       }
