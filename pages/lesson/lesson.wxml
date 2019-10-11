@@ -46,11 +46,11 @@
         <view class="lesson-price">￥{{item.lessonPrice}}</view>
         <view class="lesson-times">{{item.lessonTimes}}课时</view>
       </view>
-      <view class="lesson-operate-bar">
+      <view class="lesson-operate-bar" data-lessonId="{{item.lessonId}}">
         <van-button size="mini" class="lesson-operate">编辑</van-button>
         <van-button size="mini" class="lesson-operate">下架</van-button>
         <van-button size="mini" class="lesson-operate">分享</van-button>
-        <van-button size="mini" class="lesson-operate">预览</van-button>
+        <!--van-button size="mini" class="lesson-operate">预览</van-button-->
       </view>
     </view>
   </view>
@@ -67,11 +67,11 @@
         <view class="lesson-price">￥{{item.lessonPrice}}</view>
         <view class="lesson-times">{{item.lessonTimes}}课时</view>
       </view>
-      <view class="lesson-operate-bar">
+      <view class="lesson-operate-bar" data-lessonId="{{item.lessonId}}">
         <van-button size="mini" class="lesson-operate">编辑</van-button>
         <van-button size="mini" class="lesson-operate">上架</van-button>
         <van-button size="mini" class="lesson-operate">删除</van-button>
-        <van-button size="mini" class="lesson-operate">预览</van-button>
+        <!--van-button size="mini" class="lesson-operate">预览</van-button-->
       </view>
     </view>
   </view>

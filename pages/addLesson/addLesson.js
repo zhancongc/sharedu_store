@@ -1,14 +1,6 @@
 // pages/addLesson/addLesson.js
+import { lessons } from "../../utils/lesson.js"
 const app = getApp()
-const lessons = {
-  "中小学文化课": ["语数外", "理化生", "政史地"],
-  "早教课": ["学前智力开发", "艺术启蒙"],
-  "健身户外": ["攀岩", "冲浪", "潜水",],
-  "琴棋书画": ["乐器", "棋类", "书法", "绘画"],
-  "体操舞蹈": ["体操", "舞蹈"],
-  "软件编程": ["青少年编程", "其它计算机技术"],
-  "其它类": ["其它"]
-};
 const lessonsDict = {'中小学文化课': 1566295084992, '早教课': 1566295117317, '健身户外': 1566295178029, '体操舞蹈': 1566295209138, '软件编程': 1566295222585, '其它类': 1566295231348, '琴棋书画': 1566295415912, '语数外': 1566295561211, '理化生': 1566295570038, '政史地': 1566295576189, '学前智力开发': 1566295653403, '艺术启蒙': 1566295667369, '攀岩': 1566295689776, '冲浪': 1566295696729, '潜水': 1566295702471, '体操': 1566295784564, '舞蹈': 1566295793301, '青少年编程': 1566296043838, '其它计算机技术': 1566296075689, '乐器': 1566295739380, '棋类': 1566295744702, '书法': 1566295754157, '绘画': 1566295765198, '其它': 1566296081426}
 
 Page({
@@ -24,13 +16,13 @@ Page({
     currentTab: '',
     addPhotoCSS: ['photo-preview', 'photo-upload'],
     addPhotoCSSIndex: 1,
+    // 课程图片
     lessonImage: [],
     // 添加课程
     lessonName: '', // 课程名称
     lessonType: '', // 课程类型
     lessonTimes: '', // 课时数
     lessonPrice: '', // 课程价格
-    lessonIntro: '', // 课程介绍
     lessonIntroState: '', // 课程介绍填写状态
     lessonPicker: false, // 课程类别选择器显示状态
     lessons: '',  // 课程类别大全
@@ -79,7 +71,7 @@ Page({
   addLessonPhoto: function() {
     var that = this;
     wx.chooseImage({
-      count: 5,
+      count: 3,
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success: function (res) {
@@ -151,9 +143,14 @@ Page({
    */
   onShow: function () {
     var that = this;
-    if (app.globalData.addLessonIntro.length !== 0) {
+    if (app.globalData.addLessonIntro.length > 0) {
+      let itemsList = []
+      for (let index in app.globalData.addLessonIntro) {
+        let introItem = JSON.stringify(app.globalData.addLessonIntro[index])
+        itemsList.push(introItem)
+      }
       that.setData({
-        lessonIntro: app.globalData.addLessonIntro,
+        itemsList: itemsList,
         lessonIntroState: '已填写'
       })
     }
@@ -211,8 +208,9 @@ Page({
           if (response.msg == 'success') {
             console.log(response.data)
             tempLessonImage.push(response.data)
+            console.log(tempLessonImage)
             that.setData({
-              lessonImage: tempLessonImage
+              pictureUrlList: tempLessonImage
             })
           } else {
             wx.showToast({
@@ -253,22 +251,13 @@ Page({
         'Authorization': 'Bearer ' + app.globalData.accessToken,
         'Content-Type': 'application/json'
       },
-      data: {
-        title: that.data.lessonName,
-        classHours: that.data.lessonTimes,
-        course: that.data.lessonType,
-        experiencePrice: that.data.lessonPrice,
-        storeId: app.globalData.storeId,
-        courseCategoryId: lessonsDict[that.data.lessonType],
-        itemsList: that.data.lessonIntro,
-        pictureUrlList: that.data.pictureUrlList,
-        detail: 'lessson detail'
-      },
+      data: data,
       success(res) {
         if (res.statusCode == 200) {
-          var response = JSON.parse(res.data) 
+          console.log(res)
+          let response = res.data
+          console.log(response)
           if (response.code == 0) {
-            app.globalData.isIdentificated = true;
             wx.navigateBack();
           }
         }
@@ -281,7 +270,7 @@ Page({
   },
   addLessonCommit() {
     var that = this;
-    if (that.data.lessonImage && that.data.lessonName && that.data.lessonType && that.data.lessonTimes && that.data.lessonPrice && that.data.lessonIntro.length > 0) {
+    if (that.data.lessonImage && that.data.lessonName && that.data.lessonType && that.data.lessonTimes && that.data.lessonPrice && that.data.itemsList.length > 0) {
       wx.showLoading({
         title: '上传中',
       })

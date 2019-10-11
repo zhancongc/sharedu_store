@@ -19,7 +19,7 @@ Page({
       {
         timestamp: '',
         type: 'vedio',
-        url: '/images/logo.png'
+        url: '/images/logo.jpg'
       },
     ],
   },

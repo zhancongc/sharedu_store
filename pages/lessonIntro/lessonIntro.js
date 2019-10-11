@@ -23,7 +23,8 @@ Page({
       {
         timestamp: '',
         type: 'image',
-        url: '/images/logo.png'
+        url: '/images/logo.jpg',
+        localUrl: ''
       },
       {
         timestamp: '',
@@ -33,7 +34,8 @@ Page({
       {
         timestamp: '',
         type: 'vedio',
-        url: '/images/logo.png'
+        url: '/images/logo.jpg',
+        localUrl: ''
       },
     ],*/
     intro: [],
@@ -45,7 +47,7 @@ Page({
     this.setData({ actionSheetShow: true })
   },
   closeActionSheet(event) {
-    console.log(event.detail)
+    console.log(event)
     this.setData({ actionSheetShow: false });
   },
   selectActionSheet(event) {
@@ -75,11 +77,14 @@ Page({
             tempIntro.push({
               timestamp: timestamp,
               type: 'image',
-              url: res.tempFilePaths[0]
+              localUrl: res.tempFilePaths[0],
+              url: ''
             })
             that.setData({ intro: tempIntro })
-            that.uploadIntroFile(timestamp, tempIntro.url)
-          } else {    //图片大于5M，弹出一个提示框
+            console.log(tempIntro)
+            that.uploadIntroFile(timestamp, res.tempFilePaths[0])
+          } else {
+            //图片大于5M，弹出一个提示框
             wx.showToast({
               title: '上传图片不能大于5M!',  //标题
               icon: 'none'       //图标 none不使用图标，详情看官方文档
@@ -105,7 +110,7 @@ Page({
     this.setData({ actionSheetShow: false });
   },
   deleteItem(event) {
-    console.log(event.currentTarget.dataset.timestamp)
+    console.log(event)
     var tempIntro = this.data.intro
     for (var index in tempIntro) {
       if (tempIntro[index].timestamp === event.currentTarget.dataset.timestamp) {
@@ -195,7 +200,13 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-
+    var that = this;
+    if (app.globalData.addLessonIntro.length > 0) {
+      let itemsList = []
+      that.setData({
+        intro: app.globalData.addLessonIntro,
+      })
+    }
   },
 
   /**

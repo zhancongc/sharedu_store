@@ -16,12 +16,13 @@ Page({
     currentTab: 0,
     tabName: [{index: 0, name: '上架课程'}, {index: 1, name: '下架课程'}],
     tabColor: ['#ff6600', '#888'],
-    forSaleLesson: [{
+    /*forSaleLesson: [{
       lessonName: '考研英语',
       lessonPrice: '799',
       lessonTimes: 10,
       lessonPicture: 'http://image.sharedu.co/20190825/3f0ec731bd50480592f0e3594385977d.jpg',
-    }],
+    }],*/
+    forSaleLesson: [],
     outOfSaleLesson: []
   },
   onTabBarChange(event) {
@@ -58,7 +59,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({ isIdentificated: app.globalData.isIdentificated })
   },
 
   /**
@@ -73,9 +74,8 @@ Page({
    */
   onShow: function () {
     var that = this;
-    that.setData({
-      isIdentificated: app.globalData.isIdentificated
-    })
+    that.getOnlineLessons()
+    that.getOfflineLessons()
   },
 
   /**
@@ -122,31 +122,73 @@ Page({
       url: '/pages/identification/identification',
     })
   },
-  getAllLessons() {
+  getOnlineLessons() {
     var that = this
     wx.request({ 
       method: 'get',
-      url: 'https://store.sharedu.co/edu/course/findOwnPage?pageSize=100',
+      url: 'https://store.sharedu.co/edu/course/findOwnOnlinePage',
       header: { 'Authorization': 'Bearer ' + app.globalData.accessToken },
       success(res) {
         console.log(res)
+        if (res.statusCode == 200) {
+          if (res.data) {
+            let onlineLesson = res.data.data
+            console.log(onlineLesson)
+            if (onlineLesson !== null && onlineLesson.length > 0) {
+              let tempOnlineLesson = []
+              for (let index in onlineLesson) {
+                let tempLesson = {}
+                tempLesson.lessonId = onlineLesson[index].id
+                tempLesson.lessonName = onlineLesson[index].title
+                tempLesson.lessonPrice = onlineLesson[index].experiencePrice
+                tempLesson.lessonTimes = onlineLesson[index].classHours
+                tempLesson.lessonPicture = onlineLesson[index].pictureUrlList[0]
+                tempOnlineLesson.push(tempLesson)
+              }
+              console.log(tempOnlineLesson)
+              that.setData({
+                forSaleLesson: tempOnlineLesson
+              })
+            }
+          }
+        }
       },
       fail(res) {},
       complete(res) {}
     })
   },
-  getOfflineLesson() {
+  getOfflineLessons() {
     var that = this
     wx.request({
       method: 'get',
-      url: 'https://store.sharedu.co/edu/course/findOwnOfflinePage?pageSize=1000',
+      url: 'https://store.sharedu.co/edu/course/findOwnOfflinePage',
       header: { 'Authorization': 'Bearer ' + app.globalData.accessToken },
       success(res) {
         console.log(res)
+        if (res.statusCode == 200) {
+          if (res.data) {
+            let offlineLesson = res.data.data
+            if (offlineLesson !== null && offlineLesson.length > 0) {
+              let tempOfflineLesson = []
+              for (let index in offlineLesson) {
+                let tempLesson = {}
+                tempLesson.lessonId = offlineLesson[index].id
+                tempLesson.lessonName = offlineLesson[index].title
+                tempLesson.lessonPrice = offlineLesson[index].experiencePrice
+                tempLesson.lessonTimes = offlineLesson[index].classHours
+                tempLesson.lessonPicture = offlineLesson[index].pictureUrlList[0]
+                tempOfflineLesson.push(tempLesson)
+              }
+              console.log(tempOfflineLesson)
+              that.setData({
+                outOfSaleLesson: tempOfflineLesson
+              })
+            }
+          }
+        }
       },
       fail(res) { },
       complete(res) { }
     })
-  }
-
+  },
 })

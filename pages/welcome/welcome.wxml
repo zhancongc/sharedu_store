@@ -3,7 +3,7 @@
 
 <van-row>
   <van-col span="22" offset="1" style="text-align: center;">
-  <image src="/images/logo.png" mode="aspectFit"></image>
+  <image src="/images/logo.jpg" mode="aspectFit"></image>
   </van-col>
 </van-row>
 

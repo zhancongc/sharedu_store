@@ -10,7 +10,7 @@
 
 <van-row>
   <van-col span="22" offset="1" style="text-align: center">
-    <image src="/images/logo.png" mode="aspectFit" style="height:320rpx;" />
+    <image src="/images/logo.jpg" mode="aspectFit" style="height:320rpx;" />
   </van-col>
 </van-row>
 
