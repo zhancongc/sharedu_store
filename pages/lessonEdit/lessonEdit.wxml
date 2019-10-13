@@ -1,0 +1,55 @@
+<!--pages/lessonEdit/lessonEdit.wxml-->
+<view class="state-bar" style="height: {{3.2*navbarData.navHeight}}px;">
+  <view class='custom-navbar'>
+    <view class='palce-holder-nav' style="height: {{navbarData.navHeight}}px;"></view>
+    <van-row class='main-navbar' style="height: {{2.2*navbarData.navHeight}}px;line-height: {{2.2*navbarData.navHeight}}px">
+    <van-col span="4" class="back-word">
+      <text bind:tap="backHandler" style="width: 80rpx; height:56rpx; vertical-align:0%;" class="fa fa-angle-left fa-lg"></text>
+    </van-col>
+    <van-col span="8" offset="4" class="page-title">
+      {{navbarData.pageTitle}}</van-col>
+    </van-row>
+  </view>
+</view>
+<view style="width:100%;height: {{3.2*navbarData.navHeight}}px;"></view>
+
+
+<block wx:if="{{addPhotoCSSIndex}}">
+  <view style="width: 100%; height: 280rpx;margin-top:20rpx; margin-bottom: 20rpx;">
+  <view bindtap="addLessonPhoto" class="{{addPhotoCSS[addPhotoCSSIndex]}}"><van-icon name="photo" size="50rpx" custom-style="position: relative; left:28rpx; top: 28rpx; color: white;" /></view>
+  <view wx:if="addPhotoCSSIndex" class="addStorePhoto-subtitle">添加课程图片</view>
+  </view>
+</block>
+
+<block wx:if="{{!addPhotoCSSIndex}}">
+  <swiper style="height: 400rpx;" class='videoSwiper' current="{{currentTab}}" duration="200" bindchange="swiperchange">
+    <block wx:for="{{lessonImage}}">
+    <swiper-item style="width: 100%;"><image src="{{item}}" mode="aspectFill" class="slide-image" style="width: 100%; height: 400rpx;"/></swiper-item>
+    </block>
+  </swiper>
+  <view bindtap="addLessonPhoto" class="{{addPhotoCSS[addPhotoCSSIndex]}}"><van-icon name="photo" size="50rpx" custom-style="position: relative; left:28rpx; top: 28rpx; color: white;" /></view>
+</block>
+
+<view style="margin-top: -110rpx;">
+  <van-cell-group>
+    <van-field label="课程名称" value="{{ lessonName }}" required="true" placeholder="请输入课程名称" border="{{ true }}" maxlength="30" focus="true" bind:change="onChangeLessonName" />
+    <van-field readonly label="课程类别" value="{{ lessonType }}" type="text" required="true" placeholder="请选择最相近的课程类别" border="{{ true }}" maxlength="30" is-link="false" bind:tap="chooseLessonType" style="color: black;" />
+    <van-field value="{{ lessonTimes }}" type="number" label="课时数" required="true" placeholder="请输入课时数" border="{{ true }}" maxlength="10" bind:change="onChangeLessonTimes" />
+    <van-field label="课程价格" value="{{ lessonPrice }}" type="digit" required="true" placeholder="请输入该课程的价格" border="{{ true }}" bind:change="onChangeLessonPrice" />
+    <van-field readonly value="{{ lessonIntroState }}" type="text" label="课程介绍" required="true" placeholder="请输入该课程的介绍" border="{{ true }}" bind:tap="toLessonIntro" is-link="false" />
+  </van-cell-group>
+</view>
+
+<view style="margin-top:20rpx;">
+  <van-row><van-col span="22" offset="1">
+    <van-button type="primary" size="large" bind:tap="addLessonCommit">完成</van-button>
+  </van-col>
+  </van-row>
+</view>
+
+<view class="mask" wx:if="{{ lessonPicker }}" bindtap="onHidePicker"></view>
+<view wx:if="{{ lessonPicker }}" style="position: fixed; bottom: 0rpx; left: 0rpx; width:100%; z-index: 9999;">
+  <van-picker show-toolbar title="选择类别" columns="{{ columns }}" bind:cancel="onCancelPicker" bind:confirm="onConfirmPicker" bind:change="onChangePicker" confirm-button-text="确定" />
+</view>
+
+

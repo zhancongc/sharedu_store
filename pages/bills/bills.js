@@ -15,21 +15,23 @@ Page({
     currentTab: 0,
     tabName: [{ index: 0, name: '待接单' }, { index: 1, name: '已完成' }, {index: 2, name: '全部'}],
     tabColor: ['#ff6600', '#888', '#888'],
-    uncompleteBills: [{
+    /*uncompleteBills: [{
       billStatus: '待接单',
       billLessonPicture: '/images/English.jpg',
       billLessonName: '考研英语一基础强化训练',
       billAmount: 388,
       canReceiveOrder: true
-    }],
+    }],*/
+    uncompleteBills: [],
     completeBills: [],
-    allBills: [{
+    allBills: [],
+    /*allBills: [{
       billStatus: '待接单',
       billLessonPicture: '/images/English.jpg',
       billLessonName: '考研英语一阅读专项训练',
       billAmount: 1188,
       canReceiveOrder: true
-    }],
+    }],*/
   },
   switchTabs: function(e) {
     console.log(e.currentTarget.dataset.index);

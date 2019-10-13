@@ -1,4 +1,3 @@
-// pages/lessonIntro/lessonIntro.js
 const app = getApp()
 Page({
 
@@ -53,7 +52,8 @@ Page({
   selectActionSheet(event) {
     console.log(event.detail);
     var that = this;
-    var tempIntro = that.data.intro;
+    console.log(that.data.intro)
+    var tempIntro = that.data.intro === null ? [] : that.data.intro;
     if (event.detail.name == '文字') {
       var timestamp = (new Date()).getTime();
       tempIntro.push({
@@ -65,7 +65,6 @@ Page({
       that.setData({ actionSheetShow: false });
     }
     if (event.detail.name == '图片') {
-      var tempIntro = that.data.intro;
       wx.chooseImage({
         count: 1,
         sizeType: ['compress'],
@@ -175,7 +174,6 @@ Page({
     })
   },
   lessonIntroCommit: function() {
-    app.globalData.addLessonIntro = this.data.intro;
     wx.navigateBack();
   },
   /**
@@ -213,7 +211,7 @@ Page({
    * Lifecycle function--Called when page hide
    */
   onHide: function () {
-    this.setData({intro: []})
+    app.globalData.addLessonIntro = this.data.intro;
   },
 
   /**

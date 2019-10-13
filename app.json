@@ -9,6 +9,7 @@
     "pages/lesson/lesson",
     "pages/addLesson/addLesson",
     "pages/lessonIntro/lessonIntro",
+    "pages/lessonEdit/lessonEdit",
     "pages/bills/bills",
     "pages/me/me",
     "pages/account/account",

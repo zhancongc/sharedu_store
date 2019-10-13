@@ -31,13 +31,12 @@
     <view wx:if="{{ item.type == 'vedio' }}" style="width: 100%; text-align: center;">
       <vedio src="{{ item.localUrl }}"  data-timestamp="{{item.timestamp}}" style="width: 100%;"></vedio>
     </view>
-    <view style="width: 40rpx; height: 40rpx; position: relative; left: 666rpx; bottom: 0rpx; margin-top: -48rpx;" bindtap="deleteItem" data-timestamp="{{item.timestamp}}">
-      <text style="width: 100%; height: 100%; vertical-align: 0%; color: #aaa;" class="fa fa-times-circle fa-lg"></text>
+    <view style="width: 40rpx; height: 40rpx; position: relative; left: 666rpx; bottom: 0rpx; margin-top: -48rpx;">
+      <text style="width: 100%; height: 100%; vertical-align: 0%; color: #aaa;" class="fa fa-times-circle fa-lg"  bindtap="deleteItem" data-timestamp="{{item.timestamp}}"></text>
     </view>
   </view>
   <van-button type="default" size="large" icon="star-o" bind:click="showActionSheet" >添加</van-button>
   <view style="width: 100%; height: 20rpx;"></view>
-  <van-button type="primary" size="large" icon="star-o" bind:click="lessonIntroCommit" >完成</van-button>
 </block>
 
 </view>
