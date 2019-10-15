@@ -52,8 +52,7 @@ Page({
   selectActionSheet(event) {
     console.log(event.detail);
     var that = this;
-    console.log(that.data.intro)
-    var tempIntro = that.data.intro === null ? [] : that.data.intro;
+    var tempIntro = that.data.intro === "" ? [] : that.data.intro;
     if (event.detail.name == '文字') {
       var timestamp = (new Date()).getTime();
       tempIntro.push({
@@ -184,7 +183,7 @@ Page({
     that.setData({
       intro: app.globalData.addLessonIntro
     })
-    app.globalData.addLessonIntro = '';
+    app.globalData.addLessonIntro = [];
   },
 
   /**
