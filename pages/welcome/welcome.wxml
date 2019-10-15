@@ -13,7 +13,7 @@
   </van-col>
 </van-row>
 
-<view style="margin-top: 20rpx;">
+<view style="margin-top: 40rpx;">
 <van-row>
   <van-col span="22" offset="1" style="text-align: center;">
   <view bindtap="toRegister" style="font-size: 24rpx; color: #666; vertical-align: middle;">手机号码快捷注册 <text style="line-height:20rpx;" class="fa fa-angle-right fa-1x"></text></view>

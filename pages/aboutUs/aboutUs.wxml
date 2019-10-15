@@ -17,7 +17,16 @@
   <view style="text-align: center;">
     <image style="width: 600rpx; height: 600rpx;" src="/images/logo.jpg"></image>
   </view>
-  <view style="font-size: 28rpx; color: #222;">
-  享淘课总部位于上海，主要通过优选教育机构入驻，引流生源，创业补贴扶持机构，错位利用教学场地和教师时间资源，为学生定制化提供12K、素质教育、出国留学、家教一对一、师资输送及教学工具等服务；目前主要在上海，成都，重庆，银川，乌鲁木齐等城市发展。
+  <view class="intro-title">
+    sharedu享淘课
+  </view>
+  <view class="intro-title">
+    免费教育，公益同行
+  </view>
+  <view class="intro-text" style="margin-top: 30rpx;">
+    入驻咨询请加微信小享: <text>sharedu001</text>
+  </view> 
+  <view class="intro-text">
+    合作热线: <text>18680869344</text>
   </view>
 </view>

@@ -1,1 +1,3 @@
 /* pages/aboutUs/aboutUs.wxss */
+.intro-title {font-size: 44rpx; color: #ee861a; text-align: center; line-height: 60rpx;}
+.intro-text {font-size: 32rpx; color: #222222; text-align: center; line-height: 60rpx;}
