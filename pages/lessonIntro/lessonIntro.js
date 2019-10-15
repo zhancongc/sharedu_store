@@ -211,14 +211,15 @@ Page({
    * Lifecycle function--Called when page hide
    */
   onHide: function () {
-    app.globalData.addLessonIntro = this.data.intro;
+
   },
 
   /**
    * Lifecycle function--Called when page unload
    */
   onUnload: function () {
-
+    console.log("页面隐藏")
+    app.globalData.addLessonIntro = this.data.intro;
   },
 
   /**

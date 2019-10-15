@@ -166,7 +166,7 @@ Page({
    * Lifecycle function--Called when page unload
    */
   onUnload: function () {
-
+    app.globalData.addLessonIntro = ''
   },
 
   /**
