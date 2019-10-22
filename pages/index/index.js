@@ -119,6 +119,11 @@ Page({
       fail(res) { },
       complete(res) { }
     })
+  },
+  toAddGift() {
+    wx.navigateTo({
+      url: '/pages/addGift/addGift',
+    })
   }
 })
 

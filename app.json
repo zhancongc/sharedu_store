@@ -6,6 +6,7 @@
     "pages/identification/identification",
     "pages/comment/comment",
     "pages/index/index",
+    "pages/addGift/addGift",
     "pages/lesson/lesson",
     "pages/addLesson/addLesson",
     "pages/lessonIntro/lessonIntro",

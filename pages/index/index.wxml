@@ -24,12 +24,13 @@
   </swiper>
   <view style="width: 94%; margin: auto;">
     <view style="width: 100%; height: 60rpx; font-size: 40rpx; line-height: 60rpx; margin-top: 20rpx; margin-bottom: 20rpx;">今日数据</view>
-    <view style="margin: auto; box-shadow:1px 1px 5px #888; width: 100%; height: 200rpx;">
+    <view style="margin: auto; box-shadow:1px 1px 5px #888; width: 100%; height: 200rpx;margin-bottom: 50rpx;">
       <view wx:for="{{ statistics }}" style="width: 25%; height: 200rpx; float: left;">
         <view style="width: 100%; font-size: 20rpx; color: #999; line-height: 60rpx; float: left; text-align: center;">{{item.item}}</view>
         <view style="width: 100%; font-size: 40rpx; font-weight: bold; line-height: 100rpx; float: right; text-align: center;">{{item.amount}}</view>
       </view>
     </view>
+    <van-button type="primary" size="large" bind:click="toAddGift" style="width: 100%; margin-top: 20rpx;">添加赠品</van-button>
   </view>
 </block>
 
